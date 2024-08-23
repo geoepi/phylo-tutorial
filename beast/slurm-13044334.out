@@ -1,0 +1,222 @@
+
+        BEAST v1.10.4 Prerelease #bc6cbd9, 2002-2018
+       Bayesian Evolutionary Analysis Sampling Trees
+                 Designed and developed by
+   Alexei J. Drummond, Andrew Rambaut and Marc A. Suchard
+                              
+               Department of Computer Science
+                   University of Auckland
+                  alexei@cs.auckland.ac.nz
+                              
+             Institute of Evolutionary Biology
+                  University of Edinburgh
+                     a.rambaut@ed.ac.uk
+                              
+              David Geffen School of Medicine
+           University of California, Los Angeles
+                     msuchard@ucla.edu
+                              
+                Downloads, Help & Resources:
+                  	http://beast.community
+                              
+Source code distributed under the GNU Lesser General Public License:
+          	http://github.com/beast-dev/beast-mcmc
+                              
+                     BEAST developers:
+	Alex Alekseyenko, Guy Baele, Trevor Bedford, Filip Bielejec, Erik Bloomquist, Matthew Hall,
+	Joseph Heled, Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li,
+	Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel,
+          	Oliver Pybus, Chieh-Hsi Wu, Walter Xie
+                              
+                         Thanks to:
+    	Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Using BEAGLE library v4.0.0 (PRE-RELEASE) for accelerated, parallel likelihood evaluation
+2009-, BEAGLE Working Group - https://beagle-dev.github.io/
+Citation: Ayres et al (2019) Systematic Biology 68: 1052-1061 | doi:10.1093/sysbio/syz020
+
+
+Random number seed: 1724428969014
+
+
+Loading additional development parsers from development_parsers.properties, which is additional set of parsers only available for development version ...
+Parsing XML file: aligned_SAT1.xml
+  File encoding: UTF8
+Looking for plugins in /home/benjamin.golas/sat1/plugins
+
+Read alignment: alignment
+  Sequences = 34
+      Sites = 661
+   Datatype = nucleotide
+Site patterns 'patterns' created from positions 1-661 of alignment 'alignment'
+  unique pattern count = 214
+
+Creating the tree model, 'treeModel'
+  taxon count = 34
+  tree height = 3.2628537764445653
+
+Using strict molecular clock model.
+
+Creating state frequencies model 'frequencies': Initial frequencies = {0.25, 0.25, 0.25, 0.25}
+
+Creating HKY substitution model. Initial kappa = 2.0
+
+Creating site rate model.
+
+Using BEAGLE DataLikelihood Delegate
+  Using BEAGLE resource 0: CPU (x86_64)
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_CPP PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  With 214 unique site patterns.
+  Using rescaling scheme : dynamic (rescaling every 100 evaluations, delay rescaling until first overflow)
+
+Using TreeDataLikelihood
+  Branch rate model used: strictClockBranchRates
+Optimization Schedule: default
+Creating CTMC Scale Reference Prior model.
+Acting on subtree of size 34
+
+Likelihood computation is using an auto sizing thread pool.
+
+Creating the MCMC chain:
+  chain length = 100000
+  operator adaption = true
+  adaptation delayed for 1000 steps
+
+Citations for this analysis: 
+
+FRAMEWORK
+BEAST primary citation:
+	Suchard MA, Lemey P, Baele G, Ayres DL, Drummond AJ, Rambaut A (2018) Bayesian phylogenetic and phylodynamic data integration using BEAST 1.10. Virus Evolution. vey016. DOI:10.1093/ve/vey016
+
+SUBSTITUTION MODELS
+HKY nucleotide substitution model:
+	Hasegawa M, Kishino H, Yano T (1985) Dating the human-ape splitting by a molecular clock of mitochondrial DNA. J. Mol. Evol.. 22, 160-174
+
+PRIOR MODELS
+CTMC Scale Reference Prior model:
+	Ferreira MAR, Suchard MA (2008) Bayesian analysis of elapsed times in continuous-time Markov chains. Canadian Journal of Statistics. 36, 355-368
+
+
+# BEAST v1.10.4 Prerelease #bc6cbd9
+# Generated Fri Aug 23 11:02:49 CDT 2024 [seed=1724428969014]
+# -beagle_sse aligned_SAT1.xml
+state	Joint       	Prior       	Likelihood  	age(root)   	clock.rate  
+0	-12027.9694 	-58.7918    	-11969.1775 	2013.49     	1.00000     	-
+1000	-6425.0700  	-39.6525    	-6385.4175  	2013.83     	0.53758     	-
+2000	-4927.4336  	-45.5550    	-4881.8786  	2013.97     	0.19049     	-
+3000	-4272.2443  	-59.8422    	-4212.4021  	2013.92     	8.28447E-2  	-
+4000	-4143.9451  	-65.5510    	-4078.3941  	2013.92     	7.88257E-2  	-
+5000	-4140.3169  	-73.9816    	-4066.3352  	2013.89     	6.21723E-2  	-
+6000	-4119.0707  	-72.0329    	-4047.0378  	2013.85     	5.86136E-2  	-
+7000	-4117.2089  	-76.4907    	-4040.7182  	2013.90     	5.77596E-2  	-
+8000	-4119.1788  	-74.8868    	-4044.2920  	2013.90     	6.21954E-2  	-
+9000	-4117.0208  	-77.8051    	-4039.2157  	2013.81     	5.39729E-2  	-
+10000	-4114.7947  	-81.5910    	-4033.2037  	2013.72     	4.92679E-2  	-
+11000	-4108.8957  	-82.8227    	-4026.0730  	2013.53     	4.43559E-2  	0.42 minutes/million states
+12000	-4105.9924  	-84.5915    	-4021.4009  	2013.38     	4.36909E-2  	0.42 minutes/million states
+13000	-4109.1364  	-89.2801    	-4019.8562  	2012.98     	3.71876E-2  	0.41 minutes/million states
+14000	-4112.8579  	-100.9363   	-4011.9216  	2012.81     	3.16028E-2  	0.42 minutes/million states
+15000	-4107.7550  	-98.2938    	-4009.4612  	2012.65     	3.00036E-2  	0.43 minutes/million states
+16000	-4102.1318  	-101.1470   	-4000.9848  	2012.77     	3.02245E-2  	0.43 minutes/million states
+17000	-4112.0327  	-101.8733   	-4010.1594  	2012.11     	2.67806E-2  	0.42 minutes/million states
+18000	-4113.0934  	-103.9089   	-4009.1845  	2011.86     	2.56232E-2  	0.42 minutes/million states
+19000	-4124.4367  	-103.0377   	-4021.3991  	2011.93     	2.42191E-2  	0.41 minutes/million states
+20000	-4110.0769  	-102.2704   	-4007.8065  	2012.18     	2.82064E-2  	0.41 minutes/million states
+21000	-4114.1521  	-103.5813   	-4010.5708  	2012.34     	2.61453E-2  	0.4 minutes/million states
+22000	-4115.8918  	-106.4190   	-4009.4728  	2011.89     	2.56999E-2  	0.39 minutes/million states
+23000	-4114.2304  	-107.9906   	-4006.2398  	2011.79     	2.26639E-2  	0.39 minutes/million states
+24000	-4106.8290  	-110.3908   	-3996.4381  	2011.47     	2.11431E-2  	0.38 minutes/million states
+25000	-4117.6496  	-112.0585   	-4005.5911  	2011.97     	2.1634E-2   	0.38 minutes/million states
+26000	-4113.1875  	-111.9419   	-4001.2456  	2011.15     	1.95937E-2  	0.37 minutes/million states
+27000	-4105.4957  	-115.2078   	-3990.2879  	2011.03     	1.76296E-2  	0.37 minutes/million states
+28000	-4118.1628  	-118.7660   	-3999.3968  	2010.88     	1.79289E-2  	0.36 minutes/million states
+29000	-4112.5757  	-117.6638   	-3994.9118  	2010.82     	1.70874E-2  	0.36 minutes/million states
+30000	-4116.2294  	-120.0071   	-3996.2223  	2010.06     	1.6485E-2   	0.36 minutes/million states
+31000	-4110.1855  	-121.8036   	-3988.3819  	2010.03     	1.56521E-2  	0.35 minutes/million states
+32000	-4108.2692  	-119.3733   	-3988.8959  	2010.20     	1.66144E-2  	0.35 minutes/million states
+33000	-4119.0988  	-123.0463   	-3996.0525  	2009.76     	1.36038E-2  	0.35 minutes/million states
+34000	-4117.3912  	-123.7048   	-3993.6864  	2008.93     	1.55832E-2  	0.35 minutes/million states
+35000	-4117.8361  	-124.2341   	-3993.6020  	2009.14     	1.41992E-2  	0.35 minutes/million states
+36000	-4113.1684  	-123.9298   	-3989.2387  	2009.30     	1.38579E-2  	0.34 minutes/million states
+37000	-4115.2020  	-126.4536   	-3988.7484  	2007.27     	1.13206E-2  	0.34 minutes/million states
+38000	-4117.3321  	-127.2697   	-3990.0624  	2009.26     	1.19983E-2  	0.34 minutes/million states
+39000	-4120.9968  	-126.1047   	-3994.8921  	2008.92     	1.31939E-2  	0.34 minutes/million states
+40000	-4121.9430  	-126.7670   	-3995.1759  	2008.72     	1.20629E-2  	0.34 minutes/million states
+41000	-4124.4361  	-128.2893   	-3996.1467  	2009.49     	1.36187E-2  	0.34 minutes/million states
+42000	-4123.0364  	-124.9544   	-3998.0820  	2009.06     	1.27841E-2  	0.33 minutes/million states
+43000	-4126.6351  	-131.7650   	-3994.8702  	2008.76     	1.21982E-2  	0.33 minutes/million states
+44000	-4120.3102  	-128.5804   	-3991.7298  	2008.58     	1.25186E-2  	0.33 minutes/million states
+45000	-4116.4058  	-127.2041   	-3989.2017  	2008.14     	1.32372E-2  	0.33 minutes/million states
+46000	-4119.9258  	-129.2920   	-3990.6338  	2007.64     	1.19903E-2  	0.33 minutes/million states
+47000	-4127.7164  	-129.5613   	-3998.1551  	2009.16     	1.25378E-2  	0.33 minutes/million states
+48000	-4113.8668  	-126.2672   	-3987.5997  	2009.19     	1.29029E-2  	0.33 minutes/million states
+49000	-4131.6415  	-130.8953   	-4000.7462  	2008.67     	1.19382E-2  	0.33 minutes/million states
+50000	-4122.9337  	-129.0537   	-3993.8800  	2009.30     	1.28446E-2  	0.33 minutes/million states
+51000	-4116.9226  	-124.7222   	-3992.2004  	2008.75     	1.29522E-2  	0.33 minutes/million states
+52000	-4115.5724  	-127.4830   	-3988.0895  	2006.86     	1.15659E-2  	0.33 minutes/million states
+53000	-4119.4841  	-130.8015   	-3988.6826  	2007.69     	1.29634E-2  	0.32 minutes/million states
+54000	-4109.9544  	-123.6199   	-3986.3345  	2009.33     	1.45984E-2  	0.32 minutes/million states
+55000	-4118.6493  	-125.2783   	-3993.3710  	2009.00     	1.33828E-2  	0.32 minutes/million states
+56000	-4120.6591  	-124.5487   	-3996.1104  	2008.61     	1.40899E-2  	0.32 minutes/million states
+57000	-4123.9328  	-129.3413   	-3994.5915  	2008.84     	1.23487E-2  	0.32 minutes/million states
+58000	-4120.4326  	-131.1937   	-3989.2389  	2007.57     	1.08759E-2  	0.32 minutes/million states
+59000	-4123.4377  	-133.2404   	-3990.1974  	2007.48     	1.12386E-2  	0.32 minutes/million states
+60000	-4129.4992  	-134.9430   	-3994.5562  	2007.04     	1.13989E-2  	0.32 minutes/million states
+61000	-4126.9252  	-131.9199   	-3995.0052  	2007.14     	9.88863E-3  	0.32 minutes/million states
+62000	-4125.9091  	-135.1021   	-3990.8070  	2006.74     	1.07389E-2  	0.32 minutes/million states
+63000	-4124.6640  	-132.2548   	-3992.4092  	2007.03     	1.08345E-2  	0.32 minutes/million states
+64000	-4134.9641  	-131.3158   	-4003.6483  	2008.21     	1.04693E-2  	0.32 minutes/million states
+65000	-4126.7412  	-129.2259   	-3997.5153  	2008.85     	1.19065E-2  	0.32 minutes/million states
+66000	-4130.3759  	-132.5570   	-3997.8189  	2008.51     	1.19057E-2  	0.32 minutes/million states
+67000	-4117.9156  	-132.2902   	-3985.6254  	2008.17     	1.12939E-2  	0.32 minutes/million states
+68000	-4123.1888  	-126.3666   	-3996.8222  	2007.89     	1.22281E-2  	0.32 minutes/million states
+69000	-4117.4093  	-127.9235   	-3989.4858  	2007.74     	1.18218E-2  	0.32 minutes/million states
+70000	-4121.0215  	-129.8577   	-3991.1638  	2008.67     	1.16995E-2  	0.31 minutes/million states
+71000	-4121.7012  	-129.7349   	-3991.9663  	2008.02     	1.05049E-2  	0.31 minutes/million states
+72000	-4126.8591  	-130.1605   	-3996.6986  	2008.90     	1.24523E-2  	0.31 minutes/million states
+73000	-4125.4311  	-135.0291   	-3990.4020  	2007.38     	1.05048E-2  	0.31 minutes/million states
+74000	-4120.8849  	-129.1612   	-3991.7236  	2007.22     	1.07053E-2  	0.31 minutes/million states
+75000	-4116.7358  	-132.3822   	-3984.3537  	2007.67     	1.06973E-2  	0.31 minutes/million states
+76000	-4122.7047  	-132.7399   	-3989.9648  	2007.85     	1.13421E-2  	0.31 minutes/million states
+77000	-4124.2988  	-127.8451   	-3996.4537  	2008.31     	1.20999E-2  	0.31 minutes/million states
+78000	-4125.1495  	-130.5786   	-3994.5710  	2007.12     	1.06899E-2  	0.31 minutes/million states
+79000	-4119.3375  	-129.1114   	-3990.2261  	2007.88     	1.20486E-2  	0.31 minutes/million states
+80000	-4111.8955  	-128.4473   	-3983.4482  	2008.55     	1.26572E-2  	0.31 minutes/million states
+81000	-4115.4052  	-130.1084   	-3985.2968  	2008.26     	1.2268E-2   	0.31 minutes/million states
+82000	-4114.6333  	-131.0717   	-3983.5616  	2007.63     	1.1566E-2   	0.31 minutes/million states
+83000	-4125.7024  	-136.7292   	-3988.9732  	2007.52     	1.0878E-2   	0.31 minutes/million states
+84000	-4119.0785  	-133.3311   	-3985.7474  	2006.63     	9.92645E-3  	0.31 minutes/million states
+85000	-4119.0578  	-134.5932   	-3984.4646  	2007.36     	1.08851E-2  	0.31 minutes/million states
+86000	-4120.2968  	-131.7644   	-3988.5324  	2007.32     	1.10297E-2  	0.31 minutes/million states
+87000	-4114.3673  	-127.9840   	-3986.3834  	2008.02     	1.2347E-2   	0.31 minutes/million states
+88000	-4124.1016  	-130.0041   	-3994.0975  	2007.34     	1.13592E-2  	0.31 minutes/million states
+89000	-4118.9532  	-131.1897   	-3987.7635  	2007.84     	1.19542E-2  	0.31 minutes/million states
+90000	-4118.2996  	-133.2777   	-3985.0219  	2007.20     	1.11764E-2  	0.31 minutes/million states
+91000	-4116.2780  	-129.4139   	-3986.8640  	2007.88     	1.26191E-2  	0.31 minutes/million states
+92000	-4117.4837  	-129.8189   	-3987.6648  	2008.38     	1.14949E-2  	0.31 minutes/million states
+93000	-4123.8048  	-127.9185   	-3995.8863  	2008.76     	1.1621E-2   	0.31 minutes/million states
+94000	-4120.5036  	-129.7597   	-3990.7438  	2007.96     	1.13715E-2  	0.31 minutes/million states
+95000	-4124.3384  	-133.3915   	-3990.9469  	2005.37     	1.01017E-2  	0.3 minutes/million states
+96000	-4123.4504  	-130.8015   	-3992.6489  	2007.15     	1.0826E-2   	0.3 minutes/million states
+97000	-4115.7785  	-124.7780   	-3991.0005  	2008.46     	1.22292E-2  	0.3 minutes/million states
+98000	-4113.6232  	-127.6005   	-3986.0227  	2008.02     	1.24009E-2  	0.3 minutes/million states
+99000	-4123.5664  	-127.5794   	-3995.9870  	2008.34     	1.27262E-2  	0.3 minutes/million states
+100000	-4115.2717  	-130.0014   	-3985.2703  	2007.26     	1.14914E-2  	0.3 minutes/million states
+
+Operator analysis
+Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) 
+scale(kappa)                                      0.515   909        35       0.04     0.2431      
+frequencies                                       0.073   823        19       0.02     0.26        
+scale(clock.rate)                                 0.774   2685       76       0.03     0.2372      
+up:nodeHeights(treeModel) down:clock.rate         0.965   2675       96       0.04     0.2299      
+subtreeSlide(treeModel)                           0.733   27557      376      0.01     0.2324      
+Narrow Exchange(treeModel)                                27290      353      0.01     0.1236      
+Wide Exchange(treeModel)                                  2810       29       0.01     0.0046      
+wilsonBalding(treeModel)                                  2695       47       0.02     0.0085      
+scale(treeModel.rootHeight)                       0.181   2661       27       0.01     0.2371      
+uniform(nodeHeights(treeModel))                           27257      444      0.02     0.3904      
+scale(constant.popSize)                           0.328   2638       9        0.0      0.2479      
+
+2.276 seconds
+
