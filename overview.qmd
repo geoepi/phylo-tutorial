@@ -325,7 +325,7 @@ plotBS(midpoint(ml_tree), boots,
        bs.adj = c(1.25, 1.25),
        bs.col = "black")
 add.scale.bar()
-title("Maximum Parsimony")
+title("Maximum Likelihood")
 ```
    
 Could also extract the bootstrap values for use in other plotting tools.     
