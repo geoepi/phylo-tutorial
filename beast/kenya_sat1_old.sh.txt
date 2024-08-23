@@ -11,6 +11,6 @@
 #SBATCH --mem-per-cpu=15000M   
 
 module load beast
-beast -beagle_sse sat1_beauti.xml 
+beast -beagle_sse aligned_SAT1.xml 
 
                            
