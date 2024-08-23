@@ -426,6 +426,8 @@ ggtree(tmp_tree, size=0.5, col = "gray30",
 sat1_dates <- sat1_df %>%
   select(Accession, Collection)
 
+unique(sat1_dates$Collection)
+
 sat1_dates <- sat1_dates %>%
   mutate(samp_date = case_when(
     Collection == "2016-01" ~ as_date("2016-01-01", format = "%Y-%m-%d"),
@@ -453,7 +455,7 @@ $ squeue -u john.humphreys
   
 ## Tracer Type Stats  
 ```{r}
-sat_stats <- get_tracer_stats(here("beast/aligned_SAT1.log.txt")) 
+sat_stats <- get_tracer_stats(here("beast/old_beauti_sat1.log")) 
 
 sat_stats %>%
   gt() %>%
@@ -479,7 +481,8 @@ $ treeannotator -burnin 10000 -heights median aligned_SAT1.trees.txt sat1.mcc.tr
 
 ```
 ```{r}
-sat_mcc.tree <- read.nexus(here("beast/sat1_mcc.tre"))
+options(ignore.negative.edge=TRUE)
+sat_mcc.tree <- read.nexus(here("beast/sat1_mcc.tree"))
 
 ggtree(sat_mcc.tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 

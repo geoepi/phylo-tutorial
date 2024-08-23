@@ -1,0 +1,1170 @@
+
+        BEAST v1.10.4 Prerelease #bc6cbd9, 2002-2018
+       Bayesian Evolutionary Analysis Sampling Trees
+                 Designed and developed by
+   Alexei J. Drummond, Andrew Rambaut and Marc A. Suchard
+                              
+               Department of Computer Science
+                   University of Auckland
+                  alexei@cs.auckland.ac.nz
+                              
+             Institute of Evolutionary Biology
+                  University of Edinburgh
+                     a.rambaut@ed.ac.uk
+                              
+              David Geffen School of Medicine
+           University of California, Los Angeles
+                     msuchard@ucla.edu
+                              
+                Downloads, Help & Resources:
+                  	http://beast.community
+                              
+Source code distributed under the GNU Lesser General Public License:
+          	http://github.com/beast-dev/beast-mcmc
+                              
+                     BEAST developers:
+	Alex Alekseyenko, Guy Baele, Trevor Bedford, Filip Bielejec, Erik Bloomquist, Matthew Hall,
+	Joseph Heled, Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li,
+	Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel,
+          	Oliver Pybus, Chieh-Hsi Wu, Walter Xie
+                              
+                         Thanks to:
+    	Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Using BEAGLE library v4.0.0 (PRE-RELEASE) for accelerated, parallel likelihood evaluation
+2009-, BEAGLE Working Group - https://beagle-dev.github.io/
+Citation: Ayres et al (2019) Systematic Biology 68: 1052-1061 | doi:10.1093/sysbio/syz020
+
+
+Random number seed: 1724428728666
+
+
+Loading additional development parsers from development_parsers.properties, which is additional set of parsers only available for development version ...
+Parsing XML file: old_beauti_sat1.xml
+  File encoding: UTF8
+Looking for plugins in /home/john.humphreys/sat1/plugins
+
+Read alignment: alignment
+  Sequences = 34
+      Sites = 661
+   Datatype = nucleotide
+Site patterns 'CP1.patterns' created from positions 1-661 of alignment 'alignment'
+  only using every 3 site
+  unique pattern count = 158
+Site patterns 'CP2.patterns' created from positions 2-661 of alignment 'alignment'
+  only using every 3 site
+  unique pattern count = 41
+Site patterns 'CP3.patterns' created from positions 3-661 of alignment 'alignment'
+  only using every 3 site
+  unique pattern count = 33
+
+Creating the tree model, 'treeModel'
+  taxon count = 34
+  tree height = 3.0076125464838785
+
+Using strict molecular clock model.
+
+Creating state frequencies model 'CP1.frequencies': Initial frequencies = {0.25, 0.25, 0.25, 0.25}
+
+Creating HKY substitution model. Initial kappa = 2.0
+
+Creating state frequencies model 'CP2.frequencies': Initial frequencies = {0.25, 0.25, 0.25, 0.25}
+
+Creating HKY substitution model. Initial kappa = 2.0
+
+Creating state frequencies model 'CP3.frequencies': Initial frequencies = {0.25, 0.25, 0.25, 0.25}
+
+Creating HKY substitution model. Initial kappa = 2.0
+
+Creating site rate model: 
+  with initial relative rate = 0.3333333333333333 with weight: 2.990950226244344
+
+Creating site rate model: 
+  with initial relative rate = 0.3333333333333333 with weight: 3.0045454545454544
+
+Creating site rate model: 
+  with initial relative rate = 0.3333333333333333 with weight: 3.0045454545454544
+
+Using BEAGLE DataLikelihood Delegate
+  Using BEAGLE resource 0: CPU (x86_64)
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_CPP PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  With 158 unique site patterns.
+  Using rescaling scheme : dynamic (rescaling every 100 evaluations, delay rescaling until first overflow)
+
+Using TreeDataLikelihood
+  Branch rate model used: strictClockBranchRates
+
+Using BEAGLE DataLikelihood Delegate
+  Using BEAGLE resource 0: CPU (x86_64)
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_CPP PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  With 41 unique site patterns.
+  Using rescaling scheme : dynamic (rescaling every 100 evaluations, delay rescaling until first overflow)
+
+Using TreeDataLikelihood
+  Branch rate model used: strictClockBranchRates
+
+Using BEAGLE DataLikelihood Delegate
+  Using BEAGLE resource 0: CPU (x86_64)
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_CPP PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  With 33 unique site patterns.
+  Using rescaling scheme : dynamic (rescaling every 100 evaluations, delay rescaling until first overflow)
+
+Using TreeDataLikelihood
+  Branch rate model used: strictClockBranchRates
+Optimization Schedule: default
+Creating CTMC Scale Reference Prior model.
+Acting on subtree of size 34
+
+Likelihood computation is using an auto sizing thread pool.
+
+Creating the MCMC chain:
+  chain length = 100000
+  operator adaption = true
+  adaptation delayed for 1000 steps
+WARNING: Likelihood component, treeLikelihood, created but not used in the MCMC
+
+Citations for this analysis: 
+
+FRAMEWORK
+BEAST primary citation:
+	Suchard MA, Lemey P, Baele G, Ayres DL, Drummond AJ, Rambaut A (2018) Bayesian phylogenetic and phylodynamic data integration using BEAST 1.10. Virus Evolution. vey016. DOI:10.1093/ve/vey016
+
+SUBSTITUTION MODELS
+HKY nucleotide substitution model:
+	Hasegawa M, Kishino H, Yano T (1985) Dating the human-ape splitting by a molecular clock of mitochondrial DNA. J. Mol. Evol.. 22, 160-174
+
+PRIOR MODELS
+CTMC Scale Reference Prior model:
+	Ferreira MAR, Suchard MA (2008) Bayesian analysis of elapsed times in continuous-time Markov chains. Canadian Journal of Statistics. 36, 355-368
+
+
+# BEAST v1.10.4 Prerelease #bc6cbd9
+# Generated Fri Aug 23 10:58:49 CDT 2024 [seed=1724428728666]
+# -beagle_sse old_beauti_sat1.xml
+state	Joint       	Prior       	Likelihood  	age(root)   	clock.rate  
+0	-11030.9639 	-36.1046    	-10994.8593 	2013.74     	1.00000     	-
+100	-9804.0607  	-30.6129    	-9773.4478  	2013.75     	1.00000     	-
+200	-8544.6155  	-27.3434    	-8517.2721  	2013.83     	0.75148     	-
+300	-7650.8919  	-30.0832    	-7620.8088  	2013.84     	0.57545     	-
+400	-6718.4076  	-40.0772    	-6678.3304  	2013.84     	0.37630     	-
+500	-6549.2441  	-42.2518    	-6506.9924  	2013.86     	0.37630     	-
+600	-6201.5504  	-41.6597    	-6159.8908  	2013.86     	0.37630     	-
+700	-5975.1462  	-38.6068    	-5936.5394  	2013.88     	0.37630     	-
+800	-5794.5538  	-39.1344    	-5755.4195  	2013.89     	0.37630     	-
+900	-5552.2116  	-39.3923    	-5512.8193  	2013.88     	0.33335     	-
+1000	-5391.6057  	-35.7657    	-5355.8400  	2013.88     	0.33335     	-
+1100	-5300.3983  	-38.5018    	-5261.8965  	2013.88     	0.33335     	-
+1200	-5070.8197  	-38.1415    	-5032.6782  	2013.88     	0.21456     	-
+1300	-4914.6678  	-44.9434    	-4869.7244  	2013.87     	0.19766     	-
+1400	-4788.0098  	-47.2719    	-4740.7379  	2013.89     	0.19766     	-
+1500	-4695.5976  	-50.2000    	-4645.3976  	2013.88     	0.19766     	-
+1600	-4521.3509  	-50.9263    	-4470.4246  	2013.90     	0.19766     	-
+1700	-4395.2664  	-50.7919    	-4344.4745  	2013.90     	0.19766     	-
+1800	-4269.5337  	-51.2287    	-4218.3050  	2013.92     	0.14733     	-
+1900	-4206.5899  	-49.4214    	-4157.1686  	2013.94     	0.11497     	-
+2000	-4103.5747  	-49.8722    	-4053.7025  	2013.96     	0.14008     	-
+2100	-4086.6711  	-50.6135    	-4036.0576  	2013.95     	0.14008     	-
+2200	-4036.1160  	-48.9883    	-3987.1277  	2013.95     	0.14008     	-
+2300	-3987.4572  	-48.5944    	-3938.8628  	2013.96     	0.11812     	-
+2400	-3941.0018  	-48.4741    	-3892.5277  	2013.98     	0.11812     	-
+2500	-3935.5890  	-50.5304    	-3885.0585  	2013.98     	0.11769     	-
+2600	-3931.9501  	-49.9217    	-3882.0284  	2013.97     	0.11769     	-
+2700	-3920.0707  	-51.1318    	-3868.9389  	2013.98     	0.11270     	-
+2800	-3912.8359  	-53.8676    	-3858.9683  	2013.96     	0.11194     	-
+2900	-3913.5207  	-54.4955    	-3859.0252  	2013.94     	0.11169     	-
+3000	-3904.5888  	-58.4479    	-3846.1409  	2013.94     	9.35213E-2  	-
+3100	-3900.5959  	-58.1658    	-3842.4301  	2013.93     	9.34006E-2  	-
+3200	-3891.8730  	-58.4872    	-3833.3858  	2013.92     	9.16873E-2  	-
+3300	-3885.3268  	-59.2181    	-3826.1087  	2013.95     	0.10093     	-
+3400	-3891.5682  	-59.4913    	-3832.0769  	2013.95     	9.79669E-2  	-
+3500	-3885.5207  	-59.5586    	-3825.9621  	2013.94     	9.79669E-2  	-
+3600	-3883.7299  	-61.2523    	-3822.4776  	2013.90     	8.34447E-2  	-
+3700	-3881.3297  	-61.9038    	-3819.4259  	2013.95     	8.68966E-2  	-
+3800	-3877.2649  	-62.5611    	-3814.7038  	2013.95     	8.68966E-2  	-
+3900	-3880.0867  	-63.6357    	-3816.4510  	2013.95     	7.59771E-2  	-
+4000	-3884.7393  	-63.8052    	-3820.9341  	2013.95     	7.64051E-2  	-
+4100	-3882.0286  	-66.0760    	-3815.9526  	2013.93     	8.1145E-2   	-
+4200	-3876.2076  	-65.6742    	-3810.5334  	2013.93     	8.42187E-2  	-
+4300	-3874.2381  	-66.9982    	-3807.2399  	2013.92     	7.62042E-2  	-
+4400	-3876.7290  	-66.9368    	-3809.7922  	2013.90     	7.04604E-2  	-
+4500	-3875.3977  	-68.2910    	-3807.1067  	2013.95     	7.0969E-2   	-
+4600	-3875.8866  	-68.8146    	-3807.0719  	2013.92     	7.36802E-2  	-
+4700	-3873.9473  	-68.9640    	-3804.9833  	2013.92     	8.01339E-2  	-
+4800	-3887.4827  	-70.3732    	-3817.1095  	2013.92     	8.01339E-2  	-
+4900	-3884.0970  	-70.2419    	-3813.8551  	2013.92     	6.87869E-2  	-
+5000	-3884.4409  	-69.8209    	-3814.6200  	2013.93     	7.97384E-2  	-
+5100	-3881.1621  	-70.7013    	-3810.4608  	2013.93     	7.99741E-2  	-
+5200	-3874.3808  	-72.2458    	-3802.1350  	2013.91     	7.31554E-2  	-
+5300	-3873.2591  	-71.5176    	-3801.7415  	2013.91     	7.30987E-2  	-
+5400	-3870.3554  	-70.8710    	-3799.4844  	2013.91     	6.56173E-2  	-
+5500	-3868.0568  	-72.0668    	-3795.9900  	2013.91     	6.74383E-2  	-
+5600	-3862.1488  	-72.9947    	-3789.1542  	2013.92     	6.7334E-2   	-
+5700	-3865.2388  	-72.9597    	-3792.2791  	2013.85     	6.71697E-2  	-
+5800	-3865.5893  	-73.8673    	-3791.7220  	2013.85     	6.71697E-2  	-
+5900	-3858.6979  	-74.2794    	-3784.4186  	2013.85     	6.60939E-2  	-
+6000	-3868.5068  	-76.3953    	-3792.1115  	2013.88     	6.60939E-2  	-
+6100	-3871.3984  	-76.3333    	-3795.0650  	2013.88     	6.60579E-2  	-
+6200	-3864.9033  	-76.7439    	-3788.1593  	2013.88     	6.60469E-2  	-
+6300	-3861.7752  	-77.5821    	-3784.1931  	2013.90     	6.60469E-2  	-
+6400	-3860.9619  	-77.1408    	-3783.8212  	2013.86     	6.60469E-2  	-
+6500	-3858.8858  	-77.4872    	-3781.3987  	2013.88     	6.60469E-2  	-
+6600	-3864.6049  	-81.6207    	-3782.9842  	2013.57     	5.75957E-2  	-
+6700	-3856.4129  	-77.9996    	-3778.4133  	2013.61     	5.81393E-2  	-
+6800	-3857.0792  	-79.8040    	-3777.2752  	2013.59     	5.77206E-2  	-
+6900	-3860.2815  	-79.4528    	-3780.8287  	2013.60     	5.81384E-2  	-
+7000	-3861.1452  	-79.0276    	-3782.1176  	2013.65     	5.81384E-2  	-
+7100	-3860.6139  	-79.6492    	-3780.9648  	2013.63     	5.79234E-2  	-
+7200	-3858.7865  	-80.1027    	-3778.6838  	2013.40     	5.50462E-2  	-
+7300	-3861.1531  	-80.7926    	-3780.3605  	2013.25     	5.75008E-2  	-
+7400	-3853.3648  	-81.1294    	-3772.2354  	2013.25     	4.95876E-2  	-
+7500	-3856.4503  	-82.0478    	-3774.4025  	2013.35     	5.00599E-2  	-
+7600	-3860.1995  	-84.3814    	-3775.8182  	2013.33     	4.70311E-2  	-
+7700	-3862.8705  	-84.0298    	-3778.8407  	2013.34     	4.71653E-2  	-
+7800	-3861.6082  	-83.3866    	-3778.2216  	2013.34     	4.71653E-2  	-
+7900	-3858.9896  	-84.1716    	-3774.8179  	2013.36     	4.87091E-2  	-
+8000	-3856.8285  	-86.0720    	-3770.7565  	2013.27     	4.41867E-2  	-
+8100	-3858.4798  	-84.9859    	-3773.4938  	2013.13     	4.44663E-2  	-
+8200	-3855.6813  	-81.9601    	-3773.7211  	2013.47     	4.47871E-2  	-
+8300	-3861.4233  	-82.8788    	-3778.5445  	2013.47     	4.55025E-2  	-
+8400	-3856.2291  	-85.5998    	-3770.6292  	2013.51     	4.91793E-2  	-
+8500	-3853.6286  	-86.1669    	-3767.4617  	2013.51     	4.91793E-2  	-
+8600	-3856.5975  	-87.5843    	-3769.0132  	2013.51     	4.81278E-2  	-
+8700	-3852.4493  	-88.1915    	-3764.2578  	2013.28     	4.7404E-2   	-
+8800	-3853.8040  	-88.8299    	-3764.9741  	2013.28     	4.2344E-2   	-
+8900	-3852.3045  	-89.7721    	-3762.5324  	2013.22     	4.04435E-2  	-
+9000	-3847.2824  	-91.0436    	-3756.2388  	2013.05     	4.02775E-2  	-
+9100	-3845.4877  	-90.7032    	-3754.7845  	2013.00     	4.04381E-2  	-
+9200	-3846.5926  	-90.1306    	-3756.4620  	2012.97     	4.01447E-2  	-
+9300	-3845.4373  	-90.3657    	-3755.0715  	2012.97     	4.01652E-2  	-
+9400	-3843.9551  	-88.8158    	-3755.1392  	2012.91     	3.99201E-2  	-
+9500	-3844.2501  	-88.5469    	-3755.7032  	2012.74     	3.99201E-2  	-
+9600	-3844.2812  	-89.0530    	-3755.2282  	2012.67     	4.09451E-2  	-
+9700	-3842.0348  	-89.5849    	-3752.4499  	2013.21     	4.6051E-2   	-
+9800	-3844.1628  	-93.2117    	-3750.9512  	2013.12     	4.11771E-2  	-
+9900	-3851.4650  	-92.7210    	-3758.7440  	2012.83     	3.44165E-2  	-
+10000	-3850.5848  	-93.3298    	-3757.2550  	2012.69     	3.44165E-2  	-
+10100	-3850.5276  	-93.2273    	-3757.3002  	2012.87     	3.98066E-2  	0.83 minutes/million states
+10200	-3847.0972  	-91.2451    	-3755.8521  	2012.92     	4.0357E-2   	1 minutes/million states
+10300	-3850.4837  	-92.7959    	-3757.6878  	2012.92     	4.0357E-2   	0.89 minutes/million states
+10400	-3849.4959  	-90.9848    	-3758.5111  	2012.97     	4.0357E-2   	0.88 minutes/million states
+10500	-3843.9487  	-92.1020    	-3751.8467  	2012.97     	3.64759E-2  	0.87 minutes/million states
+10600	-3850.0333  	-91.4752    	-3758.5581  	2012.97     	3.97405E-2  	0.83 minutes/million states
+10700	-3858.4784  	-91.7053    	-3766.7731  	2012.94     	3.47417E-2  	0.81 minutes/million states
+10800	-3859.8314  	-90.0068    	-3769.8245  	2012.76     	3.4605E-2   	0.83 minutes/million states
+10900	-3856.7712  	-92.4488    	-3764.3223  	2012.92     	3.50802E-2  	0.83 minutes/million states
+11000	-3856.6813  	-93.5845    	-3763.0968  	2012.94     	3.48135E-2  	0.83 minutes/million states
+11100	-3857.2672  	-93.1363    	-3764.1309  	2012.77     	3.48135E-2  	0.82 minutes/million states
+11200	-3852.3308  	-91.6043    	-3760.7265  	2012.89     	3.76162E-2  	0.82 minutes/million states
+11300	-3853.1891  	-92.7978    	-3760.3913  	2012.89     	3.88132E-2  	0.82 minutes/million states
+11400	-3851.5684  	-92.6845    	-3758.8839  	2012.93     	3.7528E-2   	0.83 minutes/million states
+11500	-3847.2730  	-92.9798    	-3754.2932  	2012.82     	3.68518E-2  	0.84 minutes/million states
+11600	-3847.2713  	-92.8747    	-3754.3966  	2012.81     	3.89901E-2  	0.84 minutes/million states
+11700	-3846.9446  	-93.5176    	-3753.4270  	2012.67     	3.89901E-2  	0.84 minutes/million states
+11800	-3850.4459  	-94.4157    	-3756.0302  	2012.78     	3.93271E-2  	0.84 minutes/million states
+11900	-3853.9215  	-94.2013    	-3759.7202  	2012.85     	3.93271E-2  	0.84 minutes/million states
+12000	-3855.3504  	-93.8081    	-3761.5423  	2012.89     	3.93271E-2  	0.84 minutes/million states
+12100	-3858.7788  	-95.4224    	-3763.3564  	2012.51     	3.93271E-2  	0.84 minutes/million states
+12200	-3856.5956  	-94.2903    	-3762.3053  	2012.51     	3.65695E-2  	0.84 minutes/million states
+12300	-3859.9444  	-96.0994    	-3763.8450  	2012.80     	3.65695E-2  	0.84 minutes/million states
+12400	-3853.7726  	-94.7768    	-3758.9958  	2012.79     	3.46004E-2  	0.84 minutes/million states
+12500	-3855.1232  	-96.5563    	-3758.5669  	2012.77     	3.40947E-2  	0.83 minutes/million states
+12600	-3855.5822  	-98.0184    	-3757.5639  	2012.77     	3.45108E-2  	0.83 minutes/million states
+12700	-3853.9903  	-97.6508    	-3756.3395  	2012.77     	3.00375E-2  	0.82 minutes/million states
+12800	-3859.9043  	-99.2621    	-3760.6423  	2012.50     	3.00564E-2  	0.83 minutes/million states
+12900	-3862.1744  	-99.0620    	-3763.1124  	2012.85     	3.00564E-2  	0.83 minutes/million states
+13000	-3855.0872  	-98.8993    	-3756.1879  	2012.97     	3.31242E-2  	0.83 minutes/million states
+13100	-3855.7176  	-97.9999    	-3757.7178  	2012.93     	3.31242E-2  	0.83 minutes/million states
+13200	-3851.6149  	-96.9687    	-3754.6463  	2012.81     	3.31242E-2  	0.83 minutes/million states
+13300	-3852.3386  	-95.5630    	-3756.7756  	2012.66     	3.31242E-2  	0.82 minutes/million states
+13400	-3850.2635  	-96.9128    	-3753.3507  	2012.66     	3.57211E-2  	0.82 minutes/million states
+13500	-3847.3201  	-97.4382    	-3749.8819  	2012.62     	3.54482E-2  	0.82 minutes/million states
+13600	-3853.7617  	-96.4821    	-3757.2797  	2012.68     	3.55681E-2  	0.82 minutes/million states
+13700	-3856.3111  	-97.5922    	-3758.7189  	2012.59     	3.54937E-2  	0.82 minutes/million states
+13800	-3857.7404  	-97.8612    	-3759.8793  	2012.48     	3.54937E-2  	0.82 minutes/million states
+13900	-3854.9946  	-98.7202    	-3756.2744  	2012.47     	3.28554E-2  	0.82 minutes/million states
+14000	-3853.9661  	-97.9806    	-3755.9855  	2012.49     	3.28442E-2  	0.82 minutes/million states
+14100	-3857.3768  	-102.5838   	-3754.7931  	2012.30     	3.17089E-2  	0.82 minutes/million states
+14200	-3853.3407  	-102.3235   	-3751.0172  	2012.33     	3.08733E-2  	0.82 minutes/million states
+14300	-3856.9224  	-104.1465   	-3752.7759  	2012.33     	3.08733E-2  	0.82 minutes/million states
+14400	-3852.9240  	-100.2569   	-3752.6671  	2012.34     	3.08733E-2  	0.82 minutes/million states
+14500	-3849.9814  	-100.5218   	-3749.4595  	2012.48     	3.07765E-2  	0.82 minutes/million states
+14600	-3853.0979  	-100.3618   	-3752.7361  	2012.67     	3.07765E-2  	0.82 minutes/million states
+14700	-3851.7402  	-100.4455   	-3751.2947  	2012.19     	3.07765E-2  	0.82 minutes/million states
+14800	-3856.8329  	-101.1695   	-3755.6633  	2012.48     	3.06618E-2  	0.81 minutes/million states
+14900	-3859.5818  	-99.1203    	-3760.4615  	2012.26     	3.09214E-2  	0.81 minutes/million states
+15000	-3854.1454  	-101.3259   	-3752.8195  	2012.04     	3.02754E-2  	0.8 minutes/million states
+15100	-3856.2796  	-101.2204   	-3755.0592  	2012.07     	3.16246E-2  	0.8 minutes/million states
+15200	-3850.4743  	-101.6471   	-3748.8272  	2012.07     	3.02486E-2  	0.8 minutes/million states
+15300	-3849.4974  	-103.3880   	-3746.1095  	2012.11     	3.02104E-2  	0.8 minutes/million states
+15400	-3856.4000  	-104.1630   	-3752.2370  	2012.11     	2.94451E-2  	0.79 minutes/million states
+15500	-3858.9921  	-102.5223   	-3756.4699  	2011.92     	2.59558E-2  	0.79 minutes/million states
+15600	-3859.9598  	-106.0501   	-3753.9097  	2011.44     	2.5226E-2   	0.79 minutes/million states
+15700	-3854.6103  	-103.8299   	-3750.7804  	2012.29     	2.76657E-2  	0.78 minutes/million states
+15800	-3855.2698  	-102.0969   	-3753.1729  	2012.11     	2.77354E-2  	0.78 minutes/million states
+15900	-3855.4296  	-102.0259   	-3753.4037  	2012.11     	2.77354E-2  	0.78 minutes/million states
+16000	-3854.3359  	-102.4071   	-3751.9287  	2012.10     	2.77354E-2  	0.78 minutes/million states
+16100	-3856.4071  	-103.5916   	-3752.8155  	2011.80     	2.71904E-2  	0.78 minutes/million states
+16200	-3854.1931  	-103.5053   	-3750.6878  	2011.94     	2.74241E-2  	0.77 minutes/million states
+16300	-3856.4331  	-106.1499   	-3750.2831  	2012.40     	2.79782E-2  	0.77 minutes/million states
+16400	-3857.3630  	-102.5506   	-3754.8124  	2012.29     	2.79782E-2  	0.77 minutes/million states
+16500	-3857.8816  	-102.2954   	-3755.5863  	2012.29     	2.7485E-2   	0.77 minutes/million states
+16600	-3854.8698  	-100.6967   	-3754.1730  	2012.34     	2.78034E-2  	0.77 minutes/million states
+16700	-3853.5304  	-101.7565   	-3751.7740  	2012.28     	2.74294E-2  	0.76 minutes/million states
+16800	-3855.0998  	-100.8864   	-3754.2134  	2012.25     	2.74294E-2  	0.76 minutes/million states
+16900	-3860.5954  	-100.5480   	-3760.0474  	2012.39     	2.72543E-2  	0.76 minutes/million states
+17000	-3857.1675  	-100.8689   	-3756.2985  	2012.27     	2.72543E-2  	0.76 minutes/million states
+17100	-3860.8931  	-101.1351   	-3759.7580  	2012.25     	2.7185E-2   	0.76 minutes/million states
+17200	-3855.4520  	-99.3280    	-3756.1240  	2012.71     	2.76E-2     	0.75 minutes/million states
+17300	-3853.4901  	-100.6661   	-3752.8240  	2012.71     	2.79425E-2  	0.75 minutes/million states
+17400	-3854.0596  	-101.8729   	-3752.1867  	2012.14     	2.79322E-2  	0.75 minutes/million states
+17500	-3857.3536  	-100.9896   	-3756.3639  	2012.34     	2.79322E-2  	0.75 minutes/million states
+17600	-3852.3584  	-102.5280   	-3749.8305  	2012.33     	2.8021E-2   	0.75 minutes/million states
+17700	-3849.8093  	-102.3217   	-3747.4876  	2012.33     	2.8021E-2   	0.75 minutes/million states
+17800	-3851.8819  	-102.0276   	-3749.8542  	2012.35     	2.8021E-2   	0.75 minutes/million states
+17900	-3846.0873  	-100.7451   	-3745.3422  	2012.35     	3.09836E-2  	0.75 minutes/million states
+18000	-3842.7796  	-101.4654   	-3741.3141  	2012.35     	3.09836E-2  	0.75 minutes/million states
+18100	-3846.7395  	-101.5547   	-3745.1849  	2012.29     	2.86792E-2  	0.75 minutes/million states
+18200	-3846.1693  	-102.7850   	-3743.3844  	2012.27     	2.99883E-2  	0.75 minutes/million states
+18300	-3849.3618  	-101.9456   	-3747.4162  	2012.33     	2.88889E-2  	0.75 minutes/million states
+18400	-3859.3413  	-106.6443   	-3752.6970  	2011.97     	2.88686E-2  	0.75 minutes/million states
+18500	-3860.6467  	-106.7170   	-3753.9297  	2011.96     	2.87881E-2  	0.75 minutes/million states
+18600	-3851.9797  	-104.4321   	-3747.5476  	2012.09     	2.88502E-2  	0.75 minutes/million states
+18700	-3853.6279  	-104.2974   	-3749.3306  	2011.67     	2.86858E-2  	0.75 minutes/million states
+18800	-3851.9399  	-104.4845   	-3747.4554  	2011.78     	2.86858E-2  	0.75 minutes/million states
+18900	-3853.3957  	-105.3001   	-3748.0956  	2011.78     	2.46022E-2  	0.75 minutes/million states
+19000	-3848.6608  	-105.8094   	-3742.8515  	2011.78     	2.61848E-2  	0.74 minutes/million states
+19100	-3852.9780  	-104.8599   	-3748.1181  	2011.81     	2.63338E-2  	0.75 minutes/million states
+19200	-3850.2578  	-107.0950   	-3743.1629  	2012.06     	2.62109E-2  	0.75 minutes/million states
+19300	-3851.6853  	-107.1886   	-3744.4968  	2012.04     	2.61361E-2  	0.75 minutes/million states
+19400	-3851.7122  	-104.3411   	-3747.3711  	2011.52     	2.60816E-2  	0.74 minutes/million states
+19500	-3850.8645  	-104.7764   	-3746.0881  	2011.52     	2.70081E-2  	0.74 minutes/million states
+19600	-3854.0523  	-104.6892   	-3749.3631  	2011.92     	2.58753E-2  	0.74 minutes/million states
+19700	-3853.3588  	-105.2742   	-3748.0846  	2011.48     	2.59353E-2  	0.74 minutes/million states
+19800	-3849.5184  	-104.8933   	-3744.6251  	2011.56     	2.54939E-2  	0.74 minutes/million states
+19900	-3847.9994  	-106.1355   	-3741.8639  	2011.58     	2.55937E-2  	0.74 minutes/million states
+20000	-3846.9519  	-106.8128   	-3740.1390  	2011.47     	2.55937E-2  	0.74 minutes/million states
+20100	-3848.0918  	-106.8511   	-3741.2406  	2011.67     	2.55937E-2  	0.74 minutes/million states
+20200	-3847.4067  	-108.7707   	-3738.6360  	2011.38     	2.50368E-2  	0.74 minutes/million states
+20300	-3845.3297  	-109.9078   	-3735.4219  	2011.38     	2.50513E-2  	0.74 minutes/million states
+20400	-3854.2904  	-109.9446   	-3744.3457  	2011.38     	2.49637E-2  	0.74 minutes/million states
+20500	-3852.9737  	-110.0433   	-3742.9304  	2011.38     	2.49637E-2  	0.73 minutes/million states
+20600	-3854.2620  	-109.5364   	-3744.7256  	2011.38     	2.49683E-2  	0.73 minutes/million states
+20700	-3853.7655  	-109.7843   	-3743.9813  	2011.34     	2.17547E-2  	0.73 minutes/million states
+20800	-3848.0607  	-109.3635   	-3738.6972  	2011.34     	2.25289E-2  	0.73 minutes/million states
+20900	-3839.9305  	-108.0108   	-3731.9197  	2011.40     	2.27786E-2  	0.73 minutes/million states
+21000	-3843.9479  	-108.6421   	-3735.3057  	2011.42     	2.34643E-2  	0.73 minutes/million states
+21100	-3846.9987  	-109.6562   	-3737.3424  	2011.23     	2.30772E-2  	0.73 minutes/million states
+21200	-3853.6468  	-109.6551   	-3743.9918  	2010.74     	2.30772E-2  	0.73 minutes/million states
+21300	-3850.1884  	-110.2927   	-3739.8957  	2010.79     	2.12744E-2  	0.73 minutes/million states
+21400	-3853.3475  	-110.5116   	-3742.8359  	2010.93     	2.12764E-2  	0.73 minutes/million states
+21500	-3856.9396  	-109.6635   	-3747.2761  	2011.22     	2.13149E-2  	0.73 minutes/million states
+21600	-3858.3958  	-110.5833   	-3747.8125  	2011.07     	2.25481E-2  	0.73 minutes/million states
+21700	-3858.7366  	-111.4931   	-3747.2435  	2011.17     	2.25481E-2  	0.73 minutes/million states
+21800	-3856.7351  	-112.5948   	-3744.1403  	2011.24     	2.25481E-2  	0.73 minutes/million states
+21900	-3845.1941  	-110.4126   	-3734.7815  	2011.24     	2.29232E-2  	0.73 minutes/million states
+22000	-3848.5051  	-110.5519   	-3737.9532  	2010.95     	2.28477E-2  	0.73 minutes/million states
+22100	-3852.9138  	-110.7966   	-3742.1171  	2010.84     	2.28477E-2  	0.73 minutes/million states
+22200	-3849.9426  	-111.5799   	-3738.3628  	2011.10     	2.29356E-2  	0.73 minutes/million states
+22300	-3853.6705  	-112.2010   	-3741.4696  	2010.97     	2.13717E-2  	0.73 minutes/million states
+22400	-3850.1575  	-115.1947   	-3734.9629  	2010.97     	2.13717E-2  	0.73 minutes/million states
+22500	-3849.3918  	-113.5465   	-3735.8453  	2010.97     	2.13717E-2  	0.73 minutes/million states
+22600	-3850.0267  	-113.9303   	-3736.0964  	2011.03     	2.16079E-2  	0.73 minutes/million states
+22700	-3848.6292  	-113.5846   	-3735.0446  	2011.03     	2.05059E-2  	0.73 minutes/million states
+22800	-3841.8645  	-114.3988   	-3727.4657  	2011.02     	2.05059E-2  	0.73 minutes/million states
+22900	-3846.6869  	-115.1123   	-3731.5746  	2010.75     	1.98136E-2  	0.72 minutes/million states
+23000	-3849.0917  	-115.2029   	-3733.8888  	2010.19     	1.97528E-2  	0.72 minutes/million states
+23100	-3849.5862  	-115.3977   	-3734.1885  	2010.91     	1.94356E-2  	0.72 minutes/million states
+23200	-3852.0976  	-114.5143   	-3737.5833  	2010.86     	1.94356E-2  	0.72 minutes/million states
+23300	-3849.4664  	-115.0044   	-3734.4620  	2010.72     	1.94998E-2  	0.72 minutes/million states
+23400	-3848.3650  	-113.0503   	-3735.3146  	2010.68     	2.1917E-2   	0.72 minutes/million states
+23500	-3856.0949  	-114.2133   	-3741.8816  	2010.72     	2.1917E-2   	0.72 minutes/million states
+23600	-3859.0898  	-113.8902   	-3745.1995  	2010.63     	2.23197E-2  	0.72 minutes/million states
+23700	-3854.8046  	-112.2038   	-3742.6008  	2010.63     	2.25955E-2  	0.72 minutes/million states
+23800	-3848.5580  	-111.9295   	-3736.6285  	2010.81     	2.17281E-2  	0.72 minutes/million states
+23900	-3854.4932  	-112.9394   	-3741.5538  	2011.02     	2.16091E-2  	0.72 minutes/million states
+24000	-3850.3596  	-112.4067   	-3737.9529  	2011.01     	2.16091E-2  	0.72 minutes/million states
+24100	-3858.2374  	-113.1138   	-3745.1237  	2011.02     	2.16447E-2  	0.72 minutes/million states
+24200	-3849.5943  	-114.0972   	-3735.4971  	2011.03     	2.21373E-2  	0.72 minutes/million states
+24300	-3851.4790  	-114.1934   	-3737.2855  	2011.03     	2.21373E-2  	0.72 minutes/million states
+24400	-3850.4683  	-113.5518   	-3736.9165  	2011.03     	2.19118E-2  	0.72 minutes/million states
+24500	-3847.1265  	-112.4306   	-3734.6959  	2011.03     	2.22111E-2  	0.72 minutes/million states
+24600	-3848.5207  	-112.8592   	-3735.6615  	2010.92     	2.21027E-2  	0.72 minutes/million states
+24700	-3849.5448  	-113.7185   	-3735.8263  	2011.03     	2.21027E-2  	0.72 minutes/million states
+24800	-3851.2368  	-113.7068   	-3737.5300  	2010.81     	2.08122E-2  	0.71 minutes/million states
+24900	-3851.0485  	-114.0956   	-3736.9529  	2011.26     	2.08122E-2  	0.71 minutes/million states
+25000	-3856.4722  	-113.0364   	-3743.4359  	2011.08     	2.10106E-2  	0.71 minutes/million states
+25100	-3849.0432  	-113.6566   	-3735.3865  	2011.33     	2.10106E-2  	0.71 minutes/million states
+25200	-3851.4245  	-113.8837   	-3737.5408  	2011.14     	2.10106E-2  	0.71 minutes/million states
+25300	-3852.1363  	-113.6778   	-3738.4585  	2011.14     	2.01271E-2  	0.71 minutes/million states
+25400	-3848.1417  	-112.9137   	-3735.2280  	2011.14     	2.29669E-2  	0.71 minutes/million states
+25500	-3845.7217  	-111.6845   	-3734.0371  	2011.24     	2.29614E-2  	0.71 minutes/million states
+25600	-3850.8077  	-112.1861   	-3738.6216  	2011.33     	2.29614E-2  	0.71 minutes/million states
+25700	-3845.9281  	-111.5752   	-3734.3530  	2011.30     	2.24164E-2  	0.71 minutes/million states
+25800	-3844.8017  	-112.7922   	-3732.0095  	2011.59     	2.24164E-2  	0.71 minutes/million states
+25900	-3843.9415  	-112.9968   	-3730.9447  	2011.50     	2.2537E-2   	0.71 minutes/million states
+26000	-3841.6477  	-112.3767   	-3729.2710  	2011.17     	2.2537E-2   	0.71 minutes/million states
+26100	-3851.0062  	-114.1929   	-3736.8133  	2011.14     	2.36014E-2  	0.71 minutes/million states
+26200	-3853.9885  	-113.5029   	-3740.4856  	2011.14     	2.36014E-2  	0.71 minutes/million states
+26300	-3851.3388  	-114.5049   	-3736.8340  	2011.22     	2.26034E-2  	0.71 minutes/million states
+26400	-3850.1776  	-110.9903   	-3739.1873  	2011.31     	2.22961E-2  	0.71 minutes/million states
+26500	-3846.1502  	-109.5189   	-3736.6312  	2011.33     	2.35265E-2  	0.71 minutes/million states
+26600	-3853.1981  	-112.2141   	-3740.9840  	2011.17     	2.28645E-2  	0.71 minutes/million states
+26700	-3850.6182  	-112.8639   	-3737.7543  	2010.96     	2.1547E-2   	0.71 minutes/million states
+26800	-3851.8465  	-114.3668   	-3737.4797  	2010.43     	2.10983E-2  	0.71 minutes/million states
+26900	-3856.8223  	-114.4638   	-3742.3585  	2011.13     	2.07197E-2  	0.71 minutes/million states
+27000	-3844.5537  	-114.6244   	-3729.9293  	2011.20     	2.06321E-2  	0.71 minutes/million states
+27100	-3842.5681  	-114.8806   	-3727.6875  	2011.24     	2.23162E-2  	0.71 minutes/million states
+27200	-3847.8799  	-115.4107   	-3732.4693  	2011.24     	2.01951E-2  	0.71 minutes/million states
+27300	-3848.2410  	-114.9368   	-3733.3042  	2011.43     	2.01951E-2  	0.71 minutes/million states
+27400	-3846.8630  	-115.0961   	-3731.7669  	2011.39     	2.01951E-2  	0.71 minutes/million states
+27500	-3850.9201  	-115.1608   	-3735.7594  	2011.09     	2.02009E-2  	0.71 minutes/million states
+27600	-3852.6025  	-115.3602   	-3737.2422  	2011.09     	2.17169E-2  	0.71 minutes/million states
+27700	-3854.7634  	-116.5292   	-3738.2343  	2011.22     	2.0059E-2   	0.71 minutes/million states
+27800	-3853.3210  	-117.3312   	-3735.9898  	2011.22     	2.0059E-2   	0.71 minutes/million states
+27900	-3858.7098  	-116.7640   	-3741.9458  	2010.73     	2.01735E-2  	0.71 minutes/million states
+28000	-3862.6933  	-116.6406   	-3746.0527  	2010.92     	2.0075E-2   	0.71 minutes/million states
+28100	-3856.7373  	-115.2956   	-3741.4418  	2011.33     	2.20768E-2  	0.71 minutes/million states
+28200	-3852.5011  	-115.7311   	-3736.7700  	2011.08     	2.20768E-2  	0.71 minutes/million states
+28300	-3852.9319  	-115.5458   	-3737.3861  	2011.08     	2.16263E-2  	0.71 minutes/million states
+28400	-3848.6345  	-115.7785   	-3732.8560  	2010.53     	1.96817E-2  	0.71 minutes/million states
+28500	-3848.7341  	-117.2634   	-3731.4707  	2010.86     	1.96817E-2  	0.71 minutes/million states
+28600	-3852.9970  	-117.3549   	-3735.6421  	2011.17     	1.99832E-2  	0.71 minutes/million states
+28700	-3861.5428  	-125.4959   	-3736.0469  	2010.74     	1.99832E-2  	0.71 minutes/million states
+28800	-3855.1890  	-119.3283   	-3735.8607  	2010.41     	1.97706E-2  	0.71 minutes/million states
+28900	-3860.7345  	-120.9673   	-3739.7673  	2010.11     	1.97706E-2  	0.71 minutes/million states
+29000	-3854.2939  	-122.0306   	-3732.2633  	2010.11     	1.89324E-2  	0.71 minutes/million states
+29100	-3851.2460  	-121.5110   	-3729.7350  	2010.48     	1.89324E-2  	0.71 minutes/million states
+29200	-3849.8005  	-120.8571   	-3728.9434  	2010.48     	1.89194E-2  	0.71 minutes/million states
+29300	-3848.8224  	-119.8638   	-3728.9586  	2010.43     	1.89194E-2  	0.71 minutes/million states
+29400	-3851.3253  	-119.3040   	-3732.0213  	2010.71     	1.91083E-2  	0.71 minutes/million states
+29500	-3856.0612  	-121.2260   	-3734.8352  	2010.54     	1.91083E-2  	0.71 minutes/million states
+29600	-3854.8665  	-121.7659   	-3733.1005  	2010.51     	1.90106E-2  	0.71 minutes/million states
+29700	-3855.9102  	-121.2565   	-3734.6537  	2010.78     	1.90106E-2  	0.71 minutes/million states
+29800	-3855.7004  	-119.1058   	-3736.5946  	2010.54     	1.74323E-2  	0.71 minutes/million states
+29900	-3857.9491  	-122.3328   	-3735.6163  	2010.88     	1.79797E-2  	0.71 minutes/million states
+30000	-3858.0642  	-123.7601   	-3734.3041  	2010.43     	1.68135E-2  	0.7 minutes/million states
+30100	-3857.5616  	-124.3795   	-3733.1821  	2010.94     	1.63542E-2  	0.7 minutes/million states
+30200	-3855.4011  	-124.3182   	-3731.0829  	2010.41     	1.67875E-2  	0.71 minutes/million states
+30300	-3868.1853  	-122.3989   	-3745.7864  	2010.41     	1.67875E-2  	0.71 minutes/million states
+30400	-3859.4285  	-120.8318   	-3738.5967  	2010.43     	1.67875E-2  	0.71 minutes/million states
+30500	-3861.5918  	-120.7505   	-3740.8413  	2010.36     	1.71267E-2  	0.71 minutes/million states
+30600	-3857.6627  	-121.4565   	-3736.2062  	2010.33     	1.71267E-2  	0.71 minutes/million states
+30700	-3852.1204  	-122.4865   	-3729.6340  	2010.33     	1.84298E-2  	0.71 minutes/million states
+30800	-3858.8813  	-120.7866   	-3738.0948  	2010.33     	1.84298E-2  	0.71 minutes/million states
+30900	-3862.3999  	-121.2736   	-3741.1263  	2010.33     	1.75096E-2  	0.7 minutes/million states
+31000	-3868.8203  	-121.4748   	-3747.3455  	2010.33     	1.94465E-2  	0.71 minutes/million states
+31100	-3870.3338  	-121.2305   	-3749.1034  	2010.56     	1.94465E-2  	0.71 minutes/million states
+31200	-3870.7873  	-120.4781   	-3750.3092  	2010.45     	1.95476E-2  	0.71 minutes/million states
+31300	-3863.1597  	-120.8723   	-3742.2874  	2010.45     	1.91944E-2  	0.71 minutes/million states
+31400	-3864.7525  	-122.9006   	-3741.8518  	2010.43     	1.91944E-2  	0.7 minutes/million states
+31500	-3867.9506  	-123.2712   	-3744.6794  	2010.31     	1.68254E-2  	0.71 minutes/million states
+31600	-3861.6715  	-123.1552   	-3738.5162  	2009.79     	1.68164E-2  	0.71 minutes/million states
+31700	-3856.8219  	-123.7937   	-3733.0281  	2009.66     	1.65027E-2  	0.71 minutes/million states
+31800	-3855.5108  	-122.9790   	-3732.5318  	2009.54     	1.68537E-2  	0.7 minutes/million states
+31900	-3854.5587  	-125.7820   	-3728.7767  	2009.42     	1.68102E-2  	0.7 minutes/million states
+32000	-3853.8372  	-124.6089   	-3729.2283  	2009.42     	1.68538E-2  	0.7 minutes/million states
+32100	-3857.4123  	-124.9193   	-3732.4930  	2009.42     	1.68629E-2  	0.71 minutes/million states
+32200	-3855.9885  	-124.1926   	-3731.7959  	2009.38     	1.6002E-2   	0.7 minutes/million states
+32300	-3860.9395  	-131.4110   	-3729.5286  	2009.38     	1.6002E-2   	0.7 minutes/million states
+32400	-3861.1462  	-130.8651   	-3730.2810  	2009.41     	1.60721E-2  	0.7 minutes/million states
+32500	-3861.3598  	-129.5300   	-3731.8298  	2008.69     	1.70709E-2  	0.71 minutes/million states
+32600	-3857.4563  	-129.4774   	-3727.9789  	2008.95     	1.70685E-2  	0.71 minutes/million states
+32700	-3856.6519  	-122.9123   	-3733.7397  	2008.93     	1.65237E-2  	0.71 minutes/million states
+32800	-3854.8515  	-123.7815   	-3731.0700  	2009.30     	1.64771E-2  	0.71 minutes/million states
+32900	-3854.3244  	-124.8597   	-3729.4647  	2008.86     	1.64771E-2  	0.71 minutes/million states
+33000	-3854.3114  	-124.5172   	-3729.7942  	2009.59     	1.64814E-2  	0.71 minutes/million states
+33100	-3857.9508  	-125.8466   	-3732.1042  	2008.81     	1.53726E-2  	0.71 minutes/million states
+33200	-3861.4786  	-128.2686   	-3733.2100  	2008.67     	1.51131E-2  	0.71 minutes/million states
+33300	-3860.1150  	-126.3323   	-3733.7826  	2008.76     	1.55159E-2  	0.71 minutes/million states
+33400	-3856.4042  	-126.1317   	-3730.2725  	2008.91     	1.58037E-2  	0.71 minutes/million states
+33500	-3852.9204  	-125.9561   	-3726.9643  	2008.91     	1.46163E-2  	0.71 minutes/million states
+33600	-3855.9092  	-126.5557   	-3729.3535  	2008.91     	1.50421E-2  	0.71 minutes/million states
+33700	-3860.5955  	-124.5721   	-3736.0234  	2008.87     	1.49768E-2  	0.71 minutes/million states
+33800	-3869.9274  	-126.1212   	-3743.8062  	2008.75     	1.4741E-2   	0.7 minutes/million states
+33900	-3875.6535  	-125.3549   	-3750.2985  	2007.78     	1.37729E-2  	0.7 minutes/million states
+34000	-3871.5981  	-127.1839   	-3744.4143  	2007.88     	1.37729E-2  	0.7 minutes/million states
+34100	-3860.0998  	-125.8688   	-3734.2309  	2008.32     	1.38933E-2  	0.7 minutes/million states
+34200	-3865.6703  	-128.3252   	-3737.3451  	2007.12     	1.26531E-2  	0.7 minutes/million states
+34300	-3864.7317  	-128.7791   	-3735.9526  	2007.58     	1.33848E-2  	0.7 minutes/million states
+34400	-3869.5184  	-128.7088   	-3740.8095  	2007.50     	1.34586E-2  	0.7 minutes/million states
+34500	-3865.5413  	-129.4807   	-3736.0606  	2008.57     	1.35689E-2  	0.7 minutes/million states
+34600	-3861.3732  	-128.7895   	-3732.5837  	2008.57     	1.35689E-2  	0.7 minutes/million states
+34700	-3858.4740  	-127.5160   	-3730.9579  	2009.46     	1.38356E-2  	0.7 minutes/million states
+34800	-3856.2297  	-125.6281   	-3730.6015  	2009.33     	1.55168E-2  	0.7 minutes/million states
+34900	-3855.2394  	-126.5665   	-3728.6729  	2009.52     	1.55168E-2  	0.7 minutes/million states
+35000	-3851.9423  	-125.3140   	-3726.6283  	2009.59     	1.52896E-2  	0.7 minutes/million states
+35100	-3850.6444  	-124.3493   	-3726.2951  	2009.53     	1.50028E-2  	0.7 minutes/million states
+35200	-3851.4958  	-123.1588   	-3728.3370  	2009.83     	1.51622E-2  	0.7 minutes/million states
+35300	-3849.2216  	-123.6208   	-3725.6008  	2009.02     	1.51622E-2  	0.7 minutes/million states
+35400	-3855.2314  	-122.9674   	-3732.2640  	2009.58     	1.67259E-2  	0.7 minutes/million states
+35500	-3854.7764  	-123.8424   	-3730.9340  	2009.58     	1.63093E-2  	0.7 minutes/million states
+35600	-3851.2162  	-124.1911   	-3727.0251  	2009.58     	1.57335E-2  	0.7 minutes/million states
+35700	-3854.6829  	-123.3226   	-3731.3603  	2009.58     	1.46184E-2  	0.7 minutes/million states
+35800	-3851.9278  	-122.6660   	-3729.2617  	2009.79     	1.64407E-2  	0.7 minutes/million states
+35900	-3859.4418  	-123.1370   	-3736.3048  	2009.79     	1.64407E-2  	0.7 minutes/million states
+36000	-3860.1415  	-124.1422   	-3735.9993  	2009.78     	1.5286E-2   	0.7 minutes/million states
+36100	-3860.7182  	-125.4097   	-3735.3085  	2009.80     	1.5286E-2   	0.7 minutes/million states
+36200	-3859.2899  	-126.5238   	-3732.7661  	2009.80     	1.67437E-2  	0.7 minutes/million states
+36300	-3853.1100  	-126.4719   	-3726.6381  	2009.72     	1.65494E-2  	0.7 minutes/million states
+36400	-3851.9826  	-126.7943   	-3725.1883  	2009.52     	1.66396E-2  	0.7 minutes/million states
+36500	-3857.3425  	-125.3709   	-3731.9716  	2009.47     	1.58008E-2  	0.7 minutes/million states
+36600	-3858.8836  	-127.6904   	-3731.1932  	2009.13     	1.55997E-2  	0.7 minutes/million states
+36700	-3855.5789  	-128.1437   	-3727.4353  	2009.13     	1.55997E-2  	0.7 minutes/million states
+36800	-3860.5579  	-127.6258   	-3732.9321  	2009.37     	1.55997E-2  	0.7 minutes/million states
+36900	-3849.1867  	-126.8506   	-3722.3361  	2009.39     	1.56446E-2  	0.7 minutes/million states
+37000	-3855.9444  	-127.5098   	-3728.4346  	2009.39     	1.56446E-2  	0.7 minutes/million states
+37100	-3854.5558  	-125.8925   	-3728.6632  	2008.78     	1.49323E-2  	0.7 minutes/million states
+37200	-3853.6613  	-126.8632   	-3726.7981  	2008.83     	1.51933E-2  	0.7 minutes/million states
+37300	-3853.7093  	-127.0536   	-3726.6557  	2008.77     	1.50955E-2  	0.7 minutes/million states
+37400	-3859.9946  	-125.7105   	-3734.2841  	2009.15     	1.52778E-2  	0.7 minutes/million states
+37500	-3855.0415  	-124.5208   	-3730.5207  	2009.35     	1.57649E-2  	0.7 minutes/million states
+37600	-3858.2073  	-123.2562   	-3734.9510  	2009.40     	1.5883E-2   	0.7 minutes/million states
+37700	-3856.8415  	-123.6120   	-3733.2295  	2009.40     	1.70028E-2  	0.7 minutes/million states
+37800	-3855.1342  	-121.6169   	-3733.5173  	2009.73     	1.70028E-2  	0.7 minutes/million states
+37900	-3857.7895  	-121.9801   	-3735.8093  	2010.02     	1.68864E-2  	0.7 minutes/million states
+38000	-3859.5701  	-122.2158   	-3737.3543  	2009.92     	1.49339E-2  	0.7 minutes/million states
+38100	-3859.2286  	-122.8208   	-3736.4078  	2009.97     	1.49339E-2  	0.7 minutes/million states
+38200	-3851.4718  	-120.3724   	-3731.0994  	2010.14     	1.63957E-2  	0.7 minutes/million states
+38300	-3860.3813  	-122.7706   	-3737.6107  	2009.90     	1.84586E-2  	0.7 minutes/million states
+38400	-3858.5591  	-118.4127   	-3740.1464  	2009.91     	1.70701E-2  	0.7 minutes/million states
+38500	-3849.9888  	-120.7175   	-3729.2713  	2009.91     	1.66635E-2  	0.7 minutes/million states
+38600	-3849.7985  	-120.4460   	-3729.3525  	2009.68     	1.66635E-2  	0.7 minutes/million states
+38700	-3849.4419  	-120.9566   	-3728.4854  	2009.60     	1.77607E-2  	0.7 minutes/million states
+38800	-3858.2611  	-120.1676   	-3738.0935  	2009.32     	1.8194E-2   	0.7 minutes/million states
+38900	-3861.8029  	-119.6157   	-3742.1872  	2009.41     	1.62223E-2  	0.7 minutes/million states
+39000	-3861.1052  	-121.7172   	-3739.3880  	2009.41     	1.68235E-2  	0.7 minutes/million states
+39100	-3860.2716  	-122.3166   	-3737.9549  	2009.46     	1.69322E-2  	0.7 minutes/million states
+39200	-3860.6064  	-124.2031   	-3736.4033  	2009.65     	1.52597E-2  	0.7 minutes/million states
+39300	-3862.4112  	-123.2782   	-3739.1330  	2009.65     	1.52597E-2  	0.7 minutes/million states
+39400	-3859.0661  	-123.4402   	-3735.6259  	2009.65     	1.65016E-2  	0.7 minutes/million states
+39500	-3862.8247  	-123.2381   	-3739.5866  	2009.34     	1.65016E-2  	0.7 minutes/million states
+39600	-3855.7785  	-122.6900   	-3733.0885  	2009.75     	1.69603E-2  	0.7 minutes/million states
+39700	-3851.4298  	-120.7468   	-3730.6831  	2010.13     	1.73967E-2  	0.7 minutes/million states
+39800	-3848.5551  	-121.8343   	-3726.7207  	2010.13     	1.73967E-2  	0.7 minutes/million states
+39900	-3851.8805  	-121.5720   	-3730.3086  	2010.13     	1.66308E-2  	0.7 minutes/million states
+40000	-3853.7778  	-121.2775   	-3732.5003  	2009.89     	1.68703E-2  	0.7 minutes/million states
+40100	-3855.3784  	-121.1146   	-3734.2639  	2009.89     	1.67999E-2  	0.7 minutes/million states
+40200	-3856.3394  	-122.1011   	-3734.2383  	2010.38     	1.61596E-2  	0.7 minutes/million states
+40300	-3856.7068  	-123.8030   	-3732.9039  	2010.38     	1.61596E-2  	0.7 minutes/million states
+40400	-3861.0310  	-123.5066   	-3737.5243  	2010.43     	1.7695E-2   	0.7 minutes/million states
+40500	-3859.2058  	-122.1898   	-3737.0160  	2010.29     	1.77942E-2  	0.7 minutes/million states
+40600	-3855.3139  	-121.9990   	-3733.3149  	2010.29     	1.77942E-2  	0.69 minutes/million states
+40700	-3852.9486  	-122.2067   	-3730.7419  	2010.32     	1.77942E-2  	0.69 minutes/million states
+40800	-3856.8222  	-123.6800   	-3733.1423  	2010.35     	1.78012E-2  	0.69 minutes/million states
+40900	-3854.8182  	-122.7748   	-3732.0434  	2010.32     	1.54721E-2  	0.69 minutes/million states
+41000	-3852.1602  	-122.7617   	-3729.3985  	2009.78     	1.54721E-2  	0.69 minutes/million states
+41100	-3860.9048  	-122.1756   	-3738.7292  	2010.30     	1.56803E-2  	0.69 minutes/million states
+41200	-3858.2548  	-119.9717   	-3738.2831  	2010.08     	1.57681E-2  	0.69 minutes/million states
+41300	-3858.0460  	-122.1845   	-3735.8615  	2009.82     	1.50361E-2  	0.69 minutes/million states
+41400	-3859.6088  	-123.9586   	-3735.6502  	2009.05     	1.56701E-2  	0.69 minutes/million states
+41500	-3861.9975  	-124.9516   	-3737.0459  	2009.51     	1.68114E-2  	0.69 minutes/million states
+41600	-3855.7051  	-122.5997   	-3733.1054  	2009.51     	1.68114E-2  	0.69 minutes/million states
+41700	-3848.0760  	-123.5524   	-3724.5236  	2009.51     	1.68114E-2  	0.69 minutes/million states
+41800	-3850.5017  	-122.9711   	-3727.5306  	2009.67     	1.68534E-2  	0.69 minutes/million states
+41900	-3851.7736  	-123.4576   	-3728.3160  	2009.63     	1.73635E-2  	0.69 minutes/million states
+42000	-3854.4789  	-122.7874   	-3731.6914  	2010.08     	1.79552E-2  	0.69 minutes/million states
+42100	-3853.0859  	-121.6334   	-3731.4525  	2009.36     	1.79552E-2  	0.69 minutes/million states
+42200	-3849.2311  	-120.7813   	-3728.4498  	2009.56     	1.77884E-2  	0.69 minutes/million states
+42300	-3855.8078  	-122.0424   	-3733.7654  	2009.31     	1.77884E-2  	0.69 minutes/million states
+42400	-3860.1842  	-122.3341   	-3737.8501  	2009.12     	1.77884E-2  	0.69 minutes/million states
+42500	-3859.6554  	-122.6259   	-3737.0295  	2009.22     	1.51735E-2  	0.69 minutes/million states
+42600	-3860.8795  	-121.7450   	-3739.1344  	2009.22     	1.72638E-2  	0.69 minutes/million states
+42700	-3865.3631  	-120.7385   	-3744.6246  	2009.22     	1.72638E-2  	0.69 minutes/million states
+42800	-3857.0528  	-119.6323   	-3737.4205  	2009.73     	1.73552E-2  	0.69 minutes/million states
+42900	-3854.7209  	-120.5412   	-3734.1797  	2009.07     	1.70753E-2  	0.69 minutes/million states
+43000	-3851.4029  	-119.8779   	-3731.5250  	2008.42     	1.65039E-2  	0.69 minutes/million states
+43100	-3854.5255  	-121.8739   	-3732.6515  	2008.49     	1.5792E-2   	0.69 minutes/million states
+43200	-3854.1709  	-121.1679   	-3733.0031  	2008.49     	1.5792E-2   	0.69 minutes/million states
+43300	-3855.0443  	-121.6102   	-3733.4341  	2008.42     	1.56492E-2  	0.69 minutes/million states
+43400	-3856.0883  	-124.3291   	-3731.7592  	2008.28     	1.53923E-2  	0.69 minutes/million states
+43500	-3864.0396  	-125.0346   	-3739.0049  	2008.30     	1.47989E-2  	0.69 minutes/million states
+43600	-3863.6974  	-125.8107   	-3737.8868  	2009.12     	1.46004E-2  	0.69 minutes/million states
+43700	-3860.6544  	-125.1582   	-3735.4962  	2008.54     	1.42328E-2  	0.69 minutes/million states
+43800	-3854.5918  	-121.0431   	-3733.5487  	2008.91     	1.49041E-2  	0.69 minutes/million states
+43900	-3857.6304  	-120.9524   	-3736.6780  	2008.91     	1.5353E-2   	0.69 minutes/million states
+44000	-3856.6908  	-120.6476   	-3736.0432  	2008.49     	1.5353E-2   	0.69 minutes/million states
+44100	-3865.2902  	-123.0004   	-3742.2898  	2008.60     	1.5353E-2   	0.69 minutes/million states
+44200	-3866.7936  	-122.4883   	-3744.3053  	2008.83     	1.5468E-2   	0.69 minutes/million states
+44300	-3859.7088  	-122.8236   	-3736.8853  	2008.97     	1.62428E-2  	0.69 minutes/million states
+44400	-3857.1249  	-123.5975   	-3733.5273  	2009.26     	1.51408E-2  	0.69 minutes/million states
+44500	-3861.2845  	-123.1660   	-3738.1185  	2009.06     	1.60768E-2  	0.69 minutes/million states
+44600	-3852.7289  	-122.1392   	-3730.5897  	2009.06     	1.59665E-2  	0.68 minutes/million states
+44700	-3851.9281  	-125.1128   	-3726.8154  	2008.94     	1.61079E-2  	0.68 minutes/million states
+44800	-3847.6094  	-124.7780   	-3722.8313  	2009.00     	1.60914E-2  	0.68 minutes/million states
+44900	-3849.2330  	-124.8451   	-3724.3879  	2009.00     	1.59156E-2  	0.68 minutes/million states
+45000	-3847.5721  	-122.9766   	-3724.5955  	2009.00     	1.59156E-2  	0.68 minutes/million states
+45100	-3854.3121  	-123.5677   	-3730.7445  	2008.95     	1.5465E-2   	0.68 minutes/million states
+45200	-3852.3317  	-125.9017   	-3726.4300  	2009.03     	1.51443E-2  	0.68 minutes/million states
+45300	-3855.5721  	-123.6823   	-3731.8899  	2008.27     	1.41742E-2  	0.68 minutes/million states
+45400	-3858.6202  	-127.1884   	-3731.4318  	2007.85     	1.40744E-2  	0.68 minutes/million states
+45500	-3855.4178  	-124.8963   	-3730.5215  	2008.05     	1.47827E-2  	0.68 minutes/million states
+45600	-3857.1419  	-125.3919   	-3731.7500  	2007.91     	1.45506E-2  	0.68 minutes/million states
+45700	-3857.4957  	-127.4039   	-3730.0918  	2008.73     	1.40299E-2  	0.68 minutes/million states
+45800	-3860.9098  	-127.4897   	-3733.4201  	2008.91     	1.42822E-2  	0.68 minutes/million states
+45900	-3857.3035  	-126.6734   	-3730.6301  	2008.93     	1.45145E-2  	0.68 minutes/million states
+46000	-3852.8029  	-125.7965   	-3727.0065  	2009.03     	1.47119E-2  	0.68 minutes/million states
+46100	-3858.3796  	-126.6526   	-3731.7270  	2009.30     	1.44259E-2  	0.68 minutes/million states
+46200	-3857.3475  	-127.5771   	-3729.7703  	2009.30     	1.44259E-2  	0.68 minutes/million states
+46300	-3858.2833  	-130.6401   	-3727.6432  	2008.85     	1.4209E-2   	0.68 minutes/million states
+46400	-3864.4976  	-131.1627   	-3733.3349  	2008.04     	1.41527E-2  	0.68 minutes/million states
+46500	-3862.2862  	-130.8191   	-3731.4671  	2008.04     	1.30814E-2  	0.68 minutes/million states
+46600	-3860.1195  	-130.4111   	-3729.7085  	2008.04     	1.30814E-2  	0.68 minutes/million states
+46700	-3853.7060  	-129.7302   	-3723.9758  	2007.90     	1.40487E-2  	0.68 minutes/million states
+46800	-3859.1549  	-131.4840   	-3727.6709  	2007.62     	1.42295E-2  	0.68 minutes/million states
+46900	-3858.1504  	-130.8117   	-3727.3388  	2007.62     	1.4252E-2   	0.68 minutes/million states
+47000	-3859.0473  	-131.5414   	-3727.5060  	2007.32     	1.2686E-2   	0.68 minutes/million states
+47100	-3862.2774  	-130.2374   	-3732.0400  	2007.18     	1.28725E-2  	0.68 minutes/million states
+47200	-3865.4036  	-131.7605   	-3733.6431  	2007.18     	1.24211E-2  	0.68 minutes/million states
+47300	-3867.3387  	-132.0152   	-3735.3235  	2007.78     	1.26174E-2  	0.68 minutes/million states
+47400	-3870.1403  	-135.2919   	-3734.8484  	2006.73     	1.18515E-2  	0.68 minutes/million states
+47500	-3875.0362  	-133.8326   	-3741.2036  	2007.11     	1.40121E-2  	0.68 minutes/million states
+47600	-3865.1152  	-130.2555   	-3734.8596  	2007.20     	1.38041E-2  	0.68 minutes/million states
+47700	-3862.5765  	-129.7669   	-3732.8095  	2007.20     	1.38041E-2  	0.68 minutes/million states
+47800	-3860.8152  	-132.9707   	-3727.8445  	2006.79     	1.35605E-2  	0.68 minutes/million states
+47900	-3861.7249  	-133.4187   	-3728.3062  	2006.84     	1.2909E-2   	0.68 minutes/million states
+48000	-3863.6299  	-133.6789   	-3729.9510  	2006.50     	1.21153E-2  	0.68 minutes/million states
+48100	-3860.9223  	-132.6069   	-3728.3154  	2006.45     	1.24923E-2  	0.68 minutes/million states
+48200	-3856.9388  	-131.2909   	-3725.6479  	2006.64     	1.31496E-2  	0.68 minutes/million states
+48300	-3862.8098  	-128.9407   	-3733.8692  	2006.82     	1.40794E-2  	0.68 minutes/million states
+48400	-3859.4817  	-128.3735   	-3731.1082  	2007.42     	1.40794E-2  	0.68 minutes/million states
+48500	-3868.2412  	-128.9963   	-3739.2449  	2007.56     	1.23271E-2  	0.68 minutes/million states
+48600	-3858.9155  	-129.0332   	-3729.8823  	2007.41     	1.19129E-2  	0.68 minutes/million states
+48700	-3858.7960  	-129.5942   	-3729.2018  	2007.73     	1.21156E-2  	0.68 minutes/million states
+48800	-3866.5280  	-130.2625   	-3736.2655  	2007.73     	1.21156E-2  	0.68 minutes/million states
+48900	-3863.0289  	-130.7466   	-3732.2823  	2007.61     	1.21156E-2  	0.68 minutes/million states
+49000	-3862.2084  	-131.7761   	-3730.4323  	2007.98     	1.21156E-2  	0.68 minutes/million states
+49100	-3863.3116  	-131.5010   	-3731.8105  	2008.13     	1.21559E-2  	0.68 minutes/million states
+49200	-3862.1863  	-131.6584   	-3730.5279  	2008.13     	1.21559E-2  	0.68 minutes/million states
+49300	-3866.4647  	-132.0971   	-3734.3676  	2006.77     	1.21559E-2  	0.68 minutes/million states
+49400	-3859.3994  	-131.4809   	-3727.9185  	2007.64     	1.24757E-2  	0.68 minutes/million states
+49500	-3853.9443  	-132.0260   	-3721.9183  	2007.57     	1.24757E-2  	0.68 minutes/million states
+49600	-3863.7324  	-130.9484   	-3732.7839  	2007.11     	1.24757E-2  	0.68 minutes/million states
+49700	-3864.6249  	-131.6376   	-3732.9873  	2007.74     	1.24352E-2  	0.68 minutes/million states
+49800	-3864.4351  	-133.0918   	-3731.3432  	2007.51     	1.23215E-2  	0.68 minutes/million states
+49900	-3866.6267  	-133.1162   	-3733.5105  	2007.31     	1.20184E-2  	0.68 minutes/million states
+50000	-3861.6747  	-132.1904   	-3729.4843  	2006.95     	1.25171E-2  	0.68 minutes/million states
+50100	-3861.7145  	-133.2031   	-3728.5114  	2007.32     	1.25171E-2  	0.68 minutes/million states
+50200	-3865.2189  	-136.5200   	-3728.6989  	2005.98     	1.21263E-2  	0.68 minutes/million states
+50300	-3859.2117  	-136.9647   	-3722.2470  	2005.98     	1.21263E-2  	0.68 minutes/million states
+50400	-3864.5095  	-136.3394   	-3728.1701  	2005.98     	1.21263E-2  	0.68 minutes/million states
+50500	-3859.0770  	-134.2413   	-3724.8358  	2005.80     	1.05994E-2  	0.68 minutes/million states
+50600	-3863.1899  	-134.7186   	-3728.4713  	2005.80     	1.01043E-2  	0.68 minutes/million states
+50700	-3862.8591  	-134.9154   	-3727.9437  	2006.01     	1.04634E-2  	0.68 minutes/million states
+50800	-3860.4784  	-135.2752   	-3725.2032  	2005.73     	1.04634E-2  	0.68 minutes/million states
+50900	-3864.0758  	-132.4305   	-3731.6454  	2006.05     	1.07704E-2  	0.68 minutes/million states
+51000	-3867.3260  	-135.5202   	-3731.8058  	2005.52     	1.02676E-2  	0.68 minutes/million states
+51100	-3868.2643  	-133.9671   	-3734.2972  	2005.94     	1.12538E-2  	0.67 minutes/million states
+51200	-3863.4918  	-134.7945   	-3728.6973  	2005.84     	1.10381E-2  	0.67 minutes/million states
+51300	-3864.3068  	-134.2323   	-3730.0745  	2006.49     	1.09584E-2  	0.67 minutes/million states
+51400	-3862.3128  	-136.5610   	-3725.7517  	2006.59     	1.09584E-2  	0.67 minutes/million states
+51500	-3863.3957  	-135.7913   	-3727.6044  	2006.59     	1.11087E-2  	0.67 minutes/million states
+51600	-3869.6531  	-138.1615   	-3731.4915  	2006.47     	1.11087E-2  	0.67 minutes/million states
+51700	-3867.0927  	-138.0780   	-3729.0147  	2006.17     	1.11087E-2  	0.67 minutes/million states
+51800	-3867.4945  	-138.9631   	-3728.5314  	2006.69     	1.19476E-2  	0.67 minutes/million states
+51900	-3874.9126  	-138.6196   	-3736.2930  	2006.46     	1.19817E-2  	0.67 minutes/million states
+52000	-3863.8975  	-137.9965   	-3725.9010  	2006.46     	1.19817E-2  	0.67 minutes/million states
+52100	-3863.2012  	-137.0640   	-3726.1371  	2005.67     	1.19817E-2  	0.67 minutes/million states
+52200	-3859.0728  	-137.5115   	-3721.5613  	2005.67     	1.0924E-2   	0.67 minutes/million states
+52300	-3865.4961  	-137.9273   	-3727.5688  	2005.47     	1.093E-2    	0.67 minutes/million states
+52400	-3867.3274  	-137.4166   	-3729.9109  	2005.77     	1.09106E-2  	0.67 minutes/million states
+52500	-3867.0055  	-136.8939   	-3730.1117  	2005.90     	1.08771E-2  	0.67 minutes/million states
+52600	-3865.1028  	-136.0369   	-3729.0659  	2005.90     	1.08771E-2  	0.67 minutes/million states
+52700	-3868.9909  	-135.7522   	-3733.2387  	2005.90     	1.04428E-2  	0.67 minutes/million states
+52800	-3869.1982  	-135.3989   	-3733.7993  	2005.90     	1.08081E-2  	0.67 minutes/million states
+52900	-3869.8460  	-136.2770   	-3733.5690  	2004.88     	1.07354E-2  	0.67 minutes/million states
+53000	-3868.1011  	-137.2659   	-3730.8352  	2004.88     	1.04145E-2  	0.67 minutes/million states
+53100	-3869.3372  	-137.0601   	-3732.2771  	2004.69     	1.02751E-2  	0.67 minutes/million states
+53200	-3874.1559  	-137.4421   	-3736.7138  	2005.10     	1.02751E-2  	0.67 minutes/million states
+53300	-3878.2350  	-138.9881   	-3739.2469  	2005.10     	1.04943E-2  	0.67 minutes/million states
+53400	-3875.4079  	-140.9076   	-3734.5004  	2004.20     	1.00229E-2  	0.67 minutes/million states
+53500	-3878.6290  	-141.4058   	-3737.2232  	2003.83     	9.87168E-3  	0.67 minutes/million states
+53600	-3877.6593  	-145.4728   	-3732.1865  	2002.84     	9.15268E-3  	0.67 minutes/million states
+53700	-3879.5127  	-147.2503   	-3732.2624  	2003.70     	9.15268E-3  	0.67 minutes/million states
+53800	-3878.7938  	-145.4997   	-3733.2941  	2003.70     	8.0064E-3   	0.67 minutes/million states
+53900	-3871.8030  	-145.7017   	-3726.1013  	2003.24     	8.22619E-3  	0.67 minutes/million states
+54000	-3866.0277  	-143.5393   	-3722.4884  	2003.87     	8.48053E-3  	0.67 minutes/million states
+54100	-3867.0181  	-144.4081   	-3722.6100  	2003.59     	8.30023E-3  	0.67 minutes/million states
+54200	-3871.2071  	-143.5901   	-3727.6170  	2003.59     	8.30023E-3  	0.67 minutes/million states
+54300	-3869.2527  	-144.2755   	-3724.9771  	2002.57     	8.4397E-3   	0.67 minutes/million states
+54400	-3871.7238  	-145.2736   	-3726.4502  	2002.74     	8.62692E-3  	0.67 minutes/million states
+54500	-3875.9570  	-144.6811   	-3731.2759  	2002.74     	8.62692E-3  	0.67 minutes/million states
+54600	-3877.5302  	-143.3111   	-3734.2191  	2003.14     	8.77579E-3  	0.67 minutes/million states
+54700	-3882.4042  	-142.6567   	-3739.7475  	2003.02     	8.77579E-3  	0.67 minutes/million states
+54800	-3879.7677  	-142.8224   	-3736.9452  	2003.15     	8.77579E-3  	0.67 minutes/million states
+54900	-3881.4056  	-143.1671   	-3738.2385  	2003.03     	8.73702E-3  	0.67 minutes/million states
+55000	-3885.9375  	-142.6843   	-3743.2531  	2003.03     	8.73702E-3  	0.67 minutes/million states
+55100	-3882.9698  	-142.9687   	-3740.0011  	2003.57     	8.98458E-3  	0.67 minutes/million states
+55200	-3881.7908  	-141.3086   	-3740.4822  	2004.35     	8.98458E-3  	0.67 minutes/million states
+55300	-3875.2729  	-142.0166   	-3733.2563  	2004.35     	9.73148E-3  	0.67 minutes/million states
+55400	-3879.1585  	-141.8827   	-3737.2758  	2004.08     	9.29855E-3  	0.67 minutes/million states
+55500	-3878.9376  	-141.2442   	-3737.6934  	2005.27     	9.59855E-3  	0.67 minutes/million states
+55600	-3872.4989  	-140.6380   	-3731.8608  	2004.54     	9.58564E-3  	0.67 minutes/million states
+55700	-3874.3272  	-141.0855   	-3733.2416  	2004.85     	9.83853E-3  	0.67 minutes/million states
+55800	-3875.8483  	-140.6025   	-3735.2458  	2004.85     	9.38468E-3  	0.67 minutes/million states
+55900	-3880.4212  	-140.8098   	-3739.6114  	2004.85     	9.38468E-3  	0.67 minutes/million states
+56000	-3878.2575  	-142.2837   	-3735.9738  	2004.28     	9.71577E-3  	0.67 minutes/million states
+56100	-3878.4833  	-142.6176   	-3735.8657  	2004.28     	9.71577E-3  	0.67 minutes/million states
+56200	-3874.9145  	-142.3813   	-3732.5332  	2004.28     	8.99245E-3  	0.67 minutes/million states
+56300	-3874.3168  	-142.7459   	-3731.5710  	2004.19     	8.76178E-3  	0.67 minutes/million states
+56400	-3879.3772  	-140.9460   	-3738.4312  	2004.76     	9.12298E-3  	0.67 minutes/million states
+56500	-3876.3622  	-141.3273   	-3735.0349  	2004.60     	9.00413E-3  	0.67 minutes/million states
+56600	-3871.8716  	-141.5080   	-3730.3636  	2004.59     	9.46875E-3  	0.67 minutes/million states
+56700	-3870.9333  	-143.8403   	-3727.0930  	2003.74     	8.08569E-3  	0.67 minutes/million states
+56800	-3872.4981  	-143.8988   	-3728.5993  	2003.93     	9.58393E-3  	0.67 minutes/million states
+56900	-3875.4547  	-144.8490   	-3730.6057  	2004.26     	8.88497E-3  	0.67 minutes/million states
+57000	-3875.3147  	-146.5588   	-3728.7559  	2003.66     	8.47235E-3  	0.67 minutes/million states
+57100	-3880.5669  	-145.3654   	-3735.2016  	2004.05     	8.47235E-3  	0.67 minutes/million states
+57200	-3875.9723  	-145.4166   	-3730.5557  	2002.62     	8.1793E-3   	0.67 minutes/million states
+57300	-3870.0189  	-146.0954   	-3723.9235  	2003.77     	8.06789E-3  	0.67 minutes/million states
+57400	-3874.4105  	-145.6104   	-3728.8000  	2004.53     	8.82142E-3  	0.67 minutes/million states
+57500	-3875.1524  	-145.8575   	-3729.2950  	2004.42     	8.40343E-3  	0.67 minutes/million states
+57600	-3876.0179  	-147.1461   	-3728.8718  	2004.42     	8.40343E-3  	0.67 minutes/million states
+57700	-3877.5030  	-146.9046   	-3730.5985  	2004.10     	8.40343E-3  	0.67 minutes/million states
+57800	-3871.1378  	-146.8138   	-3724.3240  	2003.34     	8.40343E-3  	0.67 minutes/million states
+57900	-3872.2532  	-146.5856   	-3725.6676  	2002.98     	8.6715E-3   	0.67 minutes/million states
+58000	-3872.4042  	-147.8756   	-3724.5287  	2002.98     	8.6715E-3   	0.67 minutes/million states
+58100	-3877.1054  	-148.2096   	-3728.8958  	2002.77     	8.6715E-3   	0.67 minutes/million states
+58200	-3884.4744  	-149.6698   	-3734.8047  	2002.22     	7.60599E-3  	0.67 minutes/million states
+58300	-3878.7288  	-145.9993   	-3732.7295  	2002.87     	8.63745E-3  	0.67 minutes/million states
+58400	-3875.4005  	-146.8487   	-3728.5518  	2003.29     	9.37207E-3  	0.67 minutes/million states
+58500	-3868.6586  	-144.9180   	-3723.7406  	2003.06     	8.57872E-3  	0.67 minutes/million states
+58600	-3865.0404  	-145.3306   	-3719.7098  	2002.54     	8.55324E-3  	0.67 minutes/million states
+58700	-3867.7806  	-146.0334   	-3721.7472  	2004.50     	8.55324E-3  	0.66 minutes/million states
+58800	-3869.1273  	-147.5007   	-3721.6266  	2004.72     	8.42276E-3  	0.67 minutes/million states
+58900	-3870.5652  	-147.9648   	-3722.6004  	2002.63     	8.42276E-3  	0.67 minutes/million states
+59000	-3871.6487  	-146.8686   	-3724.7801  	2002.82     	8.54115E-3  	0.67 minutes/million states
+59100	-3869.2062  	-145.3796   	-3723.8266  	2002.81     	8.5305E-3   	0.67 minutes/million states
+59200	-3865.1433  	-143.8776   	-3721.2657  	2003.45     	8.76552E-3  	0.67 minutes/million states
+59300	-3867.9448  	-144.1369   	-3723.8078  	2001.85     	8.06908E-3  	0.66 minutes/million states
+59400	-3871.9457  	-143.6286   	-3728.3171  	2001.85     	8.06908E-3  	0.66 minutes/million states
+59500	-3874.6551  	-143.7028   	-3730.9523  	2002.87     	7.6023E-3   	0.66 minutes/million states
+59600	-3871.4243  	-144.5605   	-3726.8638  	2002.65     	7.6023E-3   	0.66 minutes/million states
+59700	-3873.1556  	-145.1637   	-3727.9919  	2002.68     	8.5564E-3   	0.66 minutes/million states
+59800	-3870.8660  	-148.1295   	-3722.7365  	2003.36     	8.7461E-3   	0.66 minutes/million states
+59900	-3877.0800  	-149.2150   	-3727.8650  	2003.36     	8.7461E-3   	0.66 minutes/million states
+60000	-3871.7020  	-148.0046   	-3723.6973  	2003.36     	8.34425E-3  	0.66 minutes/million states
+60100	-3876.8532  	-146.3733   	-3730.4799  	2002.48     	8.39622E-3  	0.66 minutes/million states
+60200	-3873.7498  	-143.9604   	-3729.7894  	2003.18     	8.52208E-3  	0.66 minutes/million states
+60300	-3869.6068  	-142.2939   	-3727.3129  	2003.36     	8.63838E-3  	0.66 minutes/million states
+60400	-3874.5683  	-144.2429   	-3730.3254  	2003.15     	8.50442E-3  	0.66 minutes/million states
+60500	-3871.2297  	-144.7939   	-3726.4358  	2002.97     	8.3941E-3   	0.66 minutes/million states
+60600	-3871.8727  	-145.3051   	-3726.5676  	2003.44     	8.61934E-3  	0.66 minutes/million states
+60700	-3873.7166  	-147.4435   	-3726.2731  	2002.88     	8.27254E-3  	0.66 minutes/million states
+60800	-3872.5233  	-146.5955   	-3725.9278  	2003.44     	8.44898E-3  	0.66 minutes/million states
+60900	-3875.4588  	-146.2436   	-3729.2152  	2003.44     	8.44898E-3  	0.66 minutes/million states
+61000	-3883.1537  	-149.6236   	-3733.5300  	2002.91     	8.10693E-3  	0.66 minutes/million states
+61100	-3883.7732  	-146.9558   	-3736.8174  	2002.92     	7.81176E-3  	0.66 minutes/million states
+61200	-3886.8762  	-150.5837   	-3736.2924  	2001.72     	7.2874E-3   	0.66 minutes/million states
+61300	-3880.7801  	-150.3947   	-3730.3854  	2001.21     	7.17019E-3  	0.66 minutes/million states
+61400	-3882.4897  	-148.3969   	-3734.0928  	1999.74     	7.17019E-3  	0.66 minutes/million states
+61500	-3883.8506  	-149.3789   	-3734.4717  	1999.15     	7.17019E-3  	0.66 minutes/million states
+61600	-3883.0249  	-149.0010   	-3734.0238  	1999.58     	7.51841E-3  	0.66 minutes/million states
+61700	-3881.4389  	-148.2359   	-3733.2030  	1999.67     	7.48386E-3  	0.66 minutes/million states
+61800	-3880.2895  	-149.2625   	-3731.0271  	1999.22     	7.29434E-3  	0.66 minutes/million states
+61900	-3878.6619  	-147.7604   	-3730.9015  	1999.78     	7.50604E-3  	0.66 minutes/million states
+62000	-3873.2391  	-145.9499   	-3727.2892  	2000.83     	7.50604E-3  	0.66 minutes/million states
+62100	-3872.9756  	-146.4090   	-3726.5666  	2001.37     	7.5947E-3   	0.66 minutes/million states
+62200	-3875.6405  	-148.0152   	-3727.6253  	2001.37     	7.45761E-3  	0.66 minutes/million states
+62300	-3875.0608  	-147.9921   	-3727.0688  	2001.37     	7.45327E-3  	0.66 minutes/million states
+62400	-3887.4650  	-147.2738   	-3740.1913  	2001.65     	7.57735E-3  	0.66 minutes/million states
+62500	-3882.9503  	-146.5586   	-3736.3917  	2001.47     	7.51961E-3  	0.66 minutes/million states
+62600	-3885.9591  	-146.5895   	-3739.3696  	2001.60     	8.17241E-3  	0.66 minutes/million states
+62700	-3877.1950  	-146.2516   	-3730.9434  	2003.51     	8.22031E-3  	0.66 minutes/million states
+62800	-3881.9840  	-145.0297   	-3736.9543  	2003.54     	8.60593E-3  	0.66 minutes/million states
+62900	-3879.0475  	-144.3753   	-3734.6722  	2003.54     	8.60593E-3  	0.66 minutes/million states
+63000	-3878.1530  	-144.9662   	-3733.1868  	2003.54     	8.5898E-3   	0.66 minutes/million states
+63100	-3877.8596  	-142.7543   	-3735.1053  	2003.36     	8.5682E-3   	0.66 minutes/million states
+63200	-3877.6477  	-143.7565   	-3733.8912  	2003.36     	8.5682E-3   	0.66 minutes/million states
+63300	-3875.8828  	-145.1750   	-3730.7078  	2003.51     	8.66355E-3  	0.66 minutes/million states
+63400	-3870.8053  	-143.1180   	-3727.6873  	2003.76     	8.82964E-3  	0.66 minutes/million states
+63500	-3869.1510  	-143.8369   	-3725.3141  	2003.72     	8.36596E-3  	0.66 minutes/million states
+63600	-3870.4032  	-143.5670   	-3726.8362  	2004.28     	8.36596E-3  	0.66 minutes/million states
+63700	-3872.3512  	-142.1358   	-3730.2154  	2004.30     	9.3175E-3   	0.66 minutes/million states
+63800	-3869.8540  	-144.2879   	-3725.5660  	2003.76     	8.28184E-3  	0.66 minutes/million states
+63900	-3863.6913  	-143.0027   	-3720.6886  	2004.23     	8.55731E-3  	0.66 minutes/million states
+64000	-3861.8757  	-142.2847   	-3719.5910  	2004.29     	9.29844E-3  	0.66 minutes/million states
+64100	-3868.3404  	-144.6558   	-3723.6846  	2004.29     	1.01232E-2  	0.66 minutes/million states
+64200	-3869.4057  	-144.2955   	-3725.1102  	2004.29     	9.46732E-3  	0.66 minutes/million states
+64300	-3873.2086  	-143.9922   	-3729.2165  	2004.67     	9.2801E-3   	0.66 minutes/million states
+64400	-3873.1424  	-142.3122   	-3730.8303  	2004.65     	9.2801E-3   	0.66 minutes/million states
+64500	-3875.6515  	-144.2458   	-3731.4057  	2004.83     	9.2801E-3   	0.66 minutes/million states
+64600	-3876.6710  	-142.7765   	-3733.8945  	2005.09     	9.20837E-3  	0.66 minutes/million states
+64700	-3877.3636  	-141.3496   	-3736.0140  	2005.29     	9.3718E-3   	0.66 minutes/million states
+64800	-3881.3814  	-141.9326   	-3739.4488  	2005.29     	9.3718E-3   	0.66 minutes/million states
+64900	-3887.7601  	-142.8297   	-3744.9304  	2005.43     	1.00696E-2  	0.66 minutes/million states
+65000	-3887.6696  	-143.4810   	-3744.1886  	2005.42     	1.00696E-2  	0.66 minutes/million states
+65100	-3881.6993  	-143.1692   	-3738.5301  	2005.65     	1.04631E-2  	0.66 minutes/million states
+65200	-3882.1049  	-141.7252   	-3740.3797  	2005.65     	1.00649E-2  	0.66 minutes/million states
+65300	-3879.0649  	-141.8626   	-3737.2023  	2005.25     	9.8727E-3   	0.66 minutes/million states
+65400	-3877.2926  	-141.5190   	-3735.7736  	2005.27     	9.8727E-3   	0.66 minutes/million states
+65500	-3875.0092  	-140.2402   	-3734.7690  	2005.63     	1.02367E-2  	0.66 minutes/million states
+65600	-3875.5413  	-140.7793   	-3734.7620  	2005.63     	1.02034E-2  	0.66 minutes/million states
+65700	-3871.6462  	-140.0830   	-3731.5632  	2005.62     	1.02034E-2  	0.66 minutes/million states
+65800	-3875.9863  	-139.0390   	-3736.9473  	2005.70     	1.02034E-2  	0.66 minutes/million states
+65900	-3877.1758  	-139.7109   	-3737.4649  	2005.36     	1.02034E-2  	0.66 minutes/million states
+66000	-3879.3559  	-141.7740   	-3737.5819  	2005.31     	1.03192E-2  	0.66 minutes/million states
+66100	-3880.8159  	-140.5460   	-3740.2699  	2005.31     	1.03678E-2  	0.66 minutes/million states
+66200	-3882.0822  	-142.2727   	-3739.8095  	2005.25     	1.03678E-2  	0.66 minutes/million states
+66300	-3881.6502  	-142.7096   	-3738.9407  	2006.02     	9.23192E-3  	0.66 minutes/million states
+66400	-3882.0691  	-142.3978   	-3739.6713  	2006.47     	9.92296E-3  	0.66 minutes/million states
+66500	-3883.5058  	-142.8050   	-3740.7007  	2006.79     	9.92296E-3  	0.66 minutes/million states
+66600	-3876.6997  	-142.0015   	-3734.6982  	2006.79     	9.92296E-3  	0.66 minutes/million states
+66700	-3875.5557  	-140.9850   	-3734.5707  	2006.68     	1.00274E-2  	0.66 minutes/million states
+66800	-3877.2936  	-141.5683   	-3735.7253  	2006.25     	1.17262E-2  	0.66 minutes/million states
+66900	-3868.9229  	-140.1512   	-3728.7717  	2006.25     	1.07322E-2  	0.66 minutes/million states
+67000	-3871.0430  	-137.7764   	-3733.2666  	2005.17     	1.07322E-2  	0.66 minutes/million states
+67100	-3868.3118  	-138.4930   	-3729.8188  	2005.02     	1.06325E-2  	0.66 minutes/million states
+67200	-3866.0869  	-137.4166   	-3728.6703  	2004.46     	1.06325E-2  	0.66 minutes/million states
+67300	-3862.1324  	-137.7320   	-3724.4004  	2005.50     	1.06966E-2  	0.66 minutes/million states
+67400	-3865.2825  	-137.0171   	-3728.2654  	2006.09     	1.06966E-2  	0.66 minutes/million states
+67500	-3861.8025  	-138.3063   	-3723.4962  	2006.17     	1.07708E-2  	0.66 minutes/million states
+67600	-3859.9431  	-137.9550   	-3721.9881  	2006.72     	1.11799E-2  	0.66 minutes/million states
+67700	-3863.0463  	-137.3029   	-3725.7434  	2006.72     	1.03576E-2  	0.66 minutes/million states
+67800	-3865.7091  	-140.3098   	-3725.3993  	2005.68     	9.92401E-3  	0.66 minutes/million states
+67900	-3858.5052  	-137.9376   	-3720.5676  	2006.07     	1.03921E-2  	0.66 minutes/million states
+68000	-3857.7691  	-137.4467   	-3720.3224  	2005.55     	1.03921E-2  	0.66 minutes/million states
+68100	-3859.2126  	-137.5131   	-3721.6995  	2005.41     	1.03921E-2  	0.66 minutes/million states
+68200	-3863.2492  	-139.1042   	-3724.1450  	2005.33     	1.03137E-2  	0.66 minutes/million states
+68300	-3864.7356  	-138.9451   	-3725.7905  	2005.40     	1.03137E-2  	0.66 minutes/million states
+68400	-3870.1178  	-140.7756   	-3729.3422  	2005.20     	1.01421E-2  	0.66 minutes/million states
+68500	-3869.7428  	-141.8282   	-3727.9146  	2005.68     	9.84845E-3  	0.66 minutes/million states
+68600	-3873.4402  	-140.1993   	-3733.2409  	2006.15     	9.85391E-3  	0.66 minutes/million states
+68700	-3870.1527  	-137.6936   	-3732.4591  	2005.28     	9.85391E-3  	0.66 minutes/million states
+68800	-3869.8464  	-138.1695   	-3731.6769  	2006.00     	9.85296E-3  	0.66 minutes/million states
+68900	-3868.9735  	-138.2196   	-3730.7539  	2005.71     	9.85296E-3  	0.66 minutes/million states
+69000	-3864.0343  	-139.8944   	-3724.1399  	2005.19     	9.48369E-3  	0.66 minutes/million states
+69100	-3864.1682  	-140.4430   	-3723.7251  	2005.39     	1.01764E-2  	0.66 minutes/million states
+69200	-3863.8009  	-140.6784   	-3723.1225  	2005.39     	1.01764E-2  	0.66 minutes/million states
+69300	-3865.1320  	-143.1648   	-3721.9672  	2005.31     	9.27979E-3  	0.66 minutes/million states
+69400	-3868.7630  	-141.9454   	-3726.8177  	2005.31     	9.27979E-3  	0.66 minutes/million states
+69500	-3870.8339  	-142.4696   	-3728.3643  	2005.20     	9.0507E-3   	0.66 minutes/million states
+69600	-3871.4362  	-143.0572   	-3728.3789  	2003.99     	8.83784E-3  	0.66 minutes/million states
+69700	-3869.1428  	-140.7863   	-3728.3565  	2004.27     	9.03885E-3  	0.66 minutes/million states
+69800	-3865.6691  	-139.6980   	-3725.9711  	2004.27     	9.03885E-3  	0.66 minutes/million states
+69900	-3865.4154  	-139.3571   	-3726.0583  	2003.99     	9.4986E-3   	0.66 minutes/million states
+70000	-3864.6775  	-140.3837   	-3724.2938  	2003.86     	9.62408E-3  	0.66 minutes/million states
+70100	-3866.2796  	-138.1178   	-3728.1618  	2004.23     	9.62894E-3  	0.66 minutes/million states
+70200	-3869.1769  	-140.0695   	-3729.1074  	2003.68     	8.97053E-3  	0.66 minutes/million states
+70300	-3878.3609  	-139.4807   	-3738.8802  	2002.92     	8.13829E-3  	0.66 minutes/million states
+70400	-3870.2348  	-140.3804   	-3729.8544  	2003.44     	9.27884E-3  	0.66 minutes/million states
+70500	-3873.9023  	-142.0268   	-3731.8756  	2003.47     	9.27884E-3  	0.66 minutes/million states
+70600	-3871.0630  	-140.4152   	-3730.6478  	2004.42     	9.27884E-3  	0.66 minutes/million states
+70700	-3872.1636  	-138.9390   	-3733.2246  	2004.42     	9.27884E-3  	0.66 minutes/million states
+70800	-3876.5251  	-138.9269   	-3737.5983  	2004.37     	9.38687E-3  	0.66 minutes/million states
+70900	-3877.9561  	-139.5379   	-3738.4182  	2004.37     	9.04782E-3  	0.66 minutes/million states
+71000	-3875.9330  	-143.2026   	-3732.7304  	2003.99     	8.77334E-3  	0.66 minutes/million states
+71100	-3879.7507  	-147.3207   	-3732.4300  	2002.45     	8.1355E-3   	0.66 minutes/million states
+71200	-3881.4066  	-146.2056   	-3735.2010  	2002.00     	8.22329E-3  	0.66 minutes/million states
+71300	-3877.0970  	-143.5184   	-3733.5785  	2002.80     	8.69584E-3  	0.66 minutes/million states
+71400	-3877.5729  	-146.0689   	-3731.5040  	2001.93     	8.35456E-3  	0.66 minutes/million states
+71500	-3877.0965  	-147.4517   	-3729.6448  	2002.45     	8.35456E-3  	0.66 minutes/million states
+71600	-3878.3511  	-147.1668   	-3731.1843  	2002.59     	8.35456E-3  	0.66 minutes/million states
+71700	-3872.6227  	-144.6814   	-3727.9414  	2002.59     	8.17467E-3  	0.66 minutes/million states
+71800	-3886.3420  	-146.7079   	-3739.6341  	2002.52     	8.17467E-3  	0.66 minutes/million states
+71900	-3881.7296  	-148.8331   	-3732.8965  	2001.94     	7.85164E-3  	0.66 minutes/million states
+72000	-3873.3612  	-145.6378   	-3727.7235  	2002.47     	8.29513E-3  	0.66 minutes/million states
+72100	-3871.6499  	-145.0276   	-3726.6223  	2002.47     	8.29513E-3  	0.66 minutes/million states
+72200	-3870.1410  	-144.0858   	-3726.0552  	2004.11     	8.35255E-3  	0.66 minutes/million states
+72300	-3867.5931  	-143.1188   	-3724.4744  	2003.98     	8.86133E-3  	0.66 minutes/million states
+72400	-3872.6948  	-145.0052   	-3727.6897  	2004.03     	8.70229E-3  	0.66 minutes/million states
+72500	-3869.0934  	-144.6701   	-3724.4233  	2003.92     	8.63172E-3  	0.66 minutes/million states
+72600	-3870.6121  	-142.3685   	-3728.2436  	2003.96     	8.65513E-3  	0.66 minutes/million states
+72700	-3868.6179  	-143.1395   	-3725.4785  	2003.99     	9.11772E-3  	0.66 minutes/million states
+72800	-3865.9783  	-144.0436   	-3721.9347  	2003.73     	8.93593E-3  	0.66 minutes/million states
+72900	-3864.9229  	-144.2581   	-3720.6647  	2003.05     	8.99031E-3  	0.66 minutes/million states
+73000	-3863.9462  	-142.9302   	-3721.0160  	2003.06     	9.04573E-3  	0.66 minutes/million states
+73100	-3863.7530  	-143.9166   	-3719.8365  	2002.88     	8.51855E-3  	0.65 minutes/million states
+73200	-3869.4257  	-144.2801   	-3725.1456  	2002.41     	8.92673E-3  	0.65 minutes/million states
+73300	-3874.5812  	-143.6753   	-3730.9059  	2002.03     	8.92673E-3  	0.65 minutes/million states
+73400	-3871.2252  	-142.9848   	-3728.2404  	2002.40     	8.92673E-3  	0.65 minutes/million states
+73500	-3872.9402  	-142.5459   	-3730.3943  	2002.05     	8.17387E-3  	0.65 minutes/million states
+73600	-3871.3423  	-143.1434   	-3728.1989  	2002.18     	8.17387E-3  	0.65 minutes/million states
+73700	-3869.0496  	-144.4741   	-3724.5755  	2002.18     	8.83099E-3  	0.65 minutes/million states
+73800	-3870.4995  	-143.5086   	-3726.9909  	2002.62     	8.71654E-3  	0.65 minutes/million states
+73900	-3875.5426  	-143.4095   	-3732.1332  	2002.43     	7.82703E-3  	0.65 minutes/million states
+74000	-3869.7882  	-145.0991   	-3724.6890  	2001.83     	8.60489E-3  	0.65 minutes/million states
+74100	-3870.4048  	-142.8657   	-3727.5391  	2001.99     	8.35235E-3  	0.65 minutes/million states
+74200	-3870.2343  	-142.9078   	-3727.3266  	2001.99     	8.15176E-3  	0.65 minutes/million states
+74300	-3872.1539  	-142.8961   	-3729.2578  	2001.76     	8.15176E-3  	0.65 minutes/million states
+74400	-3872.3996  	-145.0454   	-3727.3543  	2001.13     	7.94498E-3  	0.65 minutes/million states
+74500	-3868.7509  	-143.8126   	-3724.9383  	2003.25     	8.15405E-3  	0.65 minutes/million states
+74600	-3869.2195  	-144.7715   	-3724.4480  	2001.98     	8.04095E-3  	0.65 minutes/million states
+74700	-3867.3814  	-144.3023   	-3723.0791  	2002.03     	8.28801E-3  	0.65 minutes/million states
+74800	-3868.2306  	-144.3598   	-3723.8707  	2002.81     	8.31799E-3  	0.65 minutes/million states
+74900	-3870.1105  	-142.5499   	-3727.5606  	2002.73     	8.31799E-3  	0.65 minutes/million states
+75000	-3872.5643  	-142.1626   	-3730.4017  	2003.26     	8.52163E-3  	0.65 minutes/million states
+75100	-3880.5873  	-141.8079   	-3738.7794  	2003.34     	9.18753E-3  	0.65 minutes/million states
+75200	-3882.6519  	-141.4672   	-3741.1848  	2003.74     	9.33831E-3  	0.65 minutes/million states
+75300	-3877.2657  	-142.0171   	-3735.2485  	2004.46     	8.70005E-3  	0.65 minutes/million states
+75400	-3884.6741  	-145.3271   	-3739.3470  	2003.47     	9.40694E-3  	0.65 minutes/million states
+75500	-3879.4658  	-146.2138   	-3733.2520  	2003.47     	8.18394E-3  	0.65 minutes/million states
+75600	-3876.9808  	-146.7315   	-3730.2492  	2003.47     	8.16353E-3  	0.65 minutes/million states
+75700	-3878.5499  	-146.3980   	-3732.1520  	2003.38     	8.34942E-3  	0.65 minutes/million states
+75800	-3874.8556  	-143.2734   	-3731.5821  	2003.46     	8.94203E-3  	0.65 minutes/million states
+75900	-3882.3027  	-143.0667   	-3739.2359  	2003.41     	9.11882E-3  	0.65 minutes/million states
+76000	-3885.2125  	-143.8691   	-3741.3434  	2003.62     	8.72223E-3  	0.65 minutes/million states
+76100	-3874.3019  	-144.8894   	-3729.4125  	2004.24     	8.72223E-3  	0.65 minutes/million states
+76200	-3877.9437  	-144.9962   	-3732.9474  	2004.26     	8.72223E-3  	0.65 minutes/million states
+76300	-3881.6427  	-145.1198   	-3736.5228  	2004.21     	8.72223E-3  	0.65 minutes/million states
+76400	-3880.2350  	-144.6154   	-3735.6195  	2004.43     	8.72223E-3  	0.65 minutes/million states
+76500	-3878.2915  	-144.4489   	-3733.8426  	2006.16     	8.72223E-3  	0.65 minutes/million states
+76600	-3882.7648  	-144.9403   	-3737.8245  	2006.26     	8.73278E-3  	0.65 minutes/million states
+76700	-3889.0711  	-144.1806   	-3744.8906  	2006.26     	9.45797E-3  	0.65 minutes/million states
+76800	-3882.5716  	-142.9424   	-3739.6292  	2006.26     	9.66937E-3  	0.65 minutes/million states
+76900	-3881.9025  	-142.5071   	-3739.3954  	2005.42     	9.81362E-3  	0.65 minutes/million states
+77000	-3880.6331  	-143.4867   	-3737.1464  	2005.35     	9.75931E-3  	0.65 minutes/million states
+77100	-3878.6048  	-144.8549   	-3733.7498  	2005.00     	8.85544E-3  	0.65 minutes/million states
+77200	-3878.8594  	-145.3571   	-3733.5024  	2005.16     	8.95881E-3  	0.65 minutes/million states
+77300	-3872.6677  	-144.9378   	-3727.7299  	2004.88     	8.95881E-3  	0.65 minutes/million states
+77400	-3871.4179  	-144.1435   	-3727.2744  	2004.88     	8.95881E-3  	0.65 minutes/million states
+77500	-3870.7461  	-146.4817   	-3724.2643  	2004.31     	8.95881E-3  	0.65 minutes/million states
+77600	-3874.2398  	-144.2304   	-3730.0094  	2004.31     	8.95881E-3  	0.65 minutes/million states
+77700	-3872.2497  	-144.3483   	-3727.9014  	2004.31     	8.95881E-3  	0.65 minutes/million states
+77800	-3873.5929  	-142.3562   	-3731.2367  	2004.16     	8.95881E-3  	0.65 minutes/million states
+77900	-3872.4012  	-142.9961   	-3729.4051  	2004.16     	8.95881E-3  	0.65 minutes/million states
+78000	-3870.8627  	-142.7385   	-3728.1241  	2004.16     	8.95881E-3  	0.65 minutes/million states
+78100	-3867.6133  	-143.0020   	-3724.6113  	2004.02     	9.26219E-3  	0.65 minutes/million states
+78200	-3871.0150  	-143.1780   	-3727.8371  	2003.89     	9.26219E-3  	0.65 minutes/million states
+78300	-3875.1477  	-142.9804   	-3732.1672  	2003.89     	9.26931E-3  	0.65 minutes/million states
+78400	-3876.9171  	-144.4304   	-3732.4867  	2003.48     	8.79389E-3  	0.65 minutes/million states
+78500	-3877.1732  	-144.5490   	-3732.6242  	2003.83     	8.32071E-3  	0.65 minutes/million states
+78600	-3874.7784  	-143.4284   	-3731.3500  	2004.41     	8.55966E-3  	0.65 minutes/million states
+78700	-3874.1507  	-143.5738   	-3730.5769  	2004.60     	9.01857E-3  	0.65 minutes/million states
+78800	-3875.0220  	-144.0867   	-3730.9353  	2004.75     	8.92988E-3  	0.65 minutes/million states
+78900	-3868.4696  	-143.3614   	-3725.1083  	2004.47     	9.07559E-3  	0.65 minutes/million states
+79000	-3875.5312  	-142.6582   	-3732.8729  	2004.47     	9.07559E-3  	0.65 minutes/million states
+79100	-3870.8108  	-143.1608   	-3727.6500  	2003.87     	9.07559E-3  	0.65 minutes/million states
+79200	-3869.5045  	-142.6602   	-3726.8442  	2003.87     	9.07559E-3  	0.65 minutes/million states
+79300	-3869.2228  	-141.3585   	-3727.8643  	2003.94     	9.62956E-3  	0.65 minutes/million states
+79400	-3864.0055  	-139.3816   	-3724.6239  	2003.94     	9.62956E-3  	0.65 minutes/million states
+79500	-3871.9748  	-137.8697   	-3734.1050  	2003.94     	1.07407E-2  	0.65 minutes/million states
+79600	-3869.5264  	-136.5541   	-3732.9724  	2004.59     	1.09439E-2  	0.65 minutes/million states
+79700	-3869.7846  	-138.2899   	-3731.4947  	2004.59     	1.08545E-2  	0.65 minutes/million states
+79800	-3866.6453  	-138.4136   	-3728.2317  	2004.59     	1.02707E-2  	0.65 minutes/million states
+79900	-3863.2814  	-138.8838   	-3724.3976  	2005.50     	1.02707E-2  	0.65 minutes/million states
+80000	-3865.6263  	-138.8824   	-3726.7439  	2005.10     	1.02707E-2  	0.65 minutes/million states
+80100	-3863.6947  	-141.0401   	-3722.6546  	2004.84     	9.02743E-3  	0.65 minutes/million states
+80200	-3858.2540  	-139.6585   	-3718.5954  	2005.30     	1.02104E-2  	0.65 minutes/million states
+80300	-3858.6215  	-139.2064   	-3719.4151  	2005.34     	1.01793E-2  	0.65 minutes/million states
+80400	-3866.8445  	-142.0788   	-3724.7657  	2005.22     	1.00714E-2  	0.65 minutes/million states
+80500	-3865.1777  	-143.0039   	-3722.1738  	2005.28     	9.85101E-3  	0.65 minutes/million states
+80600	-3867.5198  	-142.4657   	-3725.0541  	2006.28     	9.85101E-3  	0.65 minutes/million states
+80700	-3874.9653  	-142.6878   	-3732.2775  	2006.28     	9.85101E-3  	0.65 minutes/million states
+80800	-3871.1938  	-142.9078   	-3728.2860  	2006.28     	9.85793E-3  	0.65 minutes/million states
+80900	-3868.6495  	-143.0758   	-3725.5737  	2006.41     	9.85793E-3  	0.65 minutes/million states
+81000	-3863.4788  	-141.2123   	-3722.2665  	2006.11     	9.8602E-3   	0.65 minutes/million states
+81100	-3866.4130  	-140.4375   	-3725.9754  	2006.11     	9.8602E-3   	0.65 minutes/million states
+81200	-3862.7924  	-137.2697   	-3725.5227  	2006.68     	1.00635E-2  	0.65 minutes/million states
+81300	-3868.6013  	-139.5789   	-3729.0224  	2006.12     	9.5276E-3   	0.65 minutes/million states
+81400	-3870.0094  	-140.4155   	-3729.5939  	2005.53     	9.09749E-3  	0.65 minutes/million states
+81500	-3859.8147  	-138.3348   	-3721.4798  	2006.02     	9.51056E-3  	0.65 minutes/million states
+81600	-3857.8862  	-138.3822   	-3719.5040  	2006.02     	1.07581E-2  	0.65 minutes/million states
+81700	-3859.3981  	-138.1559   	-3721.2422  	2006.19     	1.07581E-2  	0.65 minutes/million states
+81800	-3855.0369  	-137.9333   	-3717.1036  	2006.19     	1.04736E-2  	0.65 minutes/million states
+81900	-3857.5678  	-137.1507   	-3720.4172  	2006.33     	1.04736E-2  	0.65 minutes/million states
+82000	-3863.3831  	-136.5007   	-3726.8824  	2005.71     	1.04736E-2  	0.65 minutes/million states
+82100	-3867.6908  	-135.3502   	-3732.3406  	2005.39     	1.04736E-2  	0.65 minutes/million states
+82200	-3865.3637  	-140.0935   	-3725.2702  	2005.07     	9.6401E-3   	0.65 minutes/million states
+82300	-3873.0905  	-139.3598   	-3733.7307  	2004.78     	9.6401E-3   	0.65 minutes/million states
+82400	-3867.6059  	-141.9995   	-3725.6065  	2004.74     	9.43751E-3  	0.65 minutes/million states
+82500	-3865.4029  	-141.8633   	-3723.5396  	2004.10     	9.55922E-3  	0.65 minutes/million states
+82600	-3865.9161  	-142.2839   	-3723.6323  	2004.60     	9.55922E-3  	0.65 minutes/million states
+82700	-3865.4191  	-139.0128   	-3726.4063  	2004.65     	9.85466E-3  	0.65 minutes/million states
+82800	-3868.4814  	-139.0947   	-3729.3868  	2004.65     	1.02766E-2  	0.65 minutes/million states
+82900	-3874.7402  	-138.1970   	-3736.5431  	2004.65     	1.08131E-2  	0.65 minutes/million states
+83000	-3868.9283  	-138.6829   	-3730.2454  	2004.90     	1.06446E-2  	0.65 minutes/million states
+83100	-3871.0821  	-137.9393   	-3733.1428  	2006.82     	1.06446E-2  	0.65 minutes/million states
+83200	-3867.0413  	-137.0976   	-3729.9438  	2006.80     	1.12656E-2  	0.65 minutes/million states
+83300	-3876.2720  	-140.7032   	-3735.5687  	2006.91     	1.12656E-2  	0.65 minutes/million states
+83400	-3865.4954  	-140.0597   	-3725.4357  	2006.91     	1.12656E-2  	0.65 minutes/million states
+83500	-3868.5805  	-139.5012   	-3729.0793  	2006.02     	1.06522E-2  	0.65 minutes/million states
+83600	-3873.2446  	-139.9205   	-3733.3241  	2006.05     	1.11266E-2  	0.65 minutes/million states
+83700	-3873.0007  	-140.9370   	-3732.0638  	2006.73     	1.12324E-2  	0.65 minutes/million states
+83800	-3867.6231  	-137.7338   	-3729.8893  	2006.87     	1.12728E-2  	0.65 minutes/million states
+83900	-3869.4929  	-137.2627   	-3732.2302  	2006.94     	1.12728E-2  	0.65 minutes/million states
+84000	-3862.6532  	-136.1440   	-3726.5092  	2007.19     	1.15768E-2  	0.65 minutes/million states
+84100	-3859.3625  	-135.4360   	-3723.9265  	2006.91     	1.15768E-2  	0.65 minutes/million states
+84200	-3860.7105  	-136.2546   	-3724.4559  	2006.85     	1.11877E-2  	0.65 minutes/million states
+84300	-3861.4356  	-137.2380   	-3724.1976  	2006.25     	1.10214E-2  	0.65 minutes/million states
+84400	-3858.7812  	-135.7859   	-3722.9954  	2006.43     	1.12053E-2  	0.65 minutes/million states
+84500	-3865.2376  	-135.0402   	-3730.1974  	2005.76     	1.00337E-2  	0.65 minutes/million states
+84600	-3865.4364  	-136.3389   	-3729.0975  	2005.79     	1.11887E-2  	0.65 minutes/million states
+84700	-3861.0824  	-135.6422   	-3725.4402  	2006.36     	1.11887E-2  	0.65 minutes/million states
+84800	-3858.1149  	-135.5578   	-3722.5571  	2005.21     	1.11887E-2  	0.65 minutes/million states
+84900	-3862.3876  	-135.9375   	-3726.4501  	2005.04     	9.7658E-3   	0.65 minutes/million states
+85000	-3867.1024  	-138.2831   	-3728.8194  	2005.87     	9.53103E-3  	0.65 minutes/million states
+85100	-3864.1720  	-140.1874   	-3723.9846  	2005.56     	1.03919E-2  	0.65 minutes/million states
+85200	-3861.9277  	-137.6287   	-3724.2990  	2006.04     	1.0855E-2   	0.65 minutes/million states
+85300	-3864.4550  	-136.5676   	-3727.8874  	2006.25     	1.0855E-2   	0.65 minutes/million states
+85400	-3864.7465  	-135.1671   	-3729.5794  	2006.25     	1.0855E-2   	0.65 minutes/million states
+85500	-3872.2110  	-134.5263   	-3737.6848  	2005.71     	1.1527E-2   	0.65 minutes/million states
+85600	-3865.1564  	-136.4908   	-3728.6656  	2006.00     	1.12116E-2  	0.65 minutes/million states
+85700	-3865.8649  	-135.0998   	-3730.7651  	2006.29     	1.0699E-2   	0.65 minutes/million states
+85800	-3868.4355  	-135.7968   	-3732.6388  	2006.29     	1.07996E-2  	0.65 minutes/million states
+85900	-3867.1433  	-135.3394   	-3731.8040  	2006.23     	1.12781E-2  	0.65 minutes/million states
+86000	-3857.0259  	-133.3776   	-3723.6483  	2006.23     	1.12753E-2  	0.65 minutes/million states
+86100	-3860.7870  	-133.4297   	-3727.3573  	2006.23     	1.23496E-2  	0.65 minutes/million states
+86200	-3858.4284  	-133.7856   	-3724.6428  	2007.04     	1.16258E-2  	0.65 minutes/million states
+86300	-3860.4043  	-133.8153   	-3726.5890  	2006.96     	1.16258E-2  	0.65 minutes/million states
+86400	-3860.2460  	-134.3691   	-3725.8769  	2006.64     	1.16258E-2  	0.64 minutes/million states
+86500	-3861.9229  	-136.2007   	-3725.7222  	2006.42     	1.16506E-2  	0.64 minutes/million states
+86600	-3862.5451  	-137.0143   	-3725.5308  	2006.66     	1.19938E-2  	0.64 minutes/million states
+86700	-3862.0449  	-138.5276   	-3723.5173  	2006.66     	1.19938E-2  	0.64 minutes/million states
+86800	-3862.6445  	-136.8892   	-3725.7553  	2006.66     	1.09313E-2  	0.64 minutes/million states
+86900	-3864.2036  	-137.3978   	-3726.8058  	2006.87     	1.09746E-2  	0.64 minutes/million states
+87000	-3866.1262  	-137.1799   	-3728.9463  	2006.91     	1.09746E-2  	0.64 minutes/million states
+87100	-3864.1281  	-136.5530   	-3727.5751  	2007.36     	1.09447E-2  	0.64 minutes/million states
+87200	-3861.7815  	-135.8611   	-3725.9204  	2006.90     	1.09447E-2  	0.64 minutes/million states
+87300	-3865.8122  	-136.5856   	-3729.2266  	2006.90     	1.09447E-2  	0.64 minutes/million states
+87400	-3866.8468  	-137.2444   	-3729.6025  	2006.88     	1.06297E-2  	0.64 minutes/million states
+87500	-3866.5980  	-137.0278   	-3729.5702  	2006.88     	1.12569E-2  	0.64 minutes/million states
+87600	-3865.0822  	-136.0469   	-3729.0353  	2006.79     	1.06707E-2  	0.64 minutes/million states
+87700	-3863.9078  	-136.1392   	-3727.7686  	2007.08     	1.19625E-2  	0.64 minutes/million states
+87800	-3866.3679  	-136.8049   	-3729.5630  	2007.08     	1.20275E-2  	0.64 minutes/million states
+87900	-3869.6604  	-137.4369   	-3732.2235  	2006.97     	1.05055E-2  	0.64 minutes/million states
+88000	-3868.7305  	-137.8477   	-3730.8828  	2006.06     	1.05499E-2  	0.64 minutes/million states
+88100	-3863.2423  	-138.7221   	-3724.5203  	2005.32     	1.06782E-2  	0.64 minutes/million states
+88200	-3865.7375  	-141.1058   	-3724.6317  	2005.22     	1.0301E-2   	0.64 minutes/million states
+88300	-3865.9902  	-140.7373   	-3725.2529  	2005.19     	1.01804E-2  	0.64 minutes/million states
+88400	-3861.3322  	-139.7569   	-3721.5753  	2005.33     	1.05612E-2  	0.64 minutes/million states
+88500	-3865.0531  	-139.6285   	-3725.4245  	2005.18     	1.05085E-2  	0.64 minutes/million states
+88600	-3864.9424  	-138.9835   	-3725.9588  	2005.18     	1.11131E-2  	0.64 minutes/million states
+88700	-3864.3969  	-139.0132   	-3725.3837  	2005.18     	1.053E-2    	0.64 minutes/million states
+88800	-3864.4618  	-138.6436   	-3725.8182  	2005.15     	1.04959E-2  	0.64 minutes/million states
+88900	-3862.6487  	-138.4306   	-3724.2181  	2005.15     	1.05452E-2  	0.64 minutes/million states
+89000	-3863.6430  	-140.3198   	-3723.3232  	2004.79     	1.02288E-2  	0.64 minutes/million states
+89100	-3863.3875  	-140.0305   	-3723.3570  	2004.93     	1.02496E-2  	0.64 minutes/million states
+89200	-3861.9971  	-137.5615   	-3724.4356  	2005.27     	1.07419E-2  	0.64 minutes/million states
+89300	-3859.4516  	-138.3602   	-3721.0914  	2005.27     	1.07419E-2  	0.64 minutes/million states
+89400	-3862.5392  	-138.4892   	-3724.0501  	2004.98     	1.07419E-2  	0.64 minutes/million states
+89500	-3864.5448  	-138.8922   	-3725.6526  	2005.49     	1.04778E-2  	0.64 minutes/million states
+89600	-3863.7229  	-137.7274   	-3725.9954  	2005.62     	1.04778E-2  	0.64 minutes/million states
+89700	-3870.9556  	-138.8521   	-3732.1035  	2005.24     	1.14534E-2  	0.64 minutes/million states
+89800	-3868.0658  	-139.4406   	-3728.6252  	2006.86     	1.14534E-2  	0.64 minutes/million states
+89900	-3867.0258  	-138.7044   	-3728.3214  	2006.75     	1.14834E-2  	0.64 minutes/million states
+90000	-3864.5163  	-137.6131   	-3726.9032  	2006.75     	1.14834E-2  	0.64 minutes/million states
+90100	-3861.9609  	-136.5032   	-3725.4577  	2006.57     	1.14443E-2  	0.64 minutes/million states
+90200	-3867.2989  	-138.9782   	-3728.3207  	2006.48     	1.15258E-2  	0.64 minutes/million states
+90300	-3871.0082  	-140.7218   	-3730.2864  	2006.95     	1.07526E-2  	0.64 minutes/million states
+90400	-3874.5640  	-141.1889   	-3733.3751  	2007.46     	1.08212E-2  	0.64 minutes/million states
+90500	-3881.5867  	-138.1507   	-3743.4361  	2007.46     	1.07397E-2  	0.64 minutes/million states
+90600	-3877.1748  	-138.7258   	-3738.4490  	2007.49     	1.21932E-2  	0.64 minutes/million states
+90700	-3868.9538  	-138.5406   	-3730.4132  	2006.40     	9.96293E-3  	0.64 minutes/million states
+90800	-3865.7863  	-139.4875   	-3726.2988  	2006.36     	9.92242E-3  	0.64 minutes/million states
+90900	-3867.6265  	-139.7296   	-3727.8970  	2006.48     	9.92242E-3  	0.64 minutes/million states
+91000	-3871.2903  	-138.9765   	-3732.3138  	2006.48     	1.07766E-2  	0.64 minutes/million states
+91100	-3868.0128  	-139.1575   	-3728.8553  	2007.06     	1.07122E-2  	0.64 minutes/million states
+91200	-3868.1443  	-138.8765   	-3729.2679  	2006.10     	1.1302E-2   	0.64 minutes/million states
+91300	-3866.7603  	-138.6904   	-3728.0699  	2006.26     	1.1302E-2   	0.64 minutes/million states
+91400	-3869.8394  	-141.9581   	-3727.8812  	2005.61     	1.09874E-2  	0.64 minutes/million states
+91500	-3861.7819  	-138.5301   	-3723.2519  	2006.05     	1.00762E-2  	0.64 minutes/million states
+91600	-3861.3883  	-139.6339   	-3721.7544  	2006.11     	1.08781E-2  	0.64 minutes/million states
+91700	-3864.2632  	-138.1688   	-3726.0943  	2006.65     	1.09887E-2  	0.64 minutes/million states
+91800	-3871.8220  	-137.9653   	-3733.8567  	2006.77     	1.07152E-2  	0.64 minutes/million states
+91900	-3865.3602  	-139.2960   	-3726.0642  	2006.79     	1.05088E-2  	0.64 minutes/million states
+92000	-3867.6923  	-140.8469   	-3726.8453  	2005.43     	1.05088E-2  	0.64 minutes/million states
+92100	-3868.5443  	-138.9330   	-3729.6113  	2006.61     	1.04824E-2  	0.64 minutes/million states
+92200	-3869.6839  	-140.0660   	-3729.6178  	2006.00     	1.04824E-2  	0.64 minutes/million states
+92300	-3868.4305  	-139.4646   	-3728.9659  	2006.31     	1.04824E-2  	0.64 minutes/million states
+92400	-3877.0264  	-138.5523   	-3738.4741  	2006.30     	1.20936E-2  	0.64 minutes/million states
+92500	-3875.3056  	-139.7605   	-3735.5451  	2006.40     	1.16388E-2  	0.64 minutes/million states
+92600	-3875.2617  	-138.7346   	-3736.5271  	2006.28     	1.16388E-2  	0.64 minutes/million states
+92700	-3873.2431  	-139.2447   	-3733.9985  	2006.96     	1.19387E-2  	0.64 minutes/million states
+92800	-3868.3146  	-138.3690   	-3729.9457  	2005.57     	9.80934E-3  	0.64 minutes/million states
+92900	-3868.0765  	-138.0429   	-3730.0336  	2005.96     	1.01292E-2  	0.64 minutes/million states
+93000	-3864.8605  	-136.6364   	-3728.2240  	2005.96     	1.0371E-2   	0.64 minutes/million states
+93100	-3869.2559  	-137.1335   	-3732.1223  	2005.96     	9.83356E-3  	0.64 minutes/million states
+93200	-3868.3453  	-137.3275   	-3731.0178  	2005.39     	1.0913E-2   	0.64 minutes/million states
+93300	-3869.7854  	-137.9632   	-3731.8223  	2006.93     	1.0838E-2   	0.64 minutes/million states
+93400	-3868.7445  	-136.8563   	-3731.8882  	2006.53     	1.12606E-2  	0.64 minutes/million states
+93500	-3869.4694  	-136.5140   	-3732.9554  	2006.47     	1.12606E-2  	0.64 minutes/million states
+93600	-3871.3899  	-136.3861   	-3735.0038  	2006.35     	1.11336E-2  	0.64 minutes/million states
+93700	-3864.3263  	-135.5175   	-3728.8089  	2006.28     	1.17126E-2  	0.64 minutes/million states
+93800	-3859.6849  	-134.5665   	-3725.1183  	2006.45     	1.15856E-2  	0.64 minutes/million states
+93900	-3861.7500  	-134.7396   	-3727.0104  	2006.45     	1.15856E-2  	0.64 minutes/million states
+94000	-3862.6470  	-135.6812   	-3726.9659  	2006.45     	1.15813E-2  	0.64 minutes/million states
+94100	-3857.0596  	-135.6908   	-3721.3688  	2007.63     	1.13709E-2  	0.64 minutes/million states
+94200	-3868.4400  	-133.8710   	-3734.5690  	2007.54     	1.1424E-2   	0.64 minutes/million states
+94300	-3865.0280  	-134.1697   	-3730.8583  	2007.54     	1.1424E-2   	0.64 minutes/million states
+94400	-3863.7057  	-133.6444   	-3730.0614  	2007.13     	1.14622E-2  	0.64 minutes/million states
+94500	-3861.9024  	-133.2764   	-3728.6260  	2007.13     	1.21624E-2  	0.64 minutes/million states
+94600	-3863.1998  	-135.5784   	-3727.6213  	2006.39     	1.14715E-2  	0.64 minutes/million states
+94700	-3864.4141  	-134.0029   	-3730.4112  	2006.44     	1.20858E-2  	0.64 minutes/million states
+94800	-3867.8876  	-133.6782   	-3734.2094  	2006.71     	1.21187E-2  	0.64 minutes/million states
+94900	-3862.7158  	-133.5431   	-3729.1727  	2006.79     	1.17753E-2  	0.64 minutes/million states
+95000	-3856.8306  	-133.1217   	-3723.7089  	2006.79     	1.21433E-2  	0.64 minutes/million states
+95100	-3855.2252  	-132.6103   	-3722.6150  	2006.87     	1.22667E-2  	0.64 minutes/million states
+95200	-3853.6655  	-131.8008   	-3721.8647  	2006.87     	1.22667E-2  	0.64 minutes/million states
+95300	-3860.4722  	-132.0950   	-3728.3772  	2006.80     	1.21845E-2  	0.64 minutes/million states
+95400	-3856.4662  	-131.8318   	-3724.6343  	2006.45     	1.23929E-2  	0.64 minutes/million states
+95500	-3856.0542  	-133.6059   	-3722.4483  	2006.45     	1.23929E-2  	0.64 minutes/million states
+95600	-3859.5687  	-132.8938   	-3726.6749  	2006.40     	1.23929E-2  	0.64 minutes/million states
+95700	-3860.2604  	-132.9549   	-3727.3054  	2007.39     	1.23929E-2  	0.64 minutes/million states
+95800	-3859.3612  	-135.5609   	-3723.8003  	2007.39     	1.23929E-2  	0.64 minutes/million states
+95900	-3859.4434  	-133.7849   	-3725.6584  	2007.86     	1.22487E-2  	0.64 minutes/million states
+96000	-3858.8099  	-135.0557   	-3723.7542  	2006.57     	1.09041E-2  	0.64 minutes/million states
+96100	-3855.1110  	-137.3282   	-3717.7828  	2006.51     	1.07305E-2  	0.64 minutes/million states
+96200	-3860.9292  	-136.8069   	-3724.1223  	2006.51     	1.07305E-2  	0.64 minutes/million states
+96300	-3863.1305  	-138.4947   	-3724.6358  	2006.62     	1.07305E-2  	0.64 minutes/million states
+96400	-3867.3456  	-138.8549   	-3728.4907  	2006.50     	1.07305E-2  	0.64 minutes/million states
+96500	-3876.8560  	-139.7379   	-3737.1182  	2006.50     	1.07305E-2  	0.64 minutes/million states
+96600	-3875.3107  	-137.8847   	-3737.4260  	2007.14     	1.08687E-2  	0.64 minutes/million states
+96700	-3873.9991  	-138.3914   	-3735.6078  	2007.22     	1.08687E-2  	0.64 minutes/million states
+96800	-3875.6305  	-138.2714   	-3737.3591  	2005.45     	1.07767E-2  	0.64 minutes/million states
+96900	-3874.7169  	-137.6325   	-3737.0843  	2005.45     	1.07767E-2  	0.64 minutes/million states
+97000	-3872.1068  	-137.4255   	-3734.6812  	2005.45     	1.0379E-2   	0.64 minutes/million states
+97100	-3873.2878  	-139.9574   	-3733.3304  	2005.10     	9.46902E-3  	0.64 minutes/million states
+97200	-3873.1622  	-138.7333   	-3734.4289  	2006.63     	9.73563E-3  	0.64 minutes/million states
+97300	-3870.6519  	-138.2585   	-3732.3934  	2006.10     	1.00306E-2  	0.64 minutes/million states
+97400	-3867.0794  	-139.7791   	-3727.3003  	2006.21     	1.00306E-2  	0.64 minutes/million states
+97500	-3863.0816  	-139.5872   	-3723.4944  	2005.68     	9.93236E-3  	0.64 minutes/million states
+97600	-3867.8336  	-139.5727   	-3728.2609  	2005.68     	9.59348E-3  	0.64 minutes/million states
+97700	-3865.2966  	-140.3898   	-3724.9069  	2004.84     	9.52534E-3  	0.64 minutes/million states
+97800	-3868.9178  	-140.9232   	-3727.9945  	2005.11     	9.46502E-3  	0.64 minutes/million states
+97900	-3866.5581  	-139.3204   	-3727.2377  	2005.42     	9.72386E-3  	0.64 minutes/million states
+98000	-3870.6550  	-139.0739   	-3731.5810  	2004.04     	9.14957E-3  	0.64 minutes/million states
+98100	-3878.1240  	-140.0806   	-3738.0435  	2004.49     	9.14957E-3  	0.64 minutes/million states
+98200	-3874.4054  	-142.2562   	-3732.1492  	2004.28     	8.99477E-3  	0.64 minutes/million states
+98300	-3872.8793  	-141.8290   	-3731.0503  	2003.72     	8.72523E-3  	0.64 minutes/million states
+98400	-3869.0369  	-139.8383   	-3729.1986  	2004.30     	9.91123E-3  	0.64 minutes/million states
+98500	-3865.7325  	-141.2434   	-3724.4891  	2004.06     	9.72933E-3  	0.64 minutes/million states
+98600	-3862.7786  	-139.2380   	-3723.5407  	2003.89     	9.85301E-3  	0.64 minutes/million states
+98700	-3865.8680  	-138.9161   	-3726.9519  	2003.22     	9.85301E-3  	0.64 minutes/million states
+98800	-3864.2599  	-136.7421   	-3727.5178  	2004.09     	1.01322E-2  	0.64 minutes/million states
+98900	-3860.3767  	-135.7912   	-3724.5855  	2006.04     	1.11573E-2  	0.64 minutes/million states
+99000	-3872.5529  	-134.7411   	-3737.8118  	2005.63     	1.11573E-2  	0.64 minutes/million states
+99100	-3867.7130  	-134.5611   	-3733.1519  	2005.63     	1.12475E-2  	0.64 minutes/million states
+99200	-3866.2556  	-134.7805   	-3731.4751  	2005.63     	1.12475E-2  	0.64 minutes/million states
+99300	-3864.0060  	-136.6694   	-3727.3365  	2005.61     	1.12261E-2  	0.64 minutes/million states
+99400	-3866.2806  	-137.2867   	-3728.9939  	2005.61     	1.12261E-2  	0.64 minutes/million states
+99500	-3864.8616  	-137.1389   	-3727.7227  	2005.62     	1.12261E-2  	0.64 minutes/million states
+99600	-3871.6823  	-136.6200   	-3735.0623  	2005.64     	9.90083E-3  	0.64 minutes/million states
+99700	-3866.6871  	-137.4083   	-3729.2788  	2005.44     	9.72539E-3  	0.64 minutes/million states
+99800	-3866.9761  	-136.2792   	-3730.6969  	2005.44     	1.09145E-2  	0.64 minutes/million states
+99900	-3863.0639  	-135.3120   	-3727.7518  	2005.59     	1.10683E-2  	0.64 minutes/million states
+100000	-3868.5417  	-137.7860   	-3730.7556  	2005.12     	1.10683E-2  	0.64 minutes/million states
+
+Operator analysis
+Operator                                          Tuning   Count      Time     Time/Op  Pr(accept) 
+scale(CP1.kappa)                                  0.445   816        44       0.05     0.2402      
+scale(CP2.kappa)                                  0.313   890        27       0.03     0.2371      
+scale(CP3.kappa)                                  0.236   827        29       0.04     0.2491      
+CP1.frequencies                                   0.08    873        36       0.04     0.2451      
+CP2.frequencies                                   0.092   818        31       0.04     0.2445      
+CP3.frequencies                                   0.141   882        33       0.04     0.2483      
+scale(clock.rate)                                 0.781   2543       116      0.05     0.2371      
+up:nodeHeights(treeModel) down:clock.rate         0.916   2584       144      0.06     0.231       
+allNus                                            0.099   2554       118      0.05     0.2408      
+subtreeSlide(treeModel)                           1.149   25723      718      0.03     0.2339      
+Narrow Exchange(treeModel)                                25648      550      0.02     0.1469      
+Wide Exchange(treeModel)                                  2598       41       0.02     0.0069      
+wilsonBalding(treeModel)                                  2525       76       0.03     0.0099      
+scale(treeModel.rootHeight)                       0.14    2603       88       0.03     0.2297      
+uniform(nodeHeights(treeModel))                           25552      859      0.03     0.4065      
+scale(constant.popSize)                           0.357   2564       37       0.01     0.2484      
+
+4.693 seconds
+
