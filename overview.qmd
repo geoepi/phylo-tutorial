@@ -349,7 +349,7 @@ ggtree(ml_tree, size=0.5, col = "gray30",
                 size=3, 
                 color="black") +
     geom_tiplab(col="gray40", size=3, 
-                align=FALSE, offset = 0.025, hjust = 0.5) +
+                align=FALSE, offset = 0.025, hjust = 0.8) +
     geom_treescale(width=0.02) 
 ```
 
@@ -380,7 +380,7 @@ tmp_tree <- full_join(ml_tree, tree_df, by = 'label')
 ggtree(tmp_tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 
     geom_tiplab(aes(label = isolate), col="gray40", size=3, 
-                align=FALSE, offset = 0.025, hjust = 0.5) +
+                align=FALSE, offset = 0.025, hjust = 0.8) +
     geom_text2(aes(subset = !isTip, label=label), 
                hjust=-0.4, 
                size=3, 
@@ -436,12 +436,7 @@ write.table(sat1_dates, file = here("beast/sat1_dates.tsv"),
             sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
-1. Beauti walk through  
-2. Write shell script (.sh)
-3. Login to HPC (Ceres has Beast, Atlas has Beast2) 
-4. Upload data (Beauti .xml and .sh)  
-5. Navigate to working folder  
-
+**Command Line**
 ```
 $ cd /project/fadru_fmd/phylo_demo
 $ ls
@@ -470,11 +465,12 @@ sat_stats %>%
 ```
 
 ## Maximum Clade Credability Tree
+
+**Command Line**
 ```
 $ module load beast
 $ beast
-$ treeannotator -burnin 10000 -heights median aligned_SAT1.trees.txt sat1.mcc.tre
-
+$ treeannotator -burnin 10000 -heights median aligned_SAT1.trees.txt sat1_mcc.tree
 ```
 ```{r fig.height=12, fig.width=10}
 options(ignore.negative.edge=TRUE)
