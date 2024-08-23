@@ -14,21 +14,6 @@ format:
 editor_options: 
   chunk_output_type: console
 ---
-```{=html}
-<style type="text/css">
-
-body, td {
-   font-size: 13pt;
-}
-code.r{
-  font-size: 9pt;
-}
-pre {
-  font-size: 11pt
-}
-</style>
-```
-
 ## References and External Resources  
 >[Osmondi et al 2020](https://onlinelibrary.wiley.com/doi/10.1111/tbed.13573)(2020)
 >The role of African buffalo in the epidemiology of foot-and-mouth disease in sympatric cattle and buffalo populations in Kenya.  https://doi.org/10.1111/tbed.13573  
