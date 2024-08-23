@@ -349,7 +349,7 @@ ggtree(ml_tree, size=0.5, col = "gray30",
                 size=3, 
                 color="black") +
     geom_tiplab(col="gray40", size=3, 
-                align=FALSE, offset = 0.025, hjust = 0.8) +
+                align=FALSE, offset = 0.025, hjust = 1) +
     geom_treescale(width=0.02) 
 ```
 
@@ -380,7 +380,7 @@ tmp_tree <- full_join(ml_tree, tree_df, by = 'label')
 ggtree(tmp_tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 
     geom_tiplab(aes(label = isolate), col="gray40", size=3, 
-                align=FALSE, offset = 0.025, hjust = 0.8) +
+                align=FALSE, offset = 0.025, hjust = 0.6) +
     geom_text2(aes(subset = !isTip, label=label), 
                hjust=-0.4, 
                size=3, 
