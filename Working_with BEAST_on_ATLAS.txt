@@ -1,0 +1,48 @@
+Installing BEAST and Beagle on Atlas:
+	The best approach (in my opinion) for installing BEAST and Beagle on an HPC can be found here:
+
+	http://felixgrewe.github.io/linux_cookbook/install_BEAST2.html
+	
+	To be comprehensive about your options, you have three ways to get up and running:
+	
+	
+	1) Use miniconda (works, but only has version 2.6.3 or earlier of BEAST):
+	
+		# load conda	
+		module load miniconda3
+	
+		# create new conda environment and install beast
+		conda create -n beast beast2 beagle-lib 
+		
+		# load java
+		module load openjdk
+
+	
+	2) Use version of BEAST on Atlas (works, but only has version 2.7.4 of BEAST, and you still need conda for beagle)
+
+		# This should also load Java, so no need to do that separately 
+		Module load beast2
+
+		# create new conda environment and install beast
+		conda create -n beast beast2 beagle-lib 
+
+	
+	3) Download any version of BEAST you want from the GitHub page (Again, this is the  best approach I think)
+	
+		# in the directory you want BEAST to live, run the following, replacing the version number of your choice:
+
+		wget https://github.com/CompEvol/beast2/releases/download/v2.7.7/BEAST.v2.7.7.Linux.x86.tgz
+
+		# untar 
+		tar zxvf BEAST.v2.7.7.Linux.x86.tgz
+
+		# again, we need java
+		module load openjdk
+	
+		# and Beagle:
+		conda create -n beagle beagle-lib
+	
+
+All of these methods will install BEAST and BEAGLE, but any packages the you need for fancy models you will be running need to be installed still using the built in package manager for BEAST. See here for reference, under the section “Installation on cluster”:
+
+	https://www.beast2.org/managing-packages/    
