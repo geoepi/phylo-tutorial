@@ -1,3 +1,8 @@
+preamble on BEAST v. BEAST2: For almost everything you would want to do, BEAST2 should be preferred. 
+BEAST can run some older models that their creators never ported over to BEAST2, 
+but BEAST2 is meant to be a full replacement of BEAST, according to it's authors
+(see: https://www.beast2.org/BEAST/ and https://www.beast2.org/features/)
+
 Installing BEAST and Beagle on Atlas:
 	The best approach (in my opinion) for installing BEAST and Beagle on an HPC can be found here:
 
@@ -43,6 +48,8 @@ Installing BEAST and Beagle on Atlas:
 		conda create -n beagle beagle-lib
 	
 
-All of these methods will install BEAST and BEAGLE, but any packages the you need for fancy models you will be running need to be installed still using the built in package manager for BEAST. See here for reference, under the section “Installation on cluster”:
+All of these methods will install BEAST and BEAGLE, but any packages the you need for fancy models you 
+will be running need to be installed still using the built in package manager for BEAST. 
+See here for reference, under the section “Installation on cluster”:
 
 	https://www.beast2.org/managing-packages/    
