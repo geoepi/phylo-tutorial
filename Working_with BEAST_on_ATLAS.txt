@@ -1,6 +1,6 @@
 preamble on BEAST v. BEAST2: For almost everything you would want to do, BEAST2 should be preferred. 
 BEAST can run some older models that their creators never ported over to BEAST2, 
-but BEAST2 is meant to be a full replacement of BEAST, according to it's authors
+but BEAST2 is meant to be a full replacement of BEAST, according to its authors
 (see: https://www.beast2.org/BEAST/ and https://www.beast2.org/features/)
 
 Installing BEAST and Beagle on Atlas:
