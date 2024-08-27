@@ -1,0 +1,503 @@
+---
+title: "Annakate scratchwork"
+description: "Intro R-phylogenetics tutorial using Osmondi et al 2020 data"
+format:
+  html: 
+    df-print: kable
+    code-fold: show
+    code-summary: "Hide code"
+    code-overflow: wrap
+    toc-title: Page Contents
+    toc: true
+    toc-depth: 2
+    toc-location: right
+    number-sections: false
+    html-math-method: katex
+    smooth-scroll: true
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+## References and External Resources  
+>[Osmondi et al 2020](https://onlinelibrary.wiley.com/doi/10.1111/tbed.13573)(2020)
+>The role of African buffalo in the epidemiology of foot-and-mouth disease in sympatric cattle and buffalo populations in Kenya.  https://doi.org/10.1111/tbed.13573  
+  
+GenBank [PopSet: 1685824549] (https://www.ncbi.nlm.nih.gov/popset?LinkName=nuccore_popset&from_uid=1685824549)  
+  
+   
+## Libraries  
+A few packages are needed.  First, these help withdirectory management, visualization, and data wrangling.    
+```{r warning=FALSE, message=FALSE}
+library(here) # directory management
+library(tidyverse) #ggplot, lubridate, and the like 
+options(dplyr.summarise.inform = FALSE) # don't render data default summaries  
+library(ggmap) # maps
+library(ggspatial) # spatial plots
+library(pals) # color pallets
+library(gt) # pretty tables
+library(coda) # mcmc summaries/tools
+```
+  
+Next, several genetics specific packages are recommended. The *BioManager* packages may take a few minutes to compile.     
+```{r warning=FALSE, message=FALSE}
+library(ape) #Analyses of Phylogenetics and Evolution (APE)
+library(phangorn) # phylogenetic trees and networks
+library(rentrez) # R interface to the NCBI - GenBank
+
+# these next 4 pieces of code check each package, then installs them if not already installed. 
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+
+if (!requireNamespace("Biostrings", quietly = TRUE)) {
+    BiocManager::install("Biostrings")
+}
+
+if (!requireNamespace("msa", quietly = TRUE)) {
+    BiocManager::install("msa")
+}
+
+if (!requireNamespace("ggtree", quietly = TRUE)) {
+    BiocManager::install("ggtree")
+}
+
+# if now installed, load the packages  
+library(Biostrings) # sequence wrangling
+library(msa) # Multiple Sequence Alignment (MSA) algorithms  
+library(ggtree) # tree visualization and annotation
+```
+  
+Custom functions created for this demo.      
+```{r warning=FALSE, message=FALSE}
+source(here("R/utilities.R"))
+source_dir(here("R"))
+```
+
+## Query GenBank  
+The Osmondi paper provided a listing of accession numbers as a supplemental. This was attached as a Word Doc, which I copy-and-pasted into `osmondi_2020_supplemental.csv`.  
+```{r}
+osmondi_seqs <- read_csv(here("assets/osmondi_2020_supplemental.csv"))
+head(osmondi_seqs)
+
+search_term <- paste(osmondi_seqs$Accession, collapse = " OR ")
+
+genbank_return <- entrez_search(
+  db = "nucleotide",
+  term = search_term,
+  retmax = 100 # the default is 20 records, our list is 95
+)
+```
+
+Alternatively, search the database for the *popset* of interest and return all metadata. This is simpler, but not always available and GenBank may stop using PopSet numbers altogether next year.  
+```{r}
+popset_id <- "1685824549" # "population set" from GenBank page
+
+genbank_return <- 
+  entrez_search(db = "nucleotide", 
+                term = paste0("POPSET:", popset_id), # search by popset number
+                retmax = 100) 
+```
+  
+### Check Contents   
+No actual sequences yet, only metadata.  Even if you can easily access the sequences, the expanded retrieval process in this script is often needed to pull additional info, like collection dates, isolate names/labels, or geographic coordinates.      
+```{r}
+genbank_return # check results
+
+class(genbank_return)
+
+str(genbank_return)
+```
+
+### Samples Table  
+Using the metadata for each record, the desired data is pulled one at a time, then organized as a data frame.  Lot's of character string wrangling, yuk!  
+   
+First, create an empty data frame to hold results    
+```{r}
+seq_meta <- data.frame(Accession=character(),
+                       Collection=character(),
+                       Host=character(),
+                       Isolate=character(),
+                       stringsAsFactors=FALSE)
+``` 
+
+Then, loop through each record and pull desired data.  In this case, searching the metadata for accession numbers, collection dates, host type, and the more detailed isolate names.  
+```{r}
+for (id in genbank_return$ids) {
+
+  try({
+    record <- entrez_fetch(db="nucleotide", id=id, rettype="gb", retmode="text")
+    
+    accession <- sub("^.*?ACCESSION\\s+([^\n]+).*", "\\1", record)
+    
+    Collection <- ifelse(grepl("/collection_date=", record), 
+                         sub("^.*?/collection_date=\"([^\"]+)\".*", "\\1", record), NA)
+    
+    host <- ifelse(grepl("/host=", record), 
+                   sub("^.*?/host=\"([^\"]+)\".*", "\\1", record), NA)
+    
+    isolate <- ifelse(grepl("/isolate=", record), 
+                      sub("^.*?/isolate=\"([^\"]+)\".*", "\\1", record), NA)
+    
+    # add to data frame
+    seq_meta <- rbind(seq_meta, data.frame(Accession=accession,
+                                           Collection=Collection,
+                                           Host=host,
+                                           Isolate=isolate,
+                                           stringsAsFactors=FALSE)) %>%
+                as.data.frame()
+    
+    # delay to prevent overwhelming the API server
+    Sys.sleep(0.5)  # this gives a 0.5 second gap
+
+  }, silent = TRUE)  # continue if an error
+}
+```
+  
+### Data Table  
+Examine what was retrived.  
+```{r}
+dim(seq_meta)
+
+head(seq_meta)
+
+# using trimws due to an extra space in the numbers
+seq_meta$Accession <- trimws(seq_meta$Accession)
+
+# add a couple more columns
+seq_meta$Serotype <- sub("/.*", "", seq_meta$Isolate)
+seq_meta$Animal <- sub("^.*/([^/]+)/[^/]+$", "\\1", seq_meta$Isolate)
+
+seq_meta  %>%
+  gt() %>%
+  tab_header(
+    title = md("Kenya Sequences Metadata")) %>%
+  cols_width(starts_with("Accession") ~ px(90),
+             starts_with("Collection") ~ px(80),
+             starts_with("Host") ~ px(100),
+             starts_with("Isolate") ~ px(180),
+             starts_with("Serotype") ~ px(80),
+             starts_with("Animal") ~ px(80),
+             everything() ~ px(95)) %>%
+  tab_options(table.font.size = "small",
+              row_group.font.size = "small",
+              stub.font.size = "small",
+              column_labels.font.size = "medium",
+              heading.title.font.size = "large",
+              data_row.padding = px(2),
+              heading.title.font.weight = "bold",
+              column_labels.font.weight = "bold") %>%
+  opt_stylize(style = 6, color = 'gray')
+```
+  
+### Samples by Group    
+```{r}
+seq_meta %>%
+  group_by(Host, Serotype) %>%
+  summarise(Count = length(Accession))
+```
+  
+## Retrieve Sequences  
+Now, query GenBank for the actual sequences.  Example here using SAT1 as an example. 
+```{r}
+sat1_df <- seq_meta %>%
+  filter(Serotype == "SAT1")
+
+# function to get sequences
+get_sequences <- function(accessions) {
+    sequences <- sapply(accessions, function(acc) {
+        entrez_fetch(db = "nuccore", id = acc, rettype = "fasta")
+    })
+    return(sequences)
+}
+
+# run function
+sat1_sequences <- get_sequences(sat1_df$Accession)
+
+# remove special characters 
+sat1_sequences <- gsub("[^ATCG]", "", sat1_sequences)
+
+# save to text file - fasta format  
+writeLines(sat1_sequences, here("assets/sat1_sequences.fasta"))
+```
+
+## Alignment  
+```{r}
+# ensure all is named correctly
+unique_names <- make.unique(names(sat1_sequences))
+names(sat1_sequences) <- unique_names
+
+# convert to a DNAStringSet object, needed for the msa package
+dna_sequences <- DNAStringSet(sat1_sequences)
+
+# MUSCLE alignment
+alignment <- msa(dna_sequences, method = "Muscle")
+
+alignment <- as(alignment, "DNAStringSet") 
+
+# save the aligned sequences to a text file  
+writeXStringSet(alignment, filepath = here("assets/aligned_SAT1.fasta"))
+```
+  
+### View Alignment  
+A plot to view the alignment. These are very clean, hardly any breaks or missingness.    
+```{r fig.width=10, fig.height=6}
+plot_alignment(alignment)
+```
+
+## Substitution Model  
+Read in the saved alignment.  This rather than using the version already in the environment, becuase the classes are different.
+```{r message=FALSE}
+alignment <- read.dna(here("assets/aligned_SAT1.fasta"),
+                      format="fasta", as.matrix=TRUE)
+
+# convert again for modelTest (phangorn pkg)
+aligned_phyDat <- as.phyDat(alignment)
+  
+# run the test, compare the models
+mt <- modelTest(aligned_phyDat)
+
+mt %>% 
+  arrange(AIC) %>%
+  slice_head(n=5) %>%
+  gt()
+
+# use the next to best
+env <- attr(mt, "env")
+best_mod <- eval(get("GTR+G(4)+I", env), env) 
+
+best_mod
+```
+
+## Maximum Likelihood Tree  
+Quick tree to see if there's any craziness happening. Also an opportunity to check out [**ggtree**](https://yulab-smu.top/treedata-book/)  
+
+### Optimize model   
+This optimization process is rather specific to this algorithm; it's OK for quick checks, but you'll want to use other methods for publishable results.  
+```{r}
+# optimize model parameters without fitting edges
+fit1 <- optim.pml(best_mod, # best model 
+                 optNni = FALSE, optBf = TRUE, 
+                 optQ = TRUE, optInv = TRUE, 
+                 optGamma = TRUE, optEdge = FALSE, 
+                 optRate = TRUE, 
+                 control = pml.control(epsilon = 1e-08,
+                                       maxit = 10, trace = 0))
+
+#Fix substitution model and fit tree
+fit2 <- optim.pml(fit1, 
+                 optNni = TRUE, optBf = FALSE,
+                 optQ = FALSE, optInv = FALSE, 
+                 optGamma = FALSE, optEdge = TRUE,
+                 control = pml.control(epsilon = 1e-08, 
+                                       maxit = 10, trace = 0))
+
+#Fine tune
+fit3 <- optim.pml(fit2, 
+                 optNni = TRUE, optBf = TRUE,
+                 optQ = TRUE, optInv = TRUE, 
+                 optGamma = TRUE, optEdge = TRUE, 
+                 optRate = FALSE,
+                 control = pml.control(epsilon = 1e-08, 
+                                       maxit = 10, trace = 0))
+```
+  
+## Bootstrap Values   
+Only running 100 trees as an example, although a small number, this might take a few minutes...
+```{r}
+set.seed(1976)
+boots <- bootstrap.pml(fit3,
+                       bs = 100,
+                       optNni = TRUE,
+                       control = pml.control(trace = 0))
+```
+  
+**Phangorn** plotting functions as an example.    
+```{r fig.width=8, fig.height=10}
+# get the best tree from optimization
+ml_tree <- fit3$tree
+
+# Or use a consensus tree
+# consensus_tree <- consensus(boots, p = 0.5)
+  
+# phangorn specific plots
+plotBS(midpoint(ml_tree), boots, 
+       type="p", cex=0.4,
+       bs.adj = c(1.25, 1.25),
+       bs.col = "black")
+add.scale.bar()
+title("Maximum Likelihood")
+```
+   
+Could also extract the bootstrap values for use in other plotting tools.     
+```{r}
+bootstrap_matrix <- sapply(boots, function(tree) tree$node.label)
+
+bootstrap_matrix <- apply(bootstrap_matrix, 2, as.numeric)
+
+bootstrap_summarized <- apply(bootstrap_matrix, 1, mean, na.rm = TRUE)
+
+ml_tree$node.label <- round(bootstrap_summarized, 2)
+
+# root on oldest sequences, Jan 2014
+ml_tree = root(ml_tree, c("MH882578", "MH882579", "MH882580"),
+               resolve.root = TRUE)
+```
+  
+## Tree Plots    
+Using **ggtree**.  This basic plot isn't much prettier than the above, but offers more flexibility for customization. 
+```{r fig.width=8, fig.height=10}
+ggtree(ml_tree, size=0.5, col = "gray30", 
+              ladderize=TRUE) + 
+    geom_text2(aes(subset = !isTip, label=label), 
+                hjust=-0.4, 
+                size=3, 
+                color="black") +
+    geom_tiplab(col="gray40", size=3, 
+                align=FALSE, offset = 0.025, hjust = 1.4) +
+    geom_treescale(width=0.02) 
+```
+
+Here's a more fancy-fied version: 
+```{r fig.width=8, fig.height=10}
+# get labels
+tree_df <- as.data.frame(
+    ml_tree$tip.label
+  )
+
+names(tree_df) <- "label"
+  
+# match to isolate names, more info
+tree_df$isolate <- with(seq_meta,
+                        Isolate[match(
+                            tree_df$label,
+                            Accession)])
+
+# match to host type
+tree_df$host <- with(seq_meta,
+                       Host[match(
+                            tree_df$label,
+                            Accession)])
+
+# add data to tree
+tmp_tree <- full_join(ml_tree, tree_df, by = 'label')
+  
+ggtree(tmp_tree, size=0.5, col = "gray30", 
+              ladderize=TRUE) + 
+    geom_tiplab(aes(label = isolate), col="gray40", size=3, 
+                align=FALSE, offset = 0.025, hjust = .5) +
+    geom_text2(aes(subset = !isTip, label=label), 
+               hjust=-0.4, 
+               size=3, 
+               color="darkred") +
+    geom_tippoint(aes(colour=host, shape=host), size = 4) +
+    scale_color_manual(values = c("Syncerus_caffer" = "red", "Bos_taurus" = "blue")) +  
+    scale_shape_manual(values = c("Syncerus_caffer" = 16, "Bos_taurus" = 17)) + 
+    theme(plot.margin = unit(c(1,8,1,0.1), "mm"),
+          axis.title.x = element_text(size=24, face="bold"),
+          axis.title.y = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks=element_blank(),
+          axis.line=element_blank(), 
+          legend.direction = "vertical",
+          legend.position= "inside",
+          legend.position.inside = c(0.2, 0.8),
+          strip.text = element_blank(), 
+          strip.background = element_blank(),
+          legend.key.size = unit(2,"line"),
+          legend.key.width = unit(3,"line"),
+          legend.text = element_text(size=16, face="bold"),
+          legend.title = element_text(size=16, face="bold"),
+          plot.title = element_text(size=28, face="bold")) +
+    geom_treescale(width=0.02) +
+    labs(colour = "Host", shape = "Host") +
+    guides(colour = guide_legend(override.aes = list(size=4))) 
+```
+
+## BEAST 
+1. Beauti walk through  
+2. Write shell script (.sh)
+3. Login to HPC (Ceres has Beast, Atlas has Beast2) 
+4. Upload data (Beauti .xml and .sh)  
+5. Navigate to working folder 
+   
+### Create a date file      
+```{r}
+sat1_dates <- sat1_df %>%
+  select(Accession, Collection)
+
+unique(sat1_dates$Collection)
+
+sat1_dates <- sat1_dates %>%
+  mutate(samp_date = case_when(
+    Collection == "2016-01" ~ as_date("2016-01-01", format = "%Y-%m-%d"),
+    Collection == "2016-10" ~ as_date("2016-10-01", format = "%Y-%m-%d"),
+    Collection == "2014-01" ~ as_date("2014-01-01", format = "%Y-%m-%d"),
+  )) %>%
+  select(-Collection)
+
+write.table(sat1_dates, file = here("beast/sat1_dates.tsv"), 
+            sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+```
+
+1. Beauti walk through  
+2. Write shell script (.sh)
+3. Login to HPC (Ceres has Beast, Atlas has Beast2) 
+4. Upload data (Beauti .xml and .sh)  
+5. Navigate to working folder  
+
+```
+$ cd /project/fadru_fmd/phylo_demo
+$ ls
+$ sbatch kenya_sat1.sh
+$ squeue -u john.humphreys
+```
+  
+## Tracer Type Stats  
+```{r}
+sat_stats <- get_tracer_stats(here("beast/old_beauti_sat1.log")) 
+
+sat_stats %>%
+  gt() %>%
+  tab_header(
+    title = md("Simple SAT1 Tree")) %>%
+  cols_width(everything() ~ px(95)) %>%
+  tab_options(table.font.size = "small",
+              row_group.font.size = "small",
+              stub.font.size = "small",
+              column_labels.font.size = "medium",
+              heading.title.font.size = "large",
+              data_row.padding = px(2),
+              heading.title.font.weight = "bold",
+              column_labels.font.weight = "bold") %>%
+  opt_stylize(style = 6, color = 'gray')
+```
+
+## Maximum Clade Credability Tree
+```
+$ module load beast
+$ beast
+$ treeannotator -burnin 10000 -heights median aligned_SAT1.trees.txt sat1.mcc.tre
+
+```
+```{r}
+options(ignore.negative.edge=TRUE)
+sat_mcc.tree <- read.nexus(here("beast/sat1_mcc.tree"))
+
+ggtree(sat_mcc.tree, size=0.5, col = "gray30", 
+              ladderize=TRUE) + 
+    geom_tiplab(col="gray40", size=3, 
+                align=FALSE, offset = 0.025, hjust = 2.25) 
+```
+
+
+
+
+
+
+
+
+
+
+
+
