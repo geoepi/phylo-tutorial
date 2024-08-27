@@ -18,65 +18,68 @@ editor: source
 editor_options: 
   chunk_output_type: console
 ---
-## References and External Resources  
+## References and External Resources
 >[Osmondi et al 2020](https://onlinelibrary.wiley.com/doi/10.1111/tbed.13573)(2020)
->The role of African buffalo in the epidemiology of foot-and-mouth disease in sympatric cattle and buffalo populations in Kenya.  https://doi.org/10.1111/tbed.13573  
-  
-GenBank [PopSet: 1685824549] (https://www.ncbi.nlm.nih.gov/popset?LinkName=nuccore_popset&from_uid=1685824549)  
-  
-   
-## Libraries  
-A few packages are needed.  First, these help withdirectory management, visualization, and data wrangling.    
+>The role of African buffalo in the epidemiology of foot-and-mouth disease in sympatric cattle and buffalo populations in Kenya.  https://doi.org/10.1111/tbed.13573
+
+GenBank [PopSet: 1685824549] (https://www.ncbi.nlm.nih.gov/popset?LinkName=nuccore_popset&from_uid=1685824549)
+
+## Libraries
+A few packages are needed. First, these help with directory management, visualization, and data wrangling.
 ```{r warning=FALSE, message=FALSE}
 library(here) # directory management
-library(tidyverse) #ggplot, lubridate, and the like 
-options(dplyr.summarise.inform = FALSE) # don't render data default summaries  
+library(tidyverse) # ggplot, lubridate, and the like
+options(dplyr.summarise.inform = FALSE) # don't render data default summaries
 library(ggmap) # maps
 library(ggspatial) # spatial plots
 library(pals) # color pallets
 library(gt) # pretty tables
 library(coda) # mcmc summaries/tools
 ```
-  
-Next, several genetics specific packages are recommended. The *BioManager* packages may take a few minutes to compile.     
+
+Next, several genetics specific packages are recommended. The *BioManager* packages may take a few minutes to compile. 
 ```{r warning=FALSE, message=FALSE}
 library(ape) #Analyses of Phylogenetics and Evolution (APE)
 library(phangorn) # phylogenetic trees and networks
 library(rentrez) # R interface to the NCBI - GenBank
 
-# these next 4 pieces of code check each package, then installs them if not already installed. 
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-    install.packages("BiocManager")
-}
+# these next 4 pieces of code check each package, then installs them if not already installed.
+# if (!requireNamespace("BiocManager", quietly = TRUE)) {
+#     install.packages("BiocManager")
+# }
+# 
+# if (!requireNamespace("Biostrings", quietly = TRUE)) {
+#     BiocManager::install("Biostrings")
+# }
+# 
+# if (!requireNamespace("msa", quietly = TRUE)) {
+#     BiocManager::install("msa")
+# }
+# 
+# if (!requireNamespace("ggtree", quietly = TRUE)) {
+#     BiocManager::install("ggtree")
+# }
 
-if (!requireNamespace("Biostrings", quietly = TRUE)) {
-    BiocManager::install("Biostrings")
-}
-
-if (!requireNamespace("msa", quietly = TRUE)) {
-    BiocManager::install("msa")
-}
-
-if (!requireNamespace("ggtree", quietly = TRUE)) {
-    BiocManager::install("ggtree")
-}
-
-# if now installed, load the packages  
+# if now installed, load the packages
 library(Biostrings) # sequence wrangling
-library(msa) # Multiple Sequence Alignment (MSA) algorithms  
+library(msa) # Multiple Sequence Alignment (MSA) algorithms
 library(ggtree) # tree visualization and annotation
 ```
-  
-Custom functions created for this demo.      
+
+Custom functions created for this demo.
 ```{r warning=FALSE, message=FALSE}
 source(here("R/utilities.R"))
 source_dir(here("R"))
 ```
 
-## Query GenBank  
-The Osmondi paper provided a listing of accession numbers as a supplemental. This was attached as a Word Doc, which I copy-and-pasted into `osmondi_2020_supplemental.csv`.  
+# -------------------------------------------------------------------------------------------------
+# accession numbers --> ids and metadata --> sequences
+# -------------------------------------------------------------------------------------------------
+
+## Query GenBank
+The Osmondi paper provided a listing of accession numbers as a supplemental. This was attached as a Word Doc, which I copy-and-pasted into `osmondi_2020_supplemental.csv`.
 ```{r}
-osmondi_seqs <- read_csv(here("assets/osmondi_2020_supplemental.csv"))
+osmondi_seqs <- read_csv(here("data_AMS/osmondi_2020_supplemental.csv"))
 head(osmondi_seqs)
 
 search_term <- paste(osmondi_seqs$Accession, collapse = " OR ")
@@ -88,18 +91,18 @@ genbank_return <- entrez_search(
 )
 ```
 
-Alternatively, search the database for the *popset* of interest and return all metadata. This is simpler, but not always available and GenBank may stop using PopSet numbers altogether next year.  
+Alternatively, search the database for the *popset* of interest and return all metadata. This is simpler, but not always available and GenBank may stop using PopSet numbers altogether next year.
 ```{r}
 popset_id <- "1685824549" # "population set" from GenBank page
 
 genbank_return <- 
   entrez_search(db = "nucleotide", 
                 term = paste0("POPSET:", popset_id), # search by popset number
-                retmax = 100) 
+                retmax = 100)
 ```
-  
-### Check Contents   
-No actual sequences yet, only metadata.  Even if you can easily access the sequences, the expanded retrieval process in this script is often needed to pull additional info, like collection dates, isolate names/labels, or geographic coordinates.      
+
+### Check Contents
+No actual sequences yet, only metadata. Even if you can easily access the sequences, the expanded retrieval process in this script is often needed to pull additional info, like collection dates, isolate names/labels, or geographic coordinates.
 ```{r}
 genbank_return # check results
 
@@ -108,10 +111,10 @@ class(genbank_return)
 str(genbank_return)
 ```
 
-### Samples Table  
-Using the metadata for each record, the desired data is pulled one at a time, then organized as a data frame.  Lot's of character string wrangling, yuk!  
-   
-First, create an empty data frame to hold results    
+### Samples Table
+Using the metadata for each record, the desired data is pulled one at a time, then organized as a data frame. Lots of character string wrangling, yuk!
+
+First, create an empty data frame to hold results.
 ```{r}
 seq_meta <- data.frame(Accession=character(),
                        Collection=character(),
@@ -120,7 +123,7 @@ seq_meta <- data.frame(Accession=character(),
                        stringsAsFactors=FALSE)
 ``` 
 
-Then, loop through each record and pull desired data.  In this case, searching the metadata for accession numbers, collection dates, host type, and the more detailed isolate names.  
+Then, loop through each record and pull desired data. In this case, searching the metadata for accession numbers, collection dates, host type, and the more detailed isolate names. 
 ```{r}
 for (id in genbank_return$ids) {
 
@@ -152,8 +155,8 @@ for (id in genbank_return$ids) {
   }, silent = TRUE)  # continue if an error
 }
 ```
-  
-### Data Table  
+
+### Data Table
 Examine what was retrived.  
 ```{r}
 dim(seq_meta)
@@ -188,15 +191,15 @@ seq_meta  %>%
               column_labels.font.weight = "bold") %>%
   opt_stylize(style = 6, color = 'gray')
 ```
-  
-### Samples by Group    
+
+### Samples by Group
 ```{r}
 seq_meta %>%
   group_by(Host, Serotype) %>%
   summarise(Count = length(Accession))
 ```
-  
-## Retrieve Sequences  
+
+## Retrieve Sequences
 Now, query GenBank for the actual sequences.  Example here using SAT1 as an example. 
 ```{r}
 sat1_df <- seq_meta %>%
@@ -217,10 +220,16 @@ sat1_sequences <- get_sequences(sat1_df$Accession)
 sat1_sequences <- gsub("[^ATCG]", "", sat1_sequences)
 
 # save to text file - fasta format  
-writeLines(sat1_sequences, here("assets/sat1_sequences.fasta"))
+writeLines(sat1_sequences, here("data_AMS/sat1_sequences.fasta"))
 ```
 
-## Alignment  
+
+
+# -------------------------------------------------------------------------------------------------
+# alignment and substitution model
+# -------------------------------------------------------------------------------------------------
+
+## Alignment
 ```{r}
 # ensure all is named correctly
 unique_names <- make.unique(names(sat1_sequences))
@@ -235,19 +244,19 @@ alignment <- msa(dna_sequences, method = "Muscle")
 alignment <- as(alignment, "DNAStringSet") 
 
 # save the aligned sequences to a text file  
-writeXStringSet(alignment, filepath = here("assets/aligned_SAT1.fasta"))
+writeXStringSet(alignment, filepath = here("data_AMS/aligned_SAT1.fasta"))
 ```
-  
-### View Alignment  
-A plot to view the alignment. These are very clean, hardly any breaks or missingness.    
+
+### View Alignment
+A plot to view the alignment. These are very clean, hardly any breaks or missingness.
 ```{r fig.width=10, fig.height=6}
 plot_alignment(alignment)
 ```
 
-## Substitution Model  
-Read in the saved alignment.  This rather than using the version already in the environment, becuase the classes are different.
+## Substitution Model
+Read in the saved alignment. Do this rather than using the version already in the environment, because the classes are different.
 ```{r message=FALSE}
-alignment <- read.dna(here("assets/aligned_SAT1.fasta"),
+alignment <- read.dna(here("data_AMS/aligned_SAT1.fasta"),
                       format="fasta", as.matrix=TRUE)
 
 # convert again for modelTest (phangorn pkg)
@@ -268,11 +277,17 @@ best_mod <- eval(get("GTR+G(4)+I", env), env)
 best_mod
 ```
 
-## Maximum Likelihood Tree  
-Quick tree to see if there's any craziness happening. Also an opportunity to check out [**ggtree**](https://yulab-smu.top/treedata-book/)  
 
-### Optimize model   
-This optimization process is rather specific to this algorithm; it's OK for quick checks, but you'll want to use other methods for publishable results.  
+
+# -------------------------------------------------------------------------------------------------
+# tree checks
+# -------------------------------------------------------------------------------------------------
+
+## Maximum Likelihood Tree
+Quick tree to see if there's any craziness happening. Also an opportunity to check out [**ggtree**](https://yulab-smu.top/treedata-book/).
+
+### Optimize model
+This optimization process is rather specific to this algorithm; it's OK for quick checks, but you'll want to use other methods for publishable results.
 ```{r}
 # optimize model parameters without fitting edges
 fit1 <- optim.pml(best_mod, # best model 
@@ -300,8 +315,8 @@ fit3 <- optim.pml(fit2,
                  control = pml.control(epsilon = 1e-08, 
                                        maxit = 10, trace = 0))
 ```
-  
-## Bootstrap Values   
+
+## Bootstrap Values
 Only running 100 trees as an example, although a small number, this might take a few minutes...
 ```{r}
 set.seed(1976)
@@ -310,8 +325,8 @@ boots <- bootstrap.pml(fit3,
                        optNni = TRUE,
                        control = pml.control(trace = 0))
 ```
-  
-**Phangorn** plotting functions as an example.    
+
+**Phangorn** plotting functions as an example.
 ```{r fig.width=8, fig.height=10}
 # get the best tree from optimization
 ml_tree <- fit3$tree
@@ -327,8 +342,8 @@ plotBS(midpoint(ml_tree), boots,
 add.scale.bar()
 title("Maximum Likelihood")
 ```
-   
-Could also extract the bootstrap values for use in other plotting tools.     
+
+Could also extract the bootstrap values for use in other plotting tools.
 ```{r}
 bootstrap_matrix <- sapply(boots, function(tree) tree$node.label)
 
@@ -342,9 +357,9 @@ ml_tree$node.label <- round(bootstrap_summarized, 2)
 ml_tree = root(ml_tree, c("MH882578", "MH882579", "MH882580"),
                resolve.root = TRUE)
 ```
-  
-## Tree Plots    
-Using **ggtree**.  This basic plot isn't much prettier than the above, but offers more flexibility for customization. 
+
+## Tree Plots
+Using **ggtree**.  This basic plot isn't much prettier than the above, but offers more flexibility for customization.
 ```{r fig.width=8, fig.height=10}
 ggtree(ml_tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 
@@ -414,14 +429,13 @@ ggtree(tmp_tree, size=0.5, col = "gray30",
     guides(colour = guide_legend(override.aes = list(size=4))) 
 ```
 
-## BEAST 
-1. Beauti walk through  
-2. Write shell script (.sh)
-3. Login to HPC (Ceres has Beast, Atlas has Beast2) 
-4. Upload data (Beauti .xml and .sh)  
-5. Navigate to working folder 
-   
-### Create a date file      
+
+
+# -------------------------------------------------------------------------------------------------
+# BEAST
+# -------------------------------------------------------------------------------------------------
+
+### Create a date file
 ```{r}
 sat1_dates <- sat1_df %>%
   select(Accession, Collection)
@@ -436,15 +450,15 @@ sat1_dates <- sat1_dates %>%
   )) %>%
   select(-Collection)
 
-write.table(sat1_dates, file = here("beast/sat1_dates.tsv"), 
+write.table(sat1_dates, file = here("beast_AMS/sat1_dates.txt"), 
             sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
-1. Beauti walk through  
+1. Beauti walk through
 2. Write shell script (.sh)
-3. Login to HPC (Ceres has Beast, Atlas has Beast2) 
-4. Upload data (Beauti .xml and .sh)  
-5. Navigate to working folder  
+3. Login to HPC (Ceres has Beast, Atlas has Beast2)
+4. Upload data (Beauti .xml and .sh)
+5. Navigate to working folder
 
 ```
 $ cd /project/fadru_fmd/phylo_demo
@@ -452,7 +466,13 @@ $ ls
 $ sbatch kenya_sat1.sh
 $ squeue -u john.humphreys
 ```
-  
+
+
+
+# -------------------------------------------------------------------------------------------------
+# post-BEAST
+# -------------------------------------------------------------------------------------------------
+
 ## Tracer Type Stats  
 ```{r}
 sat_stats <- get_tracer_stats(here("beast/old_beauti_sat1.log")) 
@@ -491,6 +511,8 @@ ggtree(sat_mcc.tree, size=0.5, col = "gray30",
 ```
 
 
+
+# -------------------------------------------------------------------------------------------------
 
 
 
