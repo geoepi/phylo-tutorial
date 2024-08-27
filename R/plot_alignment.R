@@ -23,7 +23,7 @@ plot_alignment <- function(alignment){
   nuc_colors <- c("A" = "#66c2a5", "T" = "#fc8d62", "C" = "#8da0cb", "G" = "#e78ac3", "-" = "#a6d854")
   
   p <- ggplot(reshaped_df, aes(x = Position, y = SequenceName, col = "transparent", fill = Nucleotide)) +
-    geom_tile(color = "white") +
+    geom_tile(color = "white", width = 1) +
     scale_fill_manual(values = nuc_colors, name = "Nucleotide") +
     labs(x = "Position", y = "Sequence", title = " ") +
     theme_minimal() +
