@@ -244,7 +244,7 @@ alignment <- msa(dna_sequences, method = "Muscle")
 alignment <- as(alignment, "DNAStringSet") 
 
 # save the aligned sequences to a text file  
-writeXStringSet(alignment, filepath = here("data_AMS/aligned_SAT1.fasta"))
+writeXStringSet(alignment, filepath = here("data_AMS/aligned_sat1.fasta"))
 ```
 
 ### View Alignment
@@ -326,7 +326,8 @@ boots <- bootstrap.pml(fit3,
                        control = pml.control(trace = 0))
 ```
 
-**Phangorn** plotting functions as an example.
+## Tree Plots
+Using **phangorn**.
 ```{r fig.width=8, fig.height=10}
 # get the best tree from optimization
 ml_tree <- fit3$tree
@@ -358,8 +359,7 @@ ml_tree = root(ml_tree, c("MH882578", "MH882579", "MH882580"),
                resolve.root = TRUE)
 ```
 
-## Tree Plots
-Using **ggtree**.  This basic plot isn't much prettier than the above, but offers more flexibility for customization.
+Using **ggtree**. This basic plot isn't much prettier than the above, but offers more flexibility for customization.
 ```{r fig.width=8, fig.height=10}
 ggtree(ml_tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 
@@ -454,18 +454,20 @@ write.table(sat1_dates, file = here("beast_AMS/sat1_dates.txt"),
             sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
-1. Beauti walk through
-2. Write shell script (.sh)
-3. Login to HPC (Ceres has Beast, Atlas has Beast2)
-4. Upload data (Beauti .xml and .sh)
-5. Navigate to working folder
+1. Beauti walk through (produces .xml)
+2. Write shell script (save as .sh)
+3. Login to HPC (Ceres has Beast, Atlas has Beast2, or install preferred version on either)
+4. Upload data (.xml, .sh) to a folder ("phylo-demo")
+5. Open shell
+6. Run shell script (.sh) as below
 
 ```
-$ cd /project/fadru_fmd/phylo_demo
 $ ls
-$ sbatch kenya_sat1.sh
-$ squeue -u john.humphreys
+$ sbatch /phylo-demo/sat1.sh
+$ squeue -u annakate.schatz
 ```
+
+7. Download BEAST output files (.log, .trees)
 
 
 
@@ -475,9 +477,9 @@ $ squeue -u john.humphreys
 
 ## Tracer Type Stats  
 ```{r}
-sat_stats <- get_tracer_stats(here("beast/old_beauti_sat1.log")) 
+sat1_stats <- get_tracer_stats(here("beast_AMS/sat1-tracelog-AMS.log")) 
 
-sat_stats %>%
+sat1_stats %>%
   gt() %>%
   tab_header(
     title = md("Simple SAT1 Tree")) %>%
@@ -493,16 +495,16 @@ sat_stats %>%
   opt_stylize(style = 6, color = 'gray')
 ```
 
-## Maximum Clade Credability Tree
+## Maximum Clade Credibility Tree
 ```
 $ module load beast
 $ beast
-$ treeannotator -burnin 10000 -heights median aligned_SAT1.trees.txt sat1.mcc.tre
-
+$ treeannotator -burnin 10000 -heights median sat1-treelog-AMS.trees sat1-mcc.tree
 ```
+
 ```{r}
 options(ignore.negative.edge=TRUE)
-sat_mcc.tree <- read.nexus(here("beast/sat1_mcc.tree"))
+sat_mcc.tree <- read.nexus(here("beast_AMS/sat1-mcc.tree"))
 
 ggtree(sat_mcc.tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 
