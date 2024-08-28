@@ -12,4 +12,6 @@
 
 module load java
 
-~/beast/bin/beast -beagle-sse -threads 12 phylo-demo/sat1.xml
+conda create -n beagle beagle-lib
+
+~/beast/bin/beast -threads 12 sat1.xml

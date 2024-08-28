@@ -10,6 +10,8 @@
 
 #SBATCH --mem-per-cpu=15000M
 
+#SBATCH -A sandbox
+
 module load openjdk
 
-~/beast/bin/beast -beagle-sse -threads 12 phylo-demo/sat1.xml
+~/beast/bin/beast -threads 12 sat1.xml

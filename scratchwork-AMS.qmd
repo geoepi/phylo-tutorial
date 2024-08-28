@@ -458,16 +458,24 @@ write.table(sat1_dates, file = here("beast_AMS/sat1_dates.txt"),
 2. Write shell script (save as .sh)
 3. Login to HPC (Ceres has Beast, Atlas has Beast2, or install preferred version on either)
 4. Upload data (.xml, .sh) to a folder ("phylo-demo")
-5. Open shell
+5. Open shell, switch to folder
 6. Run shell script (.sh) as below
 
 ```
+$ cd phylo-demo
 $ ls
-$ sbatch /phylo-demo/sat1.sh
+$ dos2unix sat1-.sh 
+$ sbatch sat1-.sh
 $ squeue -u annakate.schatz
 ```
 
 7. Download BEAST output files (.log, .trees)
+
+### HPC run results
+
+SAT1 files
+- Ceres: shell file runs and returns files, but Beagle fails to load
+- Atlas: ditto
 
 
 
@@ -496,11 +504,23 @@ sat1_stats %>%
 ```
 
 ## Maximum Clade Credibility Tree
+Ceres
 ```
-$ module load beast
+$ module load java
+$ module load beast2
 $ beast
 $ treeannotator -burnin 10000 -heights median sat1-treelog-AMS.trees sat1-mcc.tree
 ```
+not sure how to load Beast2 properly, can't run "beast" line with above code ("/software/el9/apps/beast2/2.7.3/bin/beast: line 67: /software/el9/apps/java/17/bin/java: Operation not permitted") and it appears to load the wrong version but specifying /2.7.7 also doesn't work
+
+Atlas
+```
+$ module load openjdk
+$ module load beast2/2.7.7
+$ beast
+$ treeannotator -burnin 10000 -heights median sat1-treelog-AMS.trees sat1-mcc.tree
+```
+last line doesn't work ("/home/annakate.schatz/beast/bin/treeannotator: line 33: /apps/spack-managed/gcc-11.3.1/beast2-2.7.7-jiva66x7qqmcbrniff4jtdqspeg7ao2q/jre/bin/java: No such file or directory")
 
 ```{r}
 options(ignore.negative.edge=TRUE)
