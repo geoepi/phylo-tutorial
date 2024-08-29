@@ -26,7 +26,7 @@ GenBank [PopSet: 1685824549] (https://www.ncbi.nlm.nih.gov/popset?LinkName=nucco
 
 ## Libraries
 A few packages are needed. First, these help with directory management, visualization, and data wrangling.
-```{r warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(here) # directory management
 library(tidyverse) # ggplot, lubridate, and the like
 options(dplyr.summarise.inform = FALSE) # don't render data default summaries
@@ -38,7 +38,7 @@ library(coda) # mcmc summaries/tools
 ```
 
 Next, several genetics specific packages are recommended. The *BioManager* packages may take a few minutes to compile. 
-```{r warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(ape) #Analyses of Phylogenetics and Evolution (APE)
 library(phangorn) # phylogenetic trees and networks
 library(rentrez) # R interface to the NCBI - GenBank
@@ -67,7 +67,7 @@ library(ggtree) # tree visualization and annotation
 ```
 
 Custom functions created for this demo.
-```{r warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE}
 source(here("R/utilities.R"))
 source_dir(here("R"))
 ```
@@ -199,9 +199,16 @@ seq_meta %>%
   summarise(Count = length(Accession))
 ```
 
+```{r save}
+save(genbank_return, osmondi_seqs, seq_meta, popset_id, search_term,
+     file="data_AMS/prep-for-seqs.Rda")
+```
+
 ## Retrieve Sequences
-Now, query GenBank for the actual sequences.  Example here using SAT1 as an example. 
+Now, query GenBank for the actual sequences. Example here using SAT1 as an example. 
 ```{r}
+# load("data_AMS/prep-for-seqs.Rda")
+
 sat1_df <- seq_meta %>%
   filter(Serotype == "SAT1")
 
@@ -221,6 +228,30 @@ sat1_sequences <- gsub("[^ATCG]", "", sat1_sequences)
 
 # save to text file - fasta format  
 writeLines(sat1_sequences, here("data_AMS/sat1_sequences.fasta"))
+```
+
+```{r SAT2}
+# load("data_AMS/prep-for-seqs.Rda")
+
+sat2_df <- seq_meta %>%
+  filter(Serotype == "SAT2")
+
+# function to get sequences
+get_sequences <- function(accessions) {
+    sequences <- sapply(accessions, function(acc) {
+        entrez_fetch(db = "nuccore", id = acc, rettype = "fasta")
+    })
+    return(sequences)
+}
+
+# run function
+sat2_sequences <- get_sequences(sat2_df$Accession)
+
+# remove special characters 
+sat2_sequences <- gsub("[^ATCG]", "", sat2_sequences)
+
+# save to text file - fasta format  
+writeLines(sat2_sequences, here("data_AMS/sat2_sequences.fasta"))
 ```
 
 
@@ -247,16 +278,37 @@ alignment <- as(alignment, "DNAStringSet")
 writeXStringSet(alignment, filepath = here("data_AMS/aligned_sat1.fasta"))
 ```
 
+```{r SAT2}
+# ensure all is named correctly
+unique_names2 <- make.unique(names(sat2_sequences))
+names(sat2_sequences) <- unique_names2
+
+# convert to a DNAStringSet object, needed for the msa package
+dna_sequences2 <- DNAStringSet(sat2_sequences)
+
+# MUSCLE alignment
+alignment2 <- msa(dna_sequences2, method = "Muscle")
+
+alignment2 <- as(alignment2, "DNAStringSet") 
+
+# save the aligned sequences to a text file  
+writeXStringSet(alignment2, filepath = here("data_AMS/aligned_sat2.fasta"))
+```
+
 ### View Alignment
 A plot to view the alignment. These are very clean, hardly any breaks or missingness.
-```{r fig.width=10, fig.height=6}
+```{r, fig.width=10, fig.height=6}
 plot_alignment(alignment)
+```
+
+```{r SAT2, fig.width=10, fig.height=6}
+plot_alignment(alignment2)
 ```
 
 ## Substitution Model
 Read in the saved alignment. Do this rather than using the version already in the environment, because the classes are different.
-```{r message=FALSE}
-alignment <- read.dna(here("data_AMS/aligned_SAT1.fasta"),
+```{r, message=FALSE}
+alignment <- read.dna(here("data_AMS/aligned_sat1.fasta"),
                       format="fasta", as.matrix=TRUE)
 
 # convert again for modelTest (phangorn pkg)
@@ -277,6 +329,28 @@ best_mod <- eval(get("GTR+G(4)+I", env), env)
 best_mod
 ```
 
+```{r SAT2, message=FALSE}
+alignment2 <- read.dna(here("data_AMS/aligned_sat2.fasta"),
+                      format="fasta", as.matrix=TRUE)
+
+# convert again for modelTest (phangorn pkg)
+aligned_phyDat2 <- as.phyDat(alignment2)
+  
+# run the test, compare the models
+mt2 <- modelTest(aligned_phyDat2)
+
+mt2 %>% 
+  arrange(AIC) %>%
+  slice_head(n=5) %>%
+  gt()
+
+# use the best (same one we picked for SAT1)
+env2 <- attr(mt2, "env")
+best_mod2 <- eval(get("GTR+G(4)+I", env2), env2) 
+
+best_mod2
+```
+
 
 
 # -------------------------------------------------------------------------------------------------
@@ -291,29 +365,57 @@ This optimization process is rather specific to this algorithm; it's OK for quic
 ```{r}
 # optimize model parameters without fitting edges
 fit1 <- optim.pml(best_mod, # best model 
-                 optNni = FALSE, optBf = TRUE, 
-                 optQ = TRUE, optInv = TRUE, 
-                 optGamma = TRUE, optEdge = FALSE, 
-                 optRate = TRUE, 
-                 control = pml.control(epsilon = 1e-08,
-                                       maxit = 10, trace = 0))
+                  optNni = FALSE, optBf = TRUE, 
+                  optQ = TRUE, optInv = TRUE, 
+                  optGamma = TRUE, optEdge = FALSE, 
+                  optRate = TRUE, 
+                  control = pml.control(epsilon = 1e-08,
+                                        maxit = 10, trace = 0))
 
 #Fix substitution model and fit tree
 fit2 <- optim.pml(fit1, 
-                 optNni = TRUE, optBf = FALSE,
-                 optQ = FALSE, optInv = FALSE, 
-                 optGamma = FALSE, optEdge = TRUE,
-                 control = pml.control(epsilon = 1e-08, 
-                                       maxit = 10, trace = 0))
+                  optNni = TRUE, optBf = FALSE,
+                  optQ = FALSE, optInv = FALSE, 
+                  optGamma = FALSE, optEdge = TRUE,
+                  control = pml.control(epsilon = 1e-08, 
+                                        maxit = 10, trace = 0))
 
 #Fine tune
 fit3 <- optim.pml(fit2, 
-                 optNni = TRUE, optBf = TRUE,
-                 optQ = TRUE, optInv = TRUE, 
-                 optGamma = TRUE, optEdge = TRUE, 
-                 optRate = FALSE,
-                 control = pml.control(epsilon = 1e-08, 
-                                       maxit = 10, trace = 0))
+                  optNni = TRUE, optBf = TRUE,
+                  optQ = TRUE, optInv = TRUE, 
+                  optGamma = TRUE, optEdge = TRUE, 
+                  optRate = FALSE,
+                  control = pml.control(epsilon = 1e-08, 
+                                        maxit = 10, trace = 0))
+```
+
+```{r SAT2}
+# optimize model parameters without fitting edges
+fit1.2 <- optim.pml(best_mod2, # best model
+                    optNni = FALSE, optBf = TRUE, 
+                    optQ = TRUE, optInv = TRUE, 
+                    optGamma = TRUE, optEdge = FALSE, 
+                    optRate = TRUE, 
+                    control = pml.control(epsilon = 1e-08,
+                                          maxit = 10, trace = 0))
+
+#Fix substitution model and fit tree
+fit2.2 <- optim.pml(fit1.2, 
+                    optNni = TRUE, optBf = FALSE,
+                    optQ = FALSE, optInv = FALSE, 
+                    optGamma = FALSE, optEdge = TRUE,
+                    control = pml.control(epsilon = 1e-08, 
+                                          maxit = 10, trace = 0))
+
+#Fine tune
+fit3.2 <- optim.pml(fit2.2, 
+                    optNni = TRUE, optBf = TRUE,
+                    optQ = TRUE, optInv = TRUE, 
+                    optGamma = TRUE, optEdge = TRUE, 
+                    optRate = FALSE,
+                    control = pml.control(epsilon = 1e-08, 
+                                          maxit = 10, trace = 0))
 ```
 
 ## Bootstrap Values
@@ -326,9 +428,17 @@ boots <- bootstrap.pml(fit3,
                        control = pml.control(trace = 0))
 ```
 
+```{r SAT2}
+set.seed(1976)
+boots2 <- bootstrap.pml(fit3.2,
+                        bs = 100,
+                        optNni = TRUE,
+                        control = pml.control(trace = 0))
+```
+
 ## Tree Plots
 Using **phangorn**.
-```{r fig.width=8, fig.height=10}
+```{r, fig.width=8, fig.height=10}
 # get the best tree from optimization
 ml_tree <- fit3$tree
 
@@ -337,6 +447,22 @@ ml_tree <- fit3$tree
   
 # phangorn specific plots
 plotBS(midpoint(ml_tree), boots, 
+       type="p", cex=0.4,
+       bs.adj = c(1.25, 1.25),
+       bs.col = "black")
+add.scale.bar()
+title("Maximum Likelihood")
+```
+
+```{r SAT2, fig.width=8, fig.height=10}
+# get the best tree from optimization
+ml_tree2 <- fit3.2$tree
+
+# Or use a consensus tree
+# consensus_tree2 <- consensus(boots2, p = 0.5)
+  
+# phangorn specific plots
+plotBS(midpoint(ml_tree2), boots2, 
        type="p", cex=0.4,
        bs.adj = c(1.25, 1.25),
        bs.col = "black")
@@ -359,8 +485,20 @@ ml_tree = root(ml_tree, c("MH882578", "MH882579", "MH882580"),
                resolve.root = TRUE)
 ```
 
+```{r SAT2}
+bootstrap_matrix2 <- sapply(boots2, function(tree) tree$node.label)
+
+#The bootstrap trees for SAT2 appear to differ in number of nodes/labels,
+    #unlike those for SAT1.
+#As a result, the line above can't return a neat matrix (# of rows conflict)
+    #and instead returns a list of individual vectors, one per tree.
+#I'm not sure how to sync up those vectors correctly
+    #or exactly what the different lengths mean,
+    #so I'm skipping SAT2 ggtree plotting.
+```
+
 Using **ggtree**. This basic plot isn't much prettier than the above, but offers more flexibility for customization.
-```{r fig.width=8, fig.height=10}
+```{r, fig.width=8, fig.height=10}
 ggtree(ml_tree, size=0.5, col = "gray30", 
               ladderize=TRUE) + 
     geom_text2(aes(subset = !isTip, label=label), 
@@ -373,7 +511,7 @@ ggtree(ml_tree, size=0.5, col = "gray30",
 ```
 
 Here's a more fancy-fied version: 
-```{r fig.width=8, fig.height=10}
+```{r, fig.width=8, fig.height=10}
 # get labels
 tree_df <- as.data.frame(
     ml_tree$tip.label
@@ -454,6 +592,24 @@ write.table(sat1_dates, file = here("beast_AMS/sat1_dates.txt"),
             sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
+```{r SAT2}
+sat2_dates <- sat2_df %>%
+  select(Accession, Collection)
+
+unique(sat2_dates$Collection)
+
+sat2_dates <- sat2_dates %>%
+  mutate(samp_date = case_when(
+    Collection == "2016-01" ~ as_date("2016-01-01", format = "%Y-%m-%d"),
+    Collection == "2015-03" ~ as_date("2015-03-01", format = "%Y-%m-%d"),
+    Collection == "2014-09" ~ as_date("2014-09-01", format = "%Y-%m-%d"),
+  )) %>%
+  select(-Collection)
+
+write.table(sat2_dates, file = here("beast_AMS/sat2_dates.txt"), 
+            sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+```
+
 1. Beauti walk through (produces .xml)
 2. Write shell script (save as .sh)
 3. Login to HPC (Ceres has Beast, Atlas has Beast2, or install preferred version on either)
@@ -463,9 +619,8 @@ write.table(sat1_dates, file = here("beast_AMS/sat1_dates.txt"),
 
 ```
 $ cd phylo-demo
-$ ls
-$ dos2unix sat1-.sh 
-$ sbatch sat1-.sh
+$ dos2unix sat*-**.sh 
+$ sbatch sat*-**.sh
 $ squeue -u annakate.schatz
 ```
 
@@ -504,23 +659,30 @@ sat1_stats %>%
 ```
 
 ## Maximum Clade Credibility Tree
-Ceres
+
+### Ceres
 ```
 $ module load java
 $ module load beast2
 $ beast
 $ treeannotator -burnin 10000 -heights median sat1-treelog-AMS.trees sat1-mcc.tree
 ```
-not sure how to load Beast2 properly, can't run "beast" line with above code ("/software/el9/apps/beast2/2.7.3/bin/beast: line 67: /software/el9/apps/java/17/bin/java: Operation not permitted") and it appears to load the wrong version but specifying /2.7.7 also doesn't work
+ERROR ($ beast) : "/software/el9/apps/beast2/2.7.3/bin/beast: line 67: /software/el9/apps/java/17/bin/java: Operation not permitted"
 
-Atlas
+ISSUE: not sure how to load downloaded version of Beast (Beast2 2.7.7)
+
+### Atlas
 ```
 $ module load openjdk
 $ module load beast2/2.7.7
 $ beast
 $ treeannotator -burnin 10000 -heights median sat1-treelog-AMS.trees sat1-mcc.tree
 ```
-last line doesn't work ("/home/annakate.schatz/beast/bin/treeannotator: line 33: /apps/spack-managed/gcc-11.3.1/beast2-2.7.7-jiva66x7qqmcbrniff4jtdqspeg7ao2q/jre/bin/java: No such file or directory")
+ERROR ($ treeannotator ...) : "/home/annakate.schatz/beast/bin/treeannotator: line 33: /apps/spack-managed/gcc-11.3.1/beast2-2.7.7-jiva66x7qqmcbrniff4jtdqspeg7ao2q/jre/bin/java: No such file or directory"
+
+ISSUE: I think this is loading Atlas's Beast2, not the one I downloaded, but that might not matter since both are 2.7.7
+
+### Visualization
 
 ```{r}
 options(ignore.negative.edge=TRUE)
