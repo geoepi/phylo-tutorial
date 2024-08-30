@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=sat1
+#SBATCH --job-name=sat2
 
 #SBATCH -N 1
 
@@ -12,4 +12,4 @@
 
 module load java
 
-~/beast/bin/beast -threads 12 sat1.xml
+~/beast/bin/beast -threads 12 sat2.xml

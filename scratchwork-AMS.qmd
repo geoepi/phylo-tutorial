@@ -227,7 +227,7 @@ sat1_sequences <- get_sequences(sat1_df$Accession)
 sat1_sequences <- gsub("[^ATCG]", "", sat1_sequences)
 
 # save to text file - fasta format  
-writeLines(sat1_sequences, here("data_AMS/sat1_sequences.fasta"))
+writeLines(sat1_sequences, here("data_AMS/sat1-sequences.fasta"))
 ```
 
 ```{r SAT2}
@@ -251,7 +251,7 @@ sat2_sequences <- get_sequences(sat2_df$Accession)
 sat2_sequences <- gsub("[^ATCG]", "", sat2_sequences)
 
 # save to text file - fasta format  
-writeLines(sat2_sequences, here("data_AMS/sat2_sequences.fasta"))
+writeLines(sat2_sequences, here("data_AMS/sat2-sequences.fasta"))
 ```
 
 
@@ -275,7 +275,7 @@ alignment <- msa(dna_sequences, method = "Muscle")
 alignment <- as(alignment, "DNAStringSet") 
 
 # save the aligned sequences to a text file  
-writeXStringSet(alignment, filepath = here("data_AMS/aligned_sat1.fasta"))
+writeXStringSet(alignment, filepath = here("data_AMS/sat1-aligned.fasta"))
 ```
 
 ```{r SAT2}
@@ -292,7 +292,7 @@ alignment2 <- msa(dna_sequences2, method = "Muscle")
 alignment2 <- as(alignment2, "DNAStringSet") 
 
 # save the aligned sequences to a text file  
-writeXStringSet(alignment2, filepath = here("data_AMS/aligned_sat2.fasta"))
+writeXStringSet(alignment2, filepath = here("data_AMS/sat2-aligned.fasta"))
 ```
 
 ### View Alignment
@@ -308,7 +308,7 @@ plot_alignment(alignment2)
 ## Substitution Model
 Read in the saved alignment. Do this rather than using the version already in the environment, because the classes are different.
 ```{r, message=FALSE}
-alignment <- read.dna(here("data_AMS/aligned_sat1.fasta"),
+alignment <- read.dna(here("data_AMS/sat1-aligned.fasta"),
                       format="fasta", as.matrix=TRUE)
 
 # convert again for modelTest (phangorn pkg)
@@ -330,7 +330,7 @@ best_mod
 ```
 
 ```{r SAT2, message=FALSE}
-alignment2 <- read.dna(here("data_AMS/aligned_sat2.fasta"),
+alignment2 <- read.dna(here("data_AMS/sat2-aligned.fasta"),
                       format="fasta", as.matrix=TRUE)
 
 # convert again for modelTest (phangorn pkg)
@@ -349,6 +349,14 @@ env2 <- attr(mt2, "env")
 best_mod2 <- eval(get("GTR+G(4)+I", env2), env2) 
 
 best_mod2
+```
+
+```{r save}
+save(mt, best_mod,
+     file="data_AMS/sat1.Rda")
+
+save(mt2, best_mod2,
+     file="data_AMS/sat2.Rda")
 ```
 
 
@@ -434,6 +442,14 @@ boots2 <- bootstrap.pml(fit3.2,
                         bs = 100,
                         optNni = TRUE,
                         control = pml.control(trace = 0))
+```
+
+```{r save}
+save(mt, best_mod, boots,
+     file="data_AMS/sat1.Rda")
+
+save(mt2, best_mod2, boots2,
+     file="data_AMS/sat2.Rda")
 ```
 
 ## Tree Plots
@@ -588,7 +604,7 @@ sat1_dates <- sat1_dates %>%
   )) %>%
   select(-Collection)
 
-write.table(sat1_dates, file = here("beast_AMS/sat1_dates.txt"), 
+write.table(sat1_dates, file = here("beast_AMS/sat1-dates.txt"), 
             sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
@@ -606,7 +622,7 @@ sat2_dates <- sat2_dates %>%
   )) %>%
   select(-Collection)
 
-write.table(sat2_dates, file = here("beast_AMS/sat2_dates.txt"), 
+write.table(sat2_dates, file = here("beast_AMS/sat2-dates.txt"), 
             sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
@@ -629,8 +645,12 @@ $ squeue -u annakate.schatz
 ### HPC run results
 
 SAT1 files
-- Ceres: shell file runs and returns files, but Beagle fails to load
+- Ceres: shell file runs and returns Beast files, but Beagle fails to load
 - Atlas: ditto
+
+SAT2 files
+- Ceres: 
+- Atlas: 
 
 
 
@@ -638,7 +658,7 @@ SAT1 files
 # post-BEAST
 # -------------------------------------------------------------------------------------------------
 
-## Tracer Type Stats  
+## Tracer Type Stats
 ```{r}
 sat1_stats <- get_tracer_stats(here("beast_AMS/sat1-tracelog-AMS.log")) 
 
@@ -646,6 +666,25 @@ sat1_stats %>%
   gt() %>%
   tab_header(
     title = md("Simple SAT1 Tree")) %>%
+  cols_width(everything() ~ px(95)) %>%
+  tab_options(table.font.size = "small",
+              row_group.font.size = "small",
+              stub.font.size = "small",
+              column_labels.font.size = "medium",
+              heading.title.font.size = "large",
+              data_row.padding = px(2),
+              heading.title.font.weight = "bold",
+              column_labels.font.weight = "bold") %>%
+  opt_stylize(style = 6, color = 'gray')
+```
+
+```{r SAT2}
+sat1_stats <- get_tracer_stats(here("beast_AMS/sat2-tracelog-AMS.log")) 
+
+sat1_stats %>%
+  gt() %>%
+  tab_header(
+    title = md("Simple SAT2 Tree")) %>%
   cols_width(everything() ~ px(95)) %>%
   tab_options(table.font.size = "small",
               row_group.font.size = "small",
@@ -679,6 +718,12 @@ $ beast
 $ treeannotator -burnin 10000 -heights median sat1-treelog-AMS.trees sat1-mcc.tree
 ```
 ERROR ($ treeannotator ...) : "/home/annakate.schatz/beast/bin/treeannotator: line 33: /apps/spack-managed/gcc-11.3.1/beast2-2.7.7-jiva66x7qqmcbrniff4jtdqspeg7ao2q/jre/bin/java: No such file or directory"
+- appears to be a Java problem?
+- notes about Java also come up when initializing Beast
+    java.lang.reflect.InvocationTargetException
+      at (multiple lines of paths)
+    Caused by: java.awt.HeadlessException:
+    (and more)
 
 ISSUE: I think this is loading Atlas's Beast2, not the one I downloaded, but that might not matter since both are 2.7.7
 
