@@ -135,5 +135,3 @@ After you're finished, you can deactivate the environment:
 ```bash
 conda deactivate
 ```
-
----

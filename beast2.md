@@ -2,17 +2,14 @@ Install, setup, and run BEAST2 on Atlas HPC
 ================
 8/23/24
 
-- <a href="#install-and-run-beast2-and-treeannotator-via-miniconda3"
-  id="toc-install-and-run-beast2-and-treeannotator-via-miniconda3">Install
-  and Run BEAST2 and TreeAnnotator via Miniconda3</a>
-- <a href="#install-beast2-via-conda"
-  id="toc-install-beast2-via-conda"><strong>8. Install BEAST2 via
-  Conda</strong></a>
-- <a href="#deactivate-the-conda-environment-when-done"
-  id="toc-deactivate-the-conda-environment-when-done"><strong>12.
-  Deactivate the Conda Environment When Done</strong></a>
+- <a href="#initiate-conda" id="toc-initiate-conda">Initiate Conda</a>
+- <a href="#create-conda-environment"
+  id="toc-create-conda-environment">Create Conda Environment</a>
+- <a href="#install-beast2" id="toc-install-beast2">Install BEAST2</a>
+- <a href="#test-run" id="toc-test-run">Test Run</a>
+- <a href="#end-session" id="toc-end-session">End Session</a>
 
-## Install and Run BEAST2 and TreeAnnotator via Miniconda3
+## Initiate Conda
 
 ### **1. Open a Shell**
 
@@ -36,6 +33,8 @@ conda init
 
 You may need to restart your shell session. Close your terminal window
 and open a new one.
+
+## Create Conda Environment
 
 ### **5. Create a New Conda Environment for BEAST2**
 
@@ -80,7 +79,9 @@ You should see:
 
 ------------------------------------------------------------------------
 
-## **8. Install BEAST2 via Conda**
+## Install BEAST2
+
+### **8. Install BEAST2 via Conda**
 
 Now, install BEAST2 using Conda:
 
@@ -109,6 +110,8 @@ which treeannotator
 If the path to `treeannotator` is displayed, it means the command is
 available.
 
+## Test Run
+
 ### **11. Run `treeannotator`**
 
 Now you can run `treeannotator` using the alias or the command.
@@ -124,14 +127,12 @@ treeannotator -burnin 10 -heights median fmd-viet-treelog.trees atlas_test.tre
 *Ensure that you are in the directory containing your input file
 `fmd-viet-treelog.trees` or provide the full path to the file.*
 
-------------------------------------------------------------------------
+## End Session
 
-## **12. Deactivate the Conda Environment When Done**
+### **12. Deactivate the Conda Environment When Done**
 
 After you’re finished, you can deactivate the environment:
 
 ``` bash
 conda deactivate
 ```
-
-------------------------------------------------------------------------
