@@ -15,7 +15,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Install and Run BEAST2 and TreeAnnotator via Miniconda3
+## Initiate Conda
 
 ### **1. Open a Shell**
 Open a shell on Atlas and navigate to your project directory.
@@ -36,6 +36,7 @@ conda init
 
 You may need to restart your shell session.  Close your terminal window and open a new one.
 
+## Create Conda Environment
 ### **5. Create a New Conda Environment for BEAST2**
 
 Creating an environment helps manage dependencies.  In the code below, replace `beast2_env` with any name of your choosing.  
@@ -78,8 +79,9 @@ channels:
 ```
 
 ---
+## Install BEAST2 
 
-## **8. Install BEAST2 via Conda**
+### **8. Install BEAST2 via Conda**
 
 Now, install BEAST2 using Conda:
 
@@ -106,6 +108,7 @@ which treeannotator
 
 If the path to `treeannotator` is displayed, it means the command is available.
 
+## Test Run  
 
 ### **11. Run `treeannotator`**
 
@@ -121,9 +124,11 @@ treeannotator -burnin 10 -heights median fmd-viet-treelog.trees atlas_test.tre
 
 *Ensure that you are in the directory containing your input file `fmd-viet-treelog.trees` or provide the full path to the file.*
 
----
 
-## **12. Deactivate the Conda Environment When Done**
+
+## End Session
+
+### **12. Deactivate the Conda Environment When Done**
 
 After you're finished, you can deactivate the environment:
 
