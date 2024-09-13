@@ -1,0 +1,137 @@
+Install, setup, and run BEAST2 on Atlas HPC
+================
+8/23/24
+
+- <a href="#install-and-run-beast2-and-treeannotator-via-miniconda3"
+  id="toc-install-and-run-beast2-and-treeannotator-via-miniconda3">Install
+  and Run BEAST2 and TreeAnnotator via Miniconda3</a>
+- <a href="#install-beast2-via-conda"
+  id="toc-install-beast2-via-conda"><strong>8. Install BEAST2 via
+  Conda</strong></a>
+- <a href="#deactivate-the-conda-environment-when-done"
+  id="toc-deactivate-the-conda-environment-when-done"><strong>12.
+  Deactivate the Conda Environment When Done</strong></a>
+
+## Install and Run BEAST2 and TreeAnnotator via Miniconda3
+
+### **1. Open a Shell**
+
+Open a shell on Atlas and navigate to your project directory.
+
+### **2. Load the Miniconda3 Module**
+
+``` bash
+module load miniconda3
+```
+
+### **3. Initialize Conda**
+
+Initialize Conda to work with your shell:
+
+``` bash
+conda init
+```
+
+### **4. Close and Reopen Your Shell**
+
+You may need to restart your shell session. Close your terminal window
+and open a new one.
+
+### **5. Create a New Conda Environment for BEAST2**
+
+Creating an environment helps manage dependencies. In the code below,
+replace `beast2_env` with any name of your choosing.
+
+``` bash
+conda create -n beast2_env
+```
+
+- When prompted, type `Y` to proceed with the environment creation.
+
+### **6. Activate the Conda Environment**
+
+``` bash
+conda activate beast2_env
+```
+
+You should see the environment name prefixed in your shell prompt
+(before your username).
+
+### **7. Configure Conda Channels**
+
+Add the necessary channels to install BEAST2 and its dependencies.
+
+``` bash
+conda config --add channels conda-forge
+conda config --add channels bioconda
+conda config --add channels defaults
+```
+
+``` bash
+conda config --show channels
+```
+
+You should see:
+
+    channels:
+      - conda-forge
+      - bioconda
+      - defaults
+
+------------------------------------------------------------------------
+
+## **8. Install BEAST2 via Conda**
+
+Now, install BEAST2 using Conda:
+
+``` bash
+conda install -c bioconda beast2
+```
+
+- Type `Y` when prompted to proceed with the installation.
+- Conda will resolve dependencies and install BEAST2 along with the
+  appropriate Java version.
+
+### **9. Verify the Installation**
+
+``` bash
+beast -help
+```
+
+You should see usage information for BEAST2.
+
+### **10. Ensure `treeannotator` Is Available**
+
+``` bash
+which treeannotator
+```
+
+If the path to `treeannotator` is displayed, it means the command is
+available.
+
+### **11. Run `treeannotator`**
+
+Now you can run `treeannotator` using the alias or the command.
+
+##### **Example Command:**
+
+Assuming that the `fmd-viet-treelog.trees` file are
+
+``` bash
+treeannotator -burnin 10 -heights median fmd-viet-treelog.trees atlas_test.tre
+```
+
+*Ensure that you are in the directory containing your input file
+`fmd-viet-treelog.trees` or provide the full path to the file.*
+
+------------------------------------------------------------------------
+
+## **12. Deactivate the Conda Environment When Done**
+
+After you’re finished, you can deactivate the environment:
+
+``` bash
+conda deactivate
+```
+
+------------------------------------------------------------------------
